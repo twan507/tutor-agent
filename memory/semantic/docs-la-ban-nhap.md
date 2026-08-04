@@ -11,7 +11,7 @@ Người dùng tuyên bố (04/08/2026): kiến trúc dự án trong các tài l
 Ngoại lệ đã chốt thật sau đó: **tech stack** (04/08/2026 — xem [[tech-stack-da-chot]]).
 
 Hệ quả cho agent:
-- KHÔNG coi chữ "đã chốt" trong `docs/bao-cao-*.md` là quyết định cuối — đó là trạng thái của bản nháp
+- KHÔNG coi chữ "đã chốt" trong `docs/background/*.md` là quyết định cuối — đó là trạng thái của bản nháp
 - Mọi phần (stack, kiến trúc engine, lộ trình, giá) chỉ build sau khi người dùng xác nhận riêng phần đó trong hội thoại
 - Các ràng buộc PHÁP LÝ (cấm sinh trắc học, formative-only, notification digest, dữ liệu trẻ em) vẫn giữ nguyên vì bắt nguồn từ luật, không phải từ lựa chọn kiến trúc
 - Repo đã chuyển private (04/08/2026) sau khi phát hiện đang public

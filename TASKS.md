@@ -10,7 +10,7 @@ Backlog theo dõi công việc. Quy ước: `[ ]` chưa làm, `[x]` xong, `[~]` 
 
 ## Việc phi-code (từ báo cáo §18 — ứng viên, chưa chốt)
 
-- [ ] Tra cứu nhãn hiệu tên thương hiệu tại Cục SHTT nhóm 41 và 9 — CHỜ chốt tên mới (nhật ký tra cứu Flibby cũ ở docs/nhat-ky mục 7 dùng làm tham chiếu quy trình) (USER)
+- [ ] Tra cứu nhãn hiệu tên thương hiệu tại Cục SHTT nhóm 41 và 9 — CHỜ chốt tên mới (nhật ký tra cứu Flibby cũ ở docs/background/nhat-ky-hoi-thoai-du-an-flibby.md mục 7 dùng làm tham chiếu quy trình) (USER)
 - [ ] Lập danh sách 30-50 phụ huynh tiềm năng cho beta → lưu trong `private/`, KHÔNG commit (USER)
 - [ ] Tìm giáo viên Toán quen kiểm chứng skill graph (USER)
 
@@ -37,5 +37,5 @@ Backlog theo dõi công việc. Quy ước: `[ ]` chưa làm, `[x]` xong, `[~]` 
 ## Đã xong
 
 - [x] 04/08/2026 — Bộ khung vận hành: CLAUDE.md (Karpathy + phân công architect/subagent + memory + hành xử chuyên nghiệp), memory/, docs/ + index, hooks cưỡng chế, code-reviewer agent, git + GitHub (đã chuyển private)
-- [x] 04/08/2026 — **Chốt tech stack** sau 4 vòng phản biện: Next.js + Django/django-ninja + Celery + Postgres/pgvector + SSE + Nginx + Docker Compose 2 tầng trên VPS + R2 + CI/CD 3 giai đoạn (docs/nghien-cuu-tech-stack.md)
+- [x] 04/08/2026 — **Chốt tech stack** sau 4 vòng phản biện: Next.js + Django/django-ninja + Celery + Postgres/pgvector + SSE + Nginx + Docker Compose 2 tầng trên VPS + R2 + CI/CD 3 giai đoạn (docs/research/nghien-cuu-tech-stack.md)
 - [x] 04/08/2026 — **Chốt chiến lược test**: pytest/Vitest/Playwright-chromium + 9 quy tắc (mock LLM trong CI, Postgres thật, SymPy ground-truth, chống test giả, eval tách nightly) — CLAUDE.md mục Chiến lược test; checklist code-reviewer đã cập nhật

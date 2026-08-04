@@ -10,7 +10,7 @@ Nền tảng gia sư AI **parent-first** cho thị trường Việt Nam. Bán qu
 - **MVP** (định hướng): Learning Sprint — ôn thi Toán THCS trong 7-14 ngày
 - **Moat**: learner profile + assessment intelligence + mastery tracking + parent reporting
 
-**Trạng thái tài liệu**: kiến trúc, kế hoạch triển khai trong `docs/bao-cao-*.md` là **bản nháp định hướng (demo)** — người dùng nghiên cứu lại từng phần rồi mới chốt. Ngoại lệ đã chốt thật: **tech stack** (04/08/2026, mục Tech stack bên dưới). Agent không được coi chữ "đã chốt" trong docs nháp là căn cứ tự build — mọi phần chỉ build sau khi người dùng xác nhận trong hội thoại.
+**Trạng thái tài liệu**: kiến trúc, kế hoạch triển khai trong `docs/background/*.md` là **bản nháp định hướng (demo)** — người dùng nghiên cứu lại từng phần rồi mới chốt. Ngoại lệ đã chốt thật: **tech stack** (04/08/2026, mục Tech stack bên dưới). Agent không được coi chữ "đã chốt" trong docs nháp là căn cứ tự build — mọi phần chỉ build sau khi người dùng xác nhận trong hội thoại.
 
 ## Mô hình phân công: kiến trúc sư và subagent
 
@@ -51,7 +51,7 @@ Ba gate không được nhảy: **spec được duyệt**, **plan tồn tại tr
 
 ## Quy tắc bộ nhớ (memory/)
 
-Bộ nhớ dự án là file-based, nằm trong repo tại `memory/`, git-track được. Không dùng vector DB, không dùng knowledge graph — quy mô memory của một dự án không cần đến (xem `docs/nghien-cuu-ky-thuat-agent-memory.md`).
+Bộ nhớ dự án là file-based, nằm trong repo tại `memory/`, git-track được. Không dùng vector DB, không dùng knowledge graph — quy mô memory của một dự án không cần đến (xem `docs/research/nghien-cuu-ky-thuat-agent-memory.md`).
 
 **Cấu trúc:**
 
@@ -115,7 +115,7 @@ memory/
   - ~~"chứng chỉ"~~, ~~"tương đương điểm thi"~~, ~~"xếp loại học lực"~~
 - Giao diện phải có nhãn minh bạch AI (người dùng biết đang tương tác với AI).
 
-## Tech stack — ĐÃ CHỐT (04/08/2026, xem docs/nghien-cuu-tech-stack.md)
+## Tech stack — ĐÃ CHỐT (04/08/2026, xem docs/research/nghien-cuu-tech-stack.md)
 
 - Frontend: **Next.js** (chỉ UI; TS client sinh tự động từ OpenAPI, không viết tay)
 - Backend: **Django + django-ninja** — auth dùng built-in của Django; Django Admin là công cụ human-review nội dung
@@ -137,7 +137,7 @@ memory/
 
 Đổi bất kỳ phần nào của stack phải bàn với người dùng trước.
 
-## Chiến lược test — ĐÃ CHỐT (04/08/2026, xem docs/nghien-cuu-chien-luoc-test.md)
+## Chiến lược test — ĐÃ CHỐT (04/08/2026, xem docs/research/nghien-cuu-chien-luoc-test.md)
 
 **Công cụ**: pytest + pytest-django + factory_boy (backend; API qua `ninja.testing.TestClient`) | Vitest + React Testing Library + MSW (frontend) | Playwright **chỉ cài Chromium** (E2E: 10-20 smoke test critical path, <10 phút/PR) | DeepEval (eval LLM) + promptfoo (red-team jailbreak) + mutmut (mutation testing) — 3 món sau chỉ cài khi có tính năng LLM thật.
 
