@@ -14,4 +14,4 @@ Hệ quả cho agent:
 - KHÔNG coi chữ "đã chốt" trong `docs/background/*.md` là quyết định cuối — đó là trạng thái của bản nháp
 - Mọi phần (stack, kiến trúc engine, lộ trình, giá) chỉ build sau khi người dùng xác nhận riêng phần đó trong hội thoại
 - Các ràng buộc PHÁP LÝ (cấm sinh trắc học, formative-only, notification digest, dữ liệu trẻ em) vẫn giữ nguyên vì bắt nguồn từ luật, không phải từ lựa chọn kiến trúc
-- Repo đã chuyển private (04/08/2026) sau khi phát hiện đang public
+- Trạng thái repo: chuyển private 04/08/2026 sau khi phát hiện public → người dùng chủ động chuyển LẠI PUBLIC cùng ngày ("cho dễ kiểm thử, không sao cả") — đã cảnh báo docs/background chứa chiến lược/giá, người dùng chấp nhận; nếu giữ public lâu dài cân nhắc tách docs nhạy cảm
