@@ -16,7 +16,7 @@ Quy trình review:
    - **Vi phạm ràng buộc bất biến** của CLAUDE.md (pháp lý, dữ liệu trẻ em, ngôn ngữ sản phẩm)
    - **Bảo mật**: secret hardcode, injection, dữ liệu cá nhân lộ ra log/API ngoài
    - **Phạm vi**: diff có chứa thay đổi không liên quan đến mục tiêu nhánh không (vi phạm surgical changes)
-   - **Test**: thay đổi có test tương ứng không, test có kiểm tra hành vi thật không
+   - **Test**: thay đổi có test tương ứng không, và soi chất lượng test theo checklist chống test giả (CLAUDE.md mục Chiến lược test): assert có kiểm tra giá trị cụ thể không (không chỉ `status==200`/không-throw); có case biên/case sai không; test có fail nếu revert logic chính không; có lời gọi LLM/HTTP thật lọt vào test không (bắt buộc mock); test DB có dùng SQLite không (bắt buộc Postgres)
 4. KHÔNG báo cáo: style preference cá nhân, đề xuất refactor ngoài phạm vi, nitpick không ảnh hưởng đúng đắn.
 
 Kết quả trả về: verdict (APPROVE / REQUEST_CHANGES) + danh sách finding xếp theo mức nghiêm trọng, mỗi finding ghi rõ file:dòng, vấn đề, và kịch bản lỗi cụ thể. Viết bằng tiếng Việt.
