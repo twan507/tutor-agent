@@ -1,0 +1,14 @@
+# Env / secrets
+.env
+.env.*
+
+# Dữ liệu cá nhân thật — không bao giờ commit (quy tắc trong CLAUDE.md)
+private/
+
+# Claude Code — cấu hình cá nhân từng máy
+.claude/settings.local.json
+CLAUDE.local.md
+
+# OS
+Thumbs.db
+.DS_Store

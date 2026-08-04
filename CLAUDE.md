@@ -6,9 +6,10 @@ Quy tắc làm việc cho AI agent trong repo này. Áp dụng cho mọi phiên 
 
 **Flibby** — nền tảng gia sư AI **parent-first** cho thị trường Việt Nam. Bán quyền kiểm soát quá trình học cho phụ huynh, không chỉ bán khóa học. Không phải chatbot: hệ thống tạo lộ trình, dạy, kiểm tra, đo, điều chỉnh, báo cáo.
 
-- **MVP**: Learning Sprint — ôn thi Toán THCS (lớp 8) trong 7-14 ngày
+- **MVP** (định hướng): Learning Sprint — ôn thi Toán THCS trong 7-14 ngày
 - **Moat**: learner profile + assessment intelligence + mastery tracking + parent reporting
-- **Hạn cứng**: beta có người dùng thật **trước 15/08/2026** (lưới an toàn pháp lý 1 năm theo QĐ 33/2026/QĐ-TTg)
+
+**QUAN TRỌNG — trạng thái tài liệu**: toàn bộ kiến trúc, kế hoạch triển khai, tech stack trong `docs/` là **bản nháp định hướng (demo)**, KHÔNG phải quyết định cuối. Trước khi triển khai bất kỳ phần nào, người dùng sẽ nghiên cứu lại phần đó và chốt riêng. Agent không được coi chữ "đã chốt" trong docs là căn cứ để tự build — mọi phần chỉ build sau khi người dùng xác nhận trong hội thoại.
 
 ## Mô hình phân công: kiến trúc sư và subagent
 
@@ -19,6 +20,51 @@ Session chính (Fable/Opus) là **lớp kiến trúc sư — quản lý**, khôn
   - **Giao subagent (model Sonnet)** khi là việc tay chân khối lượng lớn: viết code nhiều file theo spec đã chốt, tìm kiếm/khảo sát rộng trong codebase, tác vụ lặp đi lặp lại, các việc độc lập chạy song song được.
 - Khi giao việc: đề bài phải tự đủ (spec rõ, đường dẫn file, tiêu chí hoàn thành kiểm chứng được). Subagent không có ngữ cảnh hội thoại.
 - Kết quả subagent trả về phải được session chính **review trước khi chấp nhận** — kiến trúc sư chịu trách nhiệm cuối cùng về chất lượng.
+
+## Quy tắc hành xử chuyên nghiệp
+
+Nguyên tắc gốc: **hành xử như kỹ sư cao cấp trong một team — mọi hành động phải giải trình được, không có hành động "tiện tay".**
+
+1. **Không hành động ngoài phạm vi yêu cầu trực tiếp.** Việc phát sinh trong lúc làm (thêm file mới, thêm dependency, đưa tài nguyên từ ngoài repo vào, đổi cấu trúc thư mục, đổi cách làm đã thống nhất) → nêu rõ và hỏi trước, không tự quyết rồi báo sau.
+2. **Kỷ luật git**: khi dự án đã có code chạy, làm feature/fix trên nhánh riêng (`feat/...`, `fix/...`), không commit thẳng main. Commit theo Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `test:`...), commit nhỏ một mục đích. Chỉ commit/push khi người dùng yêu cầu.
+3. **Không bypass cơ chế kiểm soát**: cấm `--no-verify`, force push, `rm -rf`, sửa `.env*` / `.claude/settings.json` / `.claude/hooks/` — các lệnh này đã bị chặn cứng bằng hook trong `.claude/settings.json`; gặp chặn thì báo người dùng, không tìm đường vòng.
+4. **Không tuyên bố hoàn thành khi chưa có bằng chứng**: chạy lệnh kiểm chứng (test/lint/build), xem output thật, rồi mới báo xong kèm output đó. Test fail thì báo fail nguyên trạng.
+
+**Quy trình feature chuẩn** (dùng skill superpowers có sẵn):
+
+```
+brainstorm (skill brainstorming)
+→ plan — NGƯỜI DÙNG DUYỆT trước khi code (skill writing-plans)
+→ TDD: test đỏ trước, code sau (skill test-driven-development)
+→ review bằng subagent code-reviewer (.claude/agents/code-reviewer.md, context sạch)
+→ verify bằng chứng thật (skill verification-before-completion)
+→ merge
+```
+
+Spec/design doc lưu tại `docs/specs/YYYY-MM-DD-<chủ-đề>.md` (nhớ thêm dòng vào `docs/README.md`). Backlog công việc theo dõi trong `TASKS.md` ở gốc repo.
+
+Hai gate không được nhảy qua: **plan phải được duyệt** và **test phải đỏ trước khi viết implementation**.
+
+## Quy tắc bộ nhớ (memory/)
+
+Bộ nhớ dự án là file-based, nằm trong repo tại `memory/`, git-track được. Không dùng vector DB, không dùng knowledge graph — quy mô memory của một dự án không cần đến (xem `docs/nghien-cuu-ky-thuat-agent-memory.md`).
+
+**Cấu trúc:**
+
+```
+memory/
+├── MEMORY.md      # chỉ mục — TRẦN CỨNG 150 dòng, đọc đầu mỗi phiên làm việc
+├── semantic/      # fact dự án: kiến trúc, quyết định sản phẩm đã chốt
+├── procedural/    # quy ước làm việc: cách phân công, deploy, test
+└── episodic/      # nhật ký quyết định theo phiên (được phép cũ đi)
+```
+
+**Bốn quy tắc:**
+
+1. **Index nhỏ, lazy-load chi tiết**: `MEMORY.md` chỉ chứa mỗi memory một dòng (tên + hook). Trần cứng 150 dòng — vượt là phải thu gọn trước khi thêm mới. Chi tiết nằm trong file con, chỉ đọc khi cần.
+2. **Mỗi memory một file**, có frontmatter: `name`, `type` (semantic/procedural/episodic), `created`, `modified`, `description` một dòng. Đặt file đúng thư mục theo type.
+3. **Reflection cuối phiên lớn**: trước khi kết thúc phiên làm việc có thay đổi đáng kể, tự hỏi: (a) có insight bậc cao nào đáng ghi thay vì chỉ fact rời rạc? (b) memory mới có mâu thuẫn với memory cũ nào không? (c) memory nào đã sai/hết hạn cần sửa hoặc xóa? Rồi cập nhật memory/ tương ứng.
+4. **Memory sai thì sửa hoặc xóa ngay khi phát hiện**, không để tồn. Không ghi vào memory những gì repo đã ghi (code, git history, CLAUDE.md) — memory chỉ chứa thứ không suy ra được từ repo.
 
 ## Quy tắc làm việc (theo Karpathy guidelines)
 
@@ -65,22 +111,27 @@ Session chính (Fable/Opus) là **lớp kiến trúc sư — quản lý**, khôn
   - ~~"chứng chỉ"~~, ~~"tương đương điểm thi"~~, ~~"xếp loại học lực"~~
 - Giao diện phải có nhãn minh bạch AI (người dùng biết đang tương tác với AI).
 
-## Tech stack đã chốt
+## Tech stack (định hướng — chốt lại từng phần trước khi build)
 
-- Frontend: **Next.js + shadcn/ui**
-- Backend: **FastAPI** (Python)
-- Data: **MongoDB Atlas** (event-sourced learner record) + **Redis**
-- Storage: **R2/S3**
+- Frontend: Next.js + shadcn/ui
+- Backend: FastAPI (Python)
+- Data: MongoDB Atlas + Redis
+- Storage: R2/S3
 - Chi phí LLM: có model routing từ đầu, không dùng một model đắt cho mọi việc.
 
-Không đổi stack khi chưa bàn với người dùng.
+Đây là định hướng từ bản nháp, không phải cam kết. Trước khi dựng phần nào (scaffold, CI, toolchain), xác nhận lại stack của phần đó với người dùng.
+
+## Dữ liệu nhạy cảm — quy tắc cứng
+
+**Dữ liệu cá nhân thật không bao giờ vào git**, kể cả khi repo private — đây là nghĩa vụ theo Luật BVDLCN, không chỉ vệ sinh kỹ thuật:
+
+- Danh sách phụ huynh/học sinh thật, số điện thoại, email, tên trẻ em → chỉ để trong `private/` (đã gitignore) hoặc ngoài repo
+- Đề thi thu thập có thông tin định danh trường/học sinh → ẩn danh trước khi đưa vào repo
+- Secret, API key, connection string → `.env` (đã gitignore + chặn đọc), không hardcode
+- Trước mỗi commit, soát staged files: có dữ liệu cá nhân/secret thì dừng và báo người dùng
 
 ## Tài liệu nguồn
 
-Tất cả nằm trong repo, chỉ tham chiếu đường dẫn tương đối (không tham chiếu file ngoài repo):
+Tất cả tài liệu nằm trong `docs/`, tra cứu qua chỉ mục **`docs/README.md`** — mỗi file một dòng kèm hook. Quy tắc: thêm file vào `docs/` thì phải thêm dòng index cùng lúc; không tham chiếu file ngoài repo; không duy trì danh sách tài liệu ở nơi thứ hai (index là nguồn duy nhất).
 
-- `docs/bao-cao-du-an-gia-su-ai-parent-first.md` — báo cáo tổng hợp dự án, 18 mục (nguồn chính về sản phẩm, thị trường, lộ trình)
-- `docs/bao-cao-phap-ly-ai-du-an-gia-su.md` — báo cáo pháp lý AI, 12 mục (nguồn chính về ràng buộc pháp lý; mục 4 và 7.1 là bảng kiểm soát thiết kế)
-- `docs/nhat-ky-hoi-thoai-du-an-flibby.md` — nhật ký quá trình brainstorm và các quyết định (đọc mục 8 để nắm quyết định đã chốt)
-
-Khi phân vân về một quyết định sản phẩm, tra tài liệu nguồn trước khi hỏi lại từ đầu.
+Khi phân vân về một quyết định sản phẩm hoặc pháp lý, tra `docs/README.md` trước khi hỏi lại từ đầu.
