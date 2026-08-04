@@ -9,7 +9,8 @@ Mỗi dòng: `- [name](đường-dẫn) — hook một câu`. Chi tiết nằm t
 
 ## Semantic (fact dự án: kiến trúc, quyết định sản phẩm)
 
-- [docs-la-ban-nhap](semantic/docs-la-ban-nhap.md) — toàn bộ kiến trúc/kế hoạch trong docs chỉ là demo, user chốt lại từng phần trước khi build; ràng buộc pháp lý vẫn giữ
+- [docs-la-ban-nhap](semantic/docs-la-ban-nhap.md) — kiến trúc/kế hoạch trong docs bao-cao-* chỉ là demo, user chốt lại từng phần trước khi build; ràng buộc pháp lý vẫn giữ
+- [tech-stack-da-chot](semantic/tech-stack-da-chot.md) — stack ĐÃ chốt 04/08 (Django/Next/Postgres/VPS, lý do từng vòng); tên "Flibby" CHƯA chốt, code dùng tên trung tính tutor-agent
 
 ## Episodic (nhật ký quyết định theo phiên — được phép cũ đi)
 

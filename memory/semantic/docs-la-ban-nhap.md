@@ -8,6 +8,8 @@ description: Toàn bộ kiến trúc/kế hoạch/tech stack trong docs chỉ l�
 
 Người dùng tuyên bố (04/08/2026): kiến trúc dự án trong các tài liệu, kể cả kế hoạch triển khai, "tất cả chỉ là demo". Trong quá trình làm, người dùng sẽ nghiên cứu kỹ lại từng phần rồi mới triển khai.
 
+Ngoại lệ đã chốt thật sau đó: **tech stack** (04/08/2026 — xem [[tech-stack-da-chot]]).
+
 Hệ quả cho agent:
 - KHÔNG coi chữ "đã chốt" trong `docs/bao-cao-*.md` là quyết định cuối — đó là trạng thái của bản nháp
 - Mọi phần (stack, kiến trúc engine, lộ trình, giá) chỉ build sau khi người dùng xác nhận riêng phần đó trong hội thoại
