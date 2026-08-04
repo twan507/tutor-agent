@@ -1,15 +1,16 @@
-# CLAUDE.md — Flibby
+# CLAUDE.md — tutor-agent
 
 Quy tắc làm việc cho AI agent trong repo này. Áp dụng cho mọi phiên làm việc, mọi agent.
 
 ## Dự án
 
-**Flibby** — nền tảng gia sư AI **parent-first** cho thị trường Việt Nam. Bán quyền kiểm soát quá trình học cho phụ huynh, không chỉ bán khóa học. Không phải chatbot: hệ thống tạo lộ trình, dạy, kiểm tra, đo, điều chỉnh, báo cáo.
+Nền tảng gia sư AI **parent-first** cho thị trường Việt Nam. Bán quyền kiểm soát quá trình học cho phụ huynh, không chỉ bán khóa học. Không phải chatbot: hệ thống tạo lộ trình, dạy, kiểm tra, đo, điều chỉnh, báo cáo.
 
+- **Tên dự án: CHƯA CHỐT** — "Flibby" là ứng viên nhưng người dùng đang xem xét lại. Code/infra/identifier dùng tên trung tính `tutor-agent` cho tới khi chốt tên; không dùng "Flibby" trong code, domain, branding mới.
 - **MVP** (định hướng): Learning Sprint — ôn thi Toán THCS trong 7-14 ngày
 - **Moat**: learner profile + assessment intelligence + mastery tracking + parent reporting
 
-**QUAN TRỌNG — trạng thái tài liệu**: toàn bộ kiến trúc, kế hoạch triển khai, tech stack trong `docs/` là **bản nháp định hướng (demo)**, KHÔNG phải quyết định cuối. Trước khi triển khai bất kỳ phần nào, người dùng sẽ nghiên cứu lại phần đó và chốt riêng. Agent không được coi chữ "đã chốt" trong docs là căn cứ để tự build — mọi phần chỉ build sau khi người dùng xác nhận trong hội thoại.
+**Trạng thái tài liệu**: kiến trúc, kế hoạch triển khai trong `docs/bao-cao-*.md` là **bản nháp định hướng (demo)** — người dùng nghiên cứu lại từng phần rồi mới chốt. Ngoại lệ đã chốt thật: **tech stack** (04/08/2026, mục Tech stack bên dưới). Agent không được coi chữ "đã chốt" trong docs nháp là căn cứ tự build — mọi phần chỉ build sau khi người dùng xác nhận trong hội thoại.
 
 ## Mô hình phân công: kiến trúc sư và subagent
 
@@ -111,15 +112,43 @@ memory/
   - ~~"chứng chỉ"~~, ~~"tương đương điểm thi"~~, ~~"xếp loại học lực"~~
 - Giao diện phải có nhãn minh bạch AI (người dùng biết đang tương tác với AI).
 
-## Tech stack (định hướng — chốt lại từng phần trước khi build)
+## Tech stack — ĐÃ CHỐT (04/08/2026, xem docs/nghien-cuu-tech-stack.md)
 
-- Frontend: Next.js + shadcn/ui
-- Backend: FastAPI (Python)
-- Data: MongoDB Atlas + Redis
-- Storage: R2/S3
-- Chi phí LLM: có model routing từ đầu, không dùng một model đắt cho mọi việc.
+- Frontend: **Next.js** (chỉ UI; TS client sinh tự động từ OpenAPI, không viết tay)
+- Backend: **Django + django-ninja** — auth dùng built-in của Django; Django Admin là công cụ human-review nội dung
+- Worker: **Celery cùng codebase Django**, process riêng — SymPy verify, PDF parsing, batch job. Không tách thành service/repo riêng
+- Database: **PostgreSQL + pgvector** self-host
+- Streaming: **SSE** (không WebSocket ở MVP — Channels chỉ thêm khi tính năng liên lạc 2 chiều được chốt)
+- Proxy: **Nginx**; hạ tầng: **VPS + Docker Compose 2 tầng** — `infra` (postgres, CI không bao giờ đụng) + `app`; Makefile `make up`/`make deploy`
+- Storage: **Cloudflare R2**; Monitoring: Sentry + PostHog; Redis: chỉ thêm khi có nhu cầu thật
+- CI/CD: GitHub Actions (lint, test, `makemigrations --check`, codegen check, build) + branch protection main; production deploy phải người dùng approve
+- Chi phí LLM: model routing từ đầu, không dùng một model đắt cho mọi việc
 
-Đây là định hướng từ bản nháp, không phải cam kết. Trước khi dựng phần nào (scaffold, CI, toolchain), xác nhận lại stack của phần đó với người dùng.
+**Quy tắc kiến trúc cứng:**
+1. App **stateless**: session trong DB, file user upload lên R2 (không ghi disk local), config qua env var
+2. Migration **backward-compatible**: thêm cột nullable trước, xóa cột sau ít nhất 1 release; không sửa migration đã merge
+3. **Cấm `docker compose down -v`** với project infra; pin version Postgres cụ thể (không `latest`)
+4. Backup Postgres ra R2 + test restore định kỳ — nghĩa vụ pháp lý với dữ liệu trẻ em
+5. SSE endpoint: nhớ `proxy_buffering off` phía nginx
+6. **API-first cho mobile tương lai**: mọi business logic nằm sau API Django (django-ninja) — Next.js là thin client, KHÔNG nhét logic nghiệp vụ vào server actions/server components. App Android/iOS (dự kiến React Native + Expo) sẽ dùng chung đúng API này; auth thiết kế sẵn sàng cho token-based bên cạnh session cookie
+
+Đổi bất kỳ phần nào của stack phải bàn với người dùng trước.
+
+## Chiến lược test — ĐÃ CHỐT (04/08/2026, xem docs/nghien-cuu-chien-luoc-test.md)
+
+**Công cụ**: pytest + pytest-django + factory_boy (backend; API qua `ninja.testing.TestClient`) | Vitest + React Testing Library + MSW (frontend) | Playwright **chỉ cài Chromium** (E2E: 10-20 smoke test critical path, <10 phút/PR) | DeepEval (eval LLM) + promptfoo (red-team jailbreak) + mutmut (mutation testing) — 3 món sau chỉ cài khi có tính năng LLM thật.
+
+**Quy tắc:**
+
+1. **Không lời gọi LLM/HTTP thật trong CI** — mock bằng `httpx.MockTransport` (cách chính chủ của Anthropic SDK) hoặc respx. KHÔNG dùng thư viện `responses` (SDK dùng httpx).
+2. **Eval tách khỏi CI**: smoke-eval nhỏ (10-20 case, model rẻ) chỉ chạy trên PR đụng tới prompt; eval đầy đủ + mutation testing chạy nightly/định kỳ.
+3. **Test DB là Postgres thật** (service container trong CI) — không SQLite (pgvector/JSONB sẽ cho test xanh giả). Tăng tốc: `--reuse-db`, `--no-migrations`.
+4. **Celery**: unit test mock `.delay()`/`.apply_async()`; integration test dùng worker thật (pytest-celery). `task_always_eager` không được coi là bằng chứng đã test.
+5. **SymPy là ground-truth đúng/sai Toán; LLM-as-judge chỉ chấm định tính** (văn phong, trình bày) — LLM-judge có bias hệ thống đã ghi nhận, không bao giờ đảo vai.
+6. **SSE**: test generator backend với stream giả lập + 1-2 E2E smoke xác nhận UI; không cố mock EventSource trong Playwright. **Async Server Component**: không unit test, để E2E cover.
+7. **Chống test giả (TDD với agent)**: trước khi viết implementation, phải chạy test và nêu rõ assertion nào đỏ, vì sao — không chấp nhận "đã có test đỏ" hình thức. Assert giá trị cụ thể (không chỉ `status==200`/không-throw). Mỗi test có ít nhất một case biên hoặc case sai.
+8. **Coverage không có ngưỡng % cứng** — chỉ là tín hiệu tham khảo. Riêng module deterministic quan trọng (SymPy verify, mastery, calibration) chủ đích giữ coverage cao + mutation testing định kỳ.
+9. **Dev-time**: agent dùng browser tool tự xác minh UI ngay sau khi sửa, rồi cập nhật smoke test tương ứng — công cụ agent nuôi bộ CI test, không thay thế nó.
 
 ## Dữ liệu nhạy cảm — quy tắc cứng
 

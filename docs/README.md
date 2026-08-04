@@ -11,6 +11,12 @@ Quy tắc: mỗi file trong `docs/` phải có một dòng ở đây (tên + hoo
 
 - [bao-cao-phap-ly-ai-du-an-gia-su.md](bao-cao-phap-ly-ai-du-an-gia-su.md) — báo cáo pháp lý AI 12 mục: đối chiếu 3 mục Danh mục rủi ro cao (mục 4), bộ kiểm soát thiết kế (mục 7.1), checklist trước beta (mục 11); hạn cứng beta 15/08/2026
 
+## Kỹ thuật
+
+- [nghien-cuu-tech-stack.md](nghien-cuu-tech-stack.md) — tech stack ĐÃ CHỐT 04/08/2026: Next.js + Django/django-ninja + Celery + Postgres/pgvector + SSE + Nginx + Compose 2 tầng trên VPS + R2 + CI/CD 3 giai đoạn; kèm toàn bộ nghiên cứu và các vòng phản biện dẫn tới quyết định
+
+- [nghien-cuu-chien-luoc-test.md](nghien-cuu-chien-luoc-test.md) — chiến lược test ĐÃ CHỐT 04/08/2026: pytest/Vitest/Playwright-chromium/DeepEval/promptfoo/mutmut, 9 quy tắc + anti-pattern + kiểm chứng "Playwright nặng"
+
 ## Vận hành agent
 
 - [nghien-cuu-ky-thuat-agent-memory.md](nghien-cuu-ky-thuat-agent-memory.md) — khảo sát 9 hệ thống agent memory; kết luận: file-based + index trần cứng + phân loại 3 type + reflection loop, không cần vector DB/graph
