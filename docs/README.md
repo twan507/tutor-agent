@@ -19,8 +19,8 @@ Cấu trúc: `background/` bản nháp định hướng (demo, chưa chốt) | `
 
 ## specs/ — đặc tả tính năng
 
-- [specs/2026-08-04-scaffold-monorepo.md](specs/2026-08-04-scaffold-monorepo.md) — spec scaffold khung monorepo theo stack đã chốt (TRẠNG THÁI: chờ duyệt)
+- [specs/2026-08-04-scaffold-monorepo.md](specs/2026-08-04-scaffold-monorepo.md) — spec scaffold khung monorepo theo stack đã chốt (TRẠNG THÁI: đã thực thi 04/08/2026)
 
 ## plans/ — kế hoạch thực thi
 
-- [plans/2026-08-04-scaffold-monorepo-plan.md](plans/2026-08-04-scaffold-monorepo-plan.md) — implementation plan 8 task chi tiết từng file/lệnh/expected cho scaffold (TRẠNG THÁI: chờ duyệt)
+- [plans/2026-08-04-scaffold-monorepo-plan.md](plans/2026-08-04-scaffold-monorepo-plan.md) — implementation plan 8 task chi tiết từng file/lệnh/expected cho scaffold (TRẠNG THÁI: đã thực thi 04/08/2026 — verify E2E 4/4 tiêu chí DoD PASS, xem `.superpowers/sdd/2026-08-04-scaffold-monorepo-plan/task-7-report.md`)
