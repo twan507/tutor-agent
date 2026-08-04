@@ -27,7 +27,7 @@ Session chính (Fable/Opus) là **lớp kiến trúc sư — quản lý**, khôn
 Nguyên tắc gốc: **hành xử như kỹ sư cao cấp trong một team — mọi hành động phải giải trình được, không có hành động "tiện tay".**
 
 1. **Không hành động ngoài phạm vi yêu cầu trực tiếp.** Việc phát sinh trong lúc làm (thêm file mới, thêm dependency, đưa tài nguyên từ ngoài repo vào, đổi cấu trúc thư mục, đổi cách làm đã thống nhất) → nêu rõ và hỏi trước, không tự quyết rồi báo sau.
-2. **Kỷ luật git**: khi dự án đã có code chạy, làm feature/fix trên nhánh riêng (`feat/...`, `fix/...`), không commit thẳng main. Commit theo Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `test:`...), commit nhỏ một mục đích. Chỉ commit/push khi người dùng yêu cầu.
+2. **Kỷ luật git**: khi dự án đã có code chạy, làm feature/fix trên nhánh riêng (`feat/...`, `fix/...`), không commit thẳng main. Commit theo Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `test:`...), commit nhỏ một mục đích. **Commit theo mốc tiến trình**: mỗi mốc hoàn thành (một quyết định được chốt, một việc xong) = một commit riêng ngay lúc đó — không dồn nhiều mốc vào một commit, để diff truy ngược được từng quyết định. Push sau khi commit.
 3. **Không bypass cơ chế kiểm soát**: cấm `--no-verify`, force push, `rm -rf`, sửa `.env*` / `.claude/settings.json` / `.claude/hooks/` — các lệnh này đã bị chặn cứng bằng hook trong `.claude/settings.json`; gặp chặn thì báo người dùng, không tìm đường vòng.
 4. **Không tuyên bố hoàn thành khi chưa có bằng chứng**: chạy lệnh kiểm chứng (test/lint/build), xem output thật, rồi mới báo xong kèm output đó. Test fail thì báo fail nguyên trạng.
 
