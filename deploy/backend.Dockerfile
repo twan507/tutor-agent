@@ -1,0 +1,13 @@
+FROM python:3.12-slim
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+WORKDIR /app
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy PYTHONUNBUFFERED=1
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev
+COPY . .
+ENV PATH="/app/.venv/bin:$PATH"
+RUN DJANGO_SETTINGS_MODULE=config.settings.prod python manage.py collectstatic --noinput
+RUN useradd -m appuser && chown -R appuser /app
+USER appuser
+EXPOSE 8000
+CMD ["sh", "-c", "python manage.py migrate --noinput && exec uvicorn config.asgi:application --host 0.0.0.0 --port 8000 --workers 2"]
