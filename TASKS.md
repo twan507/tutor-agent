@@ -31,7 +31,7 @@ Backlog theo dõi công việc. Quy ước: `[ ]` chưa làm, `[x]` xong, `[~]` 
 - [ ] PostToolUse auto-lint hook + Stop hook chạy test — khi có linter/test thật (AGENT)
 - [ ] Branch protection cho `main` trên GitHub + cài `gh` CLI — trước PR đầu tiên (USER + AGENT)
 - [ ] CI/CD giai đoạn 2 (khi deploy VPS lần đầu): GHCR + staging auto + production approve tay; pgBackRest backup ra R2 + cron test restore; healthz + UptimeRobot + healthchecks.io cho Celery beat (AGENT)
-- [ ] Hardening prod settings: fail-fast khi thiếu `DJANGO_SECRET_KEY`/`POSTGRES_PASSWORD` (kèm build-arg dummy cho `collectstatic` trong Dockerfile) — finding đã park từ review scaffold Task 1 (AGENT)
+- [ ] Hardening prod settings trước deploy VPS đầu tiên (GATE chặn deploy): fail-fast khi thiếu `DJANGO_SECRET_KEY`/`POSTGRES_PASSWORD` (kèm build-arg dummy cho `collectstatic` trong Dockerfile); `SECURE_PROXY_SSL_HEADER` + `SESSION_COOKIE_SECURE` + `CSRF_COOKIE_SECURE` + HSTS khi có TLS; viết lại target `make deploy` cho GHCR (hiện là placeholder — compose pull fail với service chỉ có `build:`) — finding từ review scaffold (AGENT)
 - [ ] CI/CD giai đoạn 3 (khi có người dùng trả tiền): zero-downtime deploy, Dependabot, pip-audit/npm audit, Trivy (AGENT)
 - [ ] Cài DeepEval + promptfoo + mutmut và dựng pipeline eval nightly — khi có tính năng LLM thật đầu tiên (AGENT)
 
