@@ -17,6 +17,11 @@ Quy tắc: mỗi file trong `docs/` phải có một dòng ở đây (tên + hoo
 
 - [nghien-cuu-chien-luoc-test.md](nghien-cuu-chien-luoc-test.md) — chiến lược test ĐÃ CHỐT 04/08/2026: pytest/Vitest/Playwright-chromium/DeepEval/promptfoo/mutmut, 9 quy tắc + anti-pattern + kiểm chứng "Playwright nặng"
 
+## Specs & Plans
+
+- [specs/2026-08-04-scaffold-monorepo.md](specs/2026-08-04-scaffold-monorepo.md) — spec scaffold khung monorepo theo stack đã chốt (TRẠNG THÁI: chờ duyệt)
+- [plans/2026-08-04-scaffold-monorepo-plan.md](plans/2026-08-04-scaffold-monorepo-plan.md) — implementation plan 8 task chi tiết từng file/lệnh/expected cho scaffold (TRẠNG THÁI: chờ duyệt)
+
 ## Vận hành agent
 
 - [nghien-cuu-ky-thuat-agent-memory.md](nghien-cuu-ky-thuat-agent-memory.md) — khảo sát 9 hệ thống agent memory; kết luận: file-based + index trần cứng + phân loại 3 type + reflection loop, không cần vector DB/graph

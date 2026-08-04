@@ -31,20 +31,23 @@ Nguyên tắc gốc: **hành xử như kỹ sư cao cấp trong một team — m
 3. **Không bypass cơ chế kiểm soát**: cấm `--no-verify`, force push, `rm -rf`, sửa `.env*` / `.claude/settings.json` / `.claude/hooks/` — các lệnh này đã bị chặn cứng bằng hook trong `.claude/settings.json`; gặp chặn thì báo người dùng, không tìm đường vòng.
 4. **Không tuyên bố hoàn thành khi chưa có bằng chứng**: chạy lệnh kiểm chứng (test/lint/build), xem output thật, rồi mới báo xong kèm output đó. Test fail thì báo fail nguyên trạng.
 
-**Quy trình feature chuẩn** (dùng skill superpowers có sẵn):
+**Quy trình feature chuẩn — KHÔNG NHẢY CÓC BƯỚC NÀO** (dùng skill superpowers có sẵn):
 
 ```
-brainstorm (skill brainstorming)
-→ plan — NGƯỜI DÙNG DUYỆT trước khi code (skill writing-plans)
-→ TDD: test đỏ trước, code sau (skill test-driven-development)
-→ review bằng subagent code-reviewer (.claude/agents/code-reviewer.md, context sạch)
-→ verify bằng chứng thật (skill verification-before-completion)
-→ merge
+1. brainstorm (skill brainstorming) — làm rõ yêu cầu
+2. SPEC → docs/specs/YYYY-MM-DD-<chủ-đề>.md — NGƯỜI DÙNG DUYỆT
+3. PLAN (skill writing-plans) → docs/plans/YYYY-MM-DD-<chủ-đề>-plan.md
+   — bẻ spec thành task nhỏ có nội dung file thật / lệnh thật / expected thật,
+   KHÔNG placeholder. Spec nói "cái gì", plan nói "chính xác làm thế nào".
+   Giao subagent khi chưa có plan là nguồn lệch chính — CẤM.
+4. THỰC THI theo plan (skill subagent-driven-development hoặc executing-plans)
+   — TDD trong từng task: test đỏ đúng lý do trước, code sau
+5. REVIEW bằng subagent code-reviewer (.claude/agents/code-reviewer.md, context sạch)
+6. VERIFY bằng chứng thật (skill verification-before-completion) — dán output
+7. merge + commit theo mốc
 ```
 
-Spec/design doc lưu tại `docs/specs/YYYY-MM-DD-<chủ-đề>.md` (nhớ thêm dòng vào `docs/README.md`). Backlog công việc theo dõi trong `TASKS.md` ở gốc repo.
-
-Hai gate không được nhảy qua: **plan phải được duyệt** và **test phải đỏ trước khi viết implementation**.
+Ba gate không được nhảy: **spec được duyệt**, **plan tồn tại trước khi giao việc**, **test đỏ trước khi viết implementation**. Cả spec lẫn plan đều thêm dòng vào `docs/README.md`. Backlog theo dõi trong `TASKS.md` ở gốc repo.
 
 ## Quy tắc bộ nhớ (memory/)
 
