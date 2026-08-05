@@ -128,6 +128,17 @@ Mô hình đúng là **Forest app**: phần thưởng cộng dồn, không trừ
 
 Cơ chế "mascot sáng dần theo tiến bộ" **chưa có tiền lệ trong edtech** — đây là điểm khác biệt thật, không phải trang trí.
 
+### 3.3 Dạng đầy đủ và motif đường bay (chốt 05/08/2026)
+
+Mascot có hai dạng, mỗi dạng một địa bàn — **không dạng nào lấn địa bàn dạng kia**:
+
+- **Đốm sáng tối giản** — sống trong wordmark (chấm chữ i) và app icon. Đây là dạng duy nhất được đứng trong logo: thay chấm chữ i bằng nguyên con đom đóm sẽ phá tính "một hình duy nhất" (tên = mascot = logo = icon) — chính là điểm ăn giải khi chọn tên Rangi.
+- **Đom đóm đầy đủ (geometric)** — sống trong minh họa: hero illustration, empty state, pattern nền, social post, pose sheet. Vẽ hình học tối giản, KHÔNG baby-face; mọi quy tắc cảm xúc mục 3.2 áp dụng nguyên vẹn.
+
+**Motif đường bay chấm gạch** (dashed flight path): đường bay của đom đóm vẽ bằng nét đứt, là họa tiết đồ họa chính thức thứ hai sau đốm sáng — dùng làm đường dẫn thị giác trong layout, pattern, trang trí. SVG: `<path>` + `stroke-dasharray`, tham số hóa trong pipeline sinh logo.
+
+**Cầu nối hai dạng**: câu chuyện chuẩn là *đom đóm đầy đủ bay theo đường chấm gạch rồi đậu xuống thành chấm chữ i*. Tĩnh: wordmark giữ nguyên, đường bay dẫn vào chấm sáng. Động (splash/hero animation): kể trọn cảnh bay-và-đậu. Nhờ đó dạng đầy đủ và wordmark không cạnh tranh nhau mà là hai khung hình của cùng một cảnh.
+
 ---
 
 ## 4. Màu sắc và câu chuyện của nó
