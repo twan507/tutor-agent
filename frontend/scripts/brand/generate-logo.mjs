@@ -47,8 +47,12 @@ const phudu = phuduFile.getVariation ? phuduFile.getVariation({ wght: 700 }) : p
 const bvp = fontkit.openSync(path.join(__dirname, "fonts/BeVietnamPro-Medium.ttf"));
 
 const wm = layoutText(phudu, "RANG", FS);
+// padTop 0.16*FS (not 0.10*FS): with capHeight≈0.70*FS, dotCyUp=0.608*FS and
+// haloR=0.225*FS, the halo's top edge sits at padTop - 13.3 units from the
+// canvas top — 0.10*FS clipped it (-3.3). 0.16*FS keeps >=1 unit of clearance
+// (padTop=16 -> halo top = 2.7) without touching any glyph/dot/halo ratio.
 const padX = 0.14 * FS,
-  padTop = 0.1 * FS,
+  padTop = 0.16 * FS,
   padBot = 0.1 * FS;
 const baseline = padTop + wm.capHeight;
 const iStemX = padX + wm.width + R.gap;
