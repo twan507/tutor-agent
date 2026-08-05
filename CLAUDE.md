@@ -67,8 +67,15 @@ memory/
 
 1. **Index nhỏ, lazy-load chi tiết**: `MEMORY.md` chỉ chứa mỗi memory một dòng (tên + hook). Trần cứng 150 dòng — vượt là phải thu gọn trước khi thêm mới. Chi tiết nằm trong file con, chỉ đọc khi cần.
 2. **Mỗi memory một file**, có frontmatter: `name`, `type` (semantic/procedural/episodic), `created`, `modified`, `description` một dòng. Đặt file đúng thư mục theo type.
-3. **Reflection cuối phiên lớn**: trước khi kết thúc phiên làm việc có thay đổi đáng kể, tự hỏi: (a) có insight bậc cao nào đáng ghi thay vì chỉ fact rời rạc? (b) memory mới có mâu thuẫn với memory cũ nào không? (c) memory nào đã sai/hết hạn cần sửa hoặc xóa? Rồi cập nhật memory/ tương ứng.
+3. **Reflection cuối phiên lớn**: trước khi kết thúc phiên làm việc có thay đổi đáng kể, tự hỏi: (a) có insight bậc cao nào đáng ghi thay vì chỉ fact rời rạc? (b) memory mới có mâu thuẫn với memory cũ nào không? (c) memory nào đã sai/hết hạn cần sửa hoặc xóa? (d) **có kiến thức nào chỉ tồn tại trong hội thoại này không** — lý lẽ, cách kể, insight vừa khám phá? Nếu có: nó sẽ MẤT khi phiên đóng, phải ghi ra file ngay (xem quy tắc 5). Rồi cập nhật memory/ tương ứng.
 4. **Memory sai thì sửa hoặc xóa ngay khi phát hiện**, không để tồn. Không ghi vào memory những gì repo đã ghi (code, git history, CLAUDE.md) — memory chỉ chứa thứ không suy ra được từ repo.
+
+5. **Chốt quyết định lớn = ghi cả LÝ DO và CÁCH DÙNG, không chỉ kết luận.** Kết luận (bảng màu, tên font, tên lệnh) là phần dễ ghi và cũng là phần ít giá trị nhất — lý lẽ đằng sau mới là thứ không tái tạo được ở phiên sau. Mỗi quyết định có sức sống dài phải để lại **ba tầng tài liệu**:
+   - `docs/research/` — **vì sao chọn** (các phương án đã cân nhắc, bằng chứng, đánh đổi, điều kiện đổi chiều)
+   - `docs/brand/` hoặc `docs/specs/` — **ý nghĩa và cách dùng** (giải nghĩa, cách kể chuyện, thông số áp dụng)
+   - `CLAUDE.md` — **quy tắc bắt buộc** rút gọn (thứ agent phải tuân khi build)
+
+   Tiền lệ: bộ nhận diện Rangi chốt xong nhưng toàn bộ phần giải nghĩa (ba tầng nghĩa của tên, các hướng khai thác marketing, điển tích văn hóa) suýt chết theo phiên vì chỉ tồn tại trong hội thoại — người dùng phải tự nhớ và yêu cầu mới có `docs/brand/so-tay-thuong-hieu-rangi.md`. **Không được để người dùng phải là bộ nhớ dự phòng.**
 
 ## Quy tắc làm việc (theo Karpathy guidelines)
 
