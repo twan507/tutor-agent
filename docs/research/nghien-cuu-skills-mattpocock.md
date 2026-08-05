@@ -43,11 +43,11 @@ Harness hiện tại (CLAUDE.md + superpowers + code-reviewer + memory/) đã é
 
 ## Vị trí các thay đổi
 
-| Kỹ thuật | File |
-|---|---|
-| Glossary song ngữ | `CONTEXT.md` (gốc repo) |
-| Grilling frontier | `CLAUDE.md` mục Quy trình feature chuẩn |
-| Debug kỷ luật | `CLAUDE.md` mục Quy tắc làm việc §5 |
-| Review hai trục | `.claude/agents/code-reviewer.md` + dòng bước 5 quy trình |
-| Bộ lọc quyết định lớn + cắt tỉa | `CLAUDE.md` mục Quy tắc bộ nhớ §5-6 |
-| Seam + tautological test | `CLAUDE.md` mục Chiến lược test §10 |
+| Kỹ thuật                        | File                                                      |
+| ------------------------------- | --------------------------------------------------------- |
+| Glossary song ngữ               | `CONTEXT.md` (gốc repo)                                   |
+| Grilling frontier               | `CLAUDE.md` mục Quy trình feature chuẩn                   |
+| Debug kỷ luật                   | `CLAUDE.md` mục Quy tắc làm việc §5                       |
+| Review hai trục                 | `.claude/agents/code-reviewer.md` + dòng bước 5 quy trình |
+| Bộ lọc quyết định lớn + cắt tỉa | `CLAUDE.md` mục Quy tắc bộ nhớ §5-6                       |
+| Seam + tautological test        | `CLAUDE.md` mục Chiến lược test §10                       |

@@ -93,22 +93,26 @@ memory/
 ## Quy tắc làm việc (theo Karpathy guidelines)
 
 ### 1. Nghĩ trước khi code
+
 - Nêu rõ giả định trước khi bắt đầu. Không chắc thì hỏi, không tự đoán thay người dùng.
 - Yêu cầu có nhiều cách hiểu → trình bày các cách hiểu, không tự chọn ngầm.
 - Thấy hướng đơn giản hơn hướng được yêu cầu → phải nói ra trước khi làm.
 - Còn điểm mơ hồ ảnh hưởng kết quả → dừng lại hỏi, không code tiếp.
 
 ### 2. Đơn giản trước tiên
+
 - Code tối thiểu giải đúng bài toán được yêu cầu. Không có gì "phòng xa".
 - Không thêm tính năng ngoài yêu cầu, không abstraction cho thứ chỉ dùng một lần, không xử lý edge case không xảy ra.
 - Bài test: senior engineer nhìn vào có thấy overcomplicated không? 50 dòng làm được thì không viết 200 dòng.
 
 ### 3. Sửa đúng chỗ
+
 - Chỉ chạm vào phần phải chạm. Giữ style code hiện có, không "tiện tay cải thiện" phần xung quanh.
 - Không refactor phần không liên quan đến yêu cầu. Chỉ dọn import/biến thừa do chính thay đổi của mình tạo ra.
 - Mỗi dòng diff phải truy ngược được về yêu cầu của người dùng.
 
 ### 4. Làm theo mục tiêu kiểm chứng được
+
 - Biến yêu cầu mơ hồ thành tiêu chí thành công cụ thể, đo được, trước khi bắt đầu.
 - Việc nhiều bước: nêu kế hoạch đánh số, mỗi bước có cách verify.
 - Lặp đến khi verify đạt. Không tuyên bố "xong" khi chưa chạy kiểm chứng.
@@ -155,6 +159,7 @@ memory/
 - Chi phí LLM: model routing từ đầu, không dùng một model đắt cho mọi việc
 
 **Quy tắc kiến trúc cứng:**
+
 1. App **stateless**: session trong DB, file user upload lên R2 (không ghi disk local), config qua env var
 2. Migration **backward-compatible**: thêm cột nullable trước, xóa cột sau ít nhất 1 release; không sửa migration đã merge
 3. **Ranh giới dữ liệu**: được phép `stop`/`down` container (dựng lại được, kể cả tầng infra); **CẤM VĨNH VIỄN** cờ `-v`/`--volumes` trong mọi lệnh docker — đó là ranh giới giữa "xóa container" và "mất dữ liệu"; hook `guard-bash.sh` chặn cứng. Pin version Postgres cụ thể (không `latest`)
@@ -182,6 +187,7 @@ memory/
 5. **Guardrail trẻ em ở CẢ prompt LẪN code**: post-check "không đưa đáp án trực tiếp", lớp chống jailbreak độc lập ngoài prompt.
 
 **Điều kiện bắt buộc đi kèm M3** (do rủi ro ToS under-16 + model Trung Quốc, người dùng chấp nhận với điều kiện code bảo vệ):
+
 - Pseudonymize **TRIỆT ĐỂ**: không tên thật, không định danh, không thông tin liên hệ, không dữ liệu nào truy ngược được về trẻ rời khỏi hệ thống tới API — enforce tại `ai_call()`, có test riêng cho lớp này
 - Minh bạch với phụ huynh: công bố model nào xử lý phần dữ liệu nào
 - Kiểm chứng ToS API MiniMax về giới hạn tuổi khi đăng ký tài khoản (TASKS.md)
