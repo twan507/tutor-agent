@@ -2,13 +2,17 @@
 
 Quy tắc: mỗi file trong `docs/` phải có một dòng ở đây (tên + hook một câu). Thêm file mới → thêm dòng index cùng lúc. Đọc index trước, chỉ mở file khi cần chi tiết.
 
-Cấu trúc: `background/` bản nháp định hướng (demo, chưa chốt) | `research/` nghiên cứu đã kiểm chứng | `specs/` spec tính năng | `plans/` implementation plan.
+Cấu trúc: `background/` bản nháp định hướng (demo, chưa chốt) | `research/` nghiên cứu đã kiểm chứng | `brand/` sổ tay thương hiệu (canonical) | `specs/` spec tính năng | `plans/` implementation plan.
 
 ## background/ — bản nháp định hướng
 
 - [background/bao-cao-du-an-gia-su-ai-parent-first.md](background/bao-cao-du-an-gia-su-ai-parent-first.md) — báo cáo tổng hợp dự án 18 mục: thesis, thị trường, cạnh tranh, 8 engine, MVP, GTM, unit economics, KPI, sổ rủi ro
 - [background/nhat-ky-hoi-thoai-du-an-flibby.md](background/nhat-ky-hoi-thoai-du-an-flibby.md) — nhật ký brainstorm và phản biện; mục 8 là tổng kết quyết định; mục 7 là hành trình chọn tên (tham chiếu khi nghiên cứu tên mới)
 - [background/bao-cao-phap-ly-ai-du-an-gia-su.md](background/bao-cao-phap-ly-ai-du-an-gia-su.md) — báo cáo pháp lý AI 12 mục: đối chiếu 3 mục Danh mục rủi ro cao (mục 4), bộ kiểm soát thiết kế (mục 7.1), checklist trước beta (mục 11)
+
+## brand/ — sổ tay thương hiệu
+
+- [brand/so-tay-thuong-hieu-rangi.md](brand/so-tay-thuong-hieu-rangi.md) — tài liệu chuẩn về Ý NGHĨA và CÁCH KỂ CHUYỆN thương hiệu Rangi: 3 tầng nghĩa của "Rang" + 3 tầng của chữ "i", 7 hướng khai thác marketing, mascot đom đóm (điển tích + quy tắc anti-Duolingo), câu chuyện màu (quang phổ đom đóm + ngọc bất trác), lý do chọn PhuDu, giải nghĩa từng chi tiết logo, triết lý, slogan, 4 trụ thông điệp, brand voice, ngôn ngữ cấm
 
 ## research/ — nghiên cứu đã kiểm chứng
 
