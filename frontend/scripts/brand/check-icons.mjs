@@ -77,7 +77,7 @@ export function checkSvg(name, content, kind) {
   return errors;
 }
 
-function checkDir(dir, kind, manifest) {
+export function checkDir(dir, kind, manifest) {
   const errors = [];
   if (!fs.existsSync(dir)) return [`thiếu thư mục ${dir}`];
   const files = fs
