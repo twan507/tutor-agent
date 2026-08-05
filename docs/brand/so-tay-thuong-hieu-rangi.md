@@ -3,10 +3,11 @@
 Tài liệu chuẩn (canonical) về ý nghĩa, câu chuyện và các hướng khai thác marketing của thương hiệu Rangi. Viết ngày 05/08/2026, sau khi chốt trọn bộ nhận diện.
 
 Khác biệt với các tài liệu khác:
-- `docs/research/nghien-cuu-thuong-hieu.md` — *quá trình* nghiên cứu và bảng chấm điểm (vì sao chọn)
-- `docs/research/nghien-cuu-he-mau-va-font.md` — *thông số kỹ thuật* màu và font (dùng thế nào)
-- **File này** — *ý nghĩa và cách kể chuyện* (nói gì với khách hàng)
-- `CLAUDE.md` mục Bộ nhận diện — *quy tắc bắt buộc khi build* (không được vi phạm)
+
+- `docs/research/nghien-cuu-thuong-hieu.md` — _quá trình_ nghiên cứu và bảng chấm điểm (vì sao chọn)
+- `docs/research/nghien-cuu-he-mau-va-font.md` — _thông số kỹ thuật_ màu và font (dùng thế nào)
+- **File này** — _ý nghĩa và cách kể chuyện_ (nói gì với khách hàng)
+- `CLAUDE.md` mục Bộ nhận diện — _quy tắc bắt buộc khi build_ (không được vi phạm)
 
 ---
 
@@ -22,28 +23,28 @@ Vòng 11 sinh 14 ứng viên mới, tra cứu kỹ 6, và Rangi thắng với **
 
 Đây là lý do cái tên đắt. Một âm tiết tiếng Việt gánh được ba thứ khác nhau, và cả ba đều phục vụ đúng đối tượng:
 
-| Tầng | Chữ gốc | Nói với ai | Ý nghĩa |
-|---|---|---|---|
-| **Ẩn dụ sản phẩm** | *rạng sáng, rạng đông* | Cả hai | Khoảnh khắc ánh sáng đến sau đêm dài — nối thẳng vào trục ánh-sáng-dẫn-đường và mascot đom đóm |
-| **Cảm xúc của con** | *rạng rỡ* | Học sinh | Gương mặt đứa trẻ khi hiểu ra bài, khi được khen |
-| **Khát vọng của người trả tiền** | *rạng danh* | Phụ huynh | *"Con học hành tấn tới làm rạng danh gia đình"* — câu nằm sẵn trong tiềm thức thế hệ 8x-9x |
+| Tầng                             | Chữ gốc                | Nói với ai | Ý nghĩa                                                                                        |
+| -------------------------------- | ---------------------- | ---------- | ---------------------------------------------------------------------------------------------- |
+| **Ẩn dụ sản phẩm**               | _rạng sáng, rạng đông_ | Cả hai     | Khoảnh khắc ánh sáng đến sau đêm dài — nối thẳng vào trục ánh-sáng-dẫn-đường và mascot đom đóm |
+| **Cảm xúc của con**              | _rạng rỡ_              | Học sinh   | Gương mặt đứa trẻ khi hiểu ra bài, khi được khen                                               |
+| **Khát vọng của người trả tiền** | _rạng danh_            | Phụ huynh  | _"Con học hành tấn tới làm rạng danh gia đình"_ — câu nằm sẵn trong tiềm thức thế hệ 8x-9x     |
 
 Tầng thứ ba là tầng bán hàng mạnh nhất, và nó hoạt động **mà không cần nói ra**. Không quảng cáo nào của Rangi cần viết chữ "rạng danh"; nó tự vang lên trong đầu người nghe.
 
 ### 1.3 Ba tầng nghĩa của chữ "i" — phần hay nhất
 
-Nguyên tắc người sáng lập đặt ra: *không mảnh nào của thương hiệu được phép vô nghĩa*. Chữ "i" trả lời được ba lần:
+Nguyên tắc người sáng lập đặt ra: _không mảnh nào của thương hiệu được phép vô nghĩa_. Chữ "i" trả lời được ba lần:
 
 **a) Chấm của chữ "i" chính là con đom đóm.**
 "i" là chữ cái duy nhất có một đốm tròn lơ lửng phía trên. Trong logo, đốm ấy không phải dấu chấm — nó là **đốm sáng hổ phách của mascot**. Hệ quả: mascot không đứng cạnh cái tên, mascot **sống bên trong** cái tên. App icon chỉ cần cắt riêng chữ i + chấm sáng ra là xong — tên, mascot, logo, icon là **một hình duy nhất**. Rất ít thương hiệu đạt được mức hợp nhất này.
 
 **b) "i" là chữ cái đầu tiên của việc học — "học i tờ".**
-Thành ngữ *"mới học i tờ"*, *"bắt đầu từ i tờ"* — "i" là ký tự đầu tiên mọi đứa trẻ Việt tập viết. **RANG + i = làm rạng lên từ những bước học nhỏ nhất**, khớp nguyên văn triết lý "ngọn đèn nhỏ đủ soi một trang sách". Phụ huynh 8x-9x nghe "i tờ" là mỉm cười — đó là chữ của tuổi thơ họ.
+Thành ngữ _"mới học i tờ"_, _"bắt đầu từ i tờ"_ — "i" là ký tự đầu tiên mọi đứa trẻ Việt tập viết. **RANG + i = làm rạng lên từ những bước học nhỏ nhất**, khớp nguyên văn triết lý "ngọn đèn nhỏ đủ soi một trang sách". Phụ huynh 8x-9x nghe "i tờ" là mỉm cười — đó là chữ của tuổi thơ họ.
 
 **c) "i" đọc kiểu quốc tế là "I" — chính mình.**
-*Rạng + I = chính mình rạng lên*. Không sáng nhờ so với bạn bè, không nhờ xếp hạng. Đây chính là triết lý không-so-sánh nén vào một ký tự — tầng này tinh hơn, dành cho pitch deck và người để ý.
+_Rạng + I = chính mình rạng lên_. Không sáng nhờ so với bạn bè, không nhờ xếp hạng. Đây chính là triết lý không-so-sánh nén vào một ký tự — tầng này tinh hơn, dành cho pitch deck và người để ý.
 
-**Tóm một câu bán được:** *RANG là lời hứa với phụ huynh; **i** là đứa trẻ — nhỏ, đứng cuối, nhưng là nơi duy nhất phát sáng.*
+**Tóm một câu bán được:** _RANG là lời hứa với phụ huynh; **i** là đứa trẻ — nhỏ, đứng cuối, nhưng là nơi duy nhất phát sáng._
 
 ### 1.4 Câu chuyện phụ (dùng khi ra quốc tế)
 
@@ -61,11 +62,11 @@ Giá trị thực tế của "sạch": mua được domain, đứng đầu kết
 
 ## 2. Các hướng khai thác marketing từ cái tên
 
-Đây là phần trả lời trực tiếp câu hỏi *"cái tên này bán được những gì?"*.
+Đây là phần trả lời trực tiếp câu hỏi _"cái tên này bán được những gì?"_.
 
 ### Hướng 1 — Ánh sáng dẫn đường (trục chính)
 
-**Câu định vị**: *"Bố mẹ đặt mục tiêu, Rangi soi lộ trình cho con."*
+**Câu định vị**: _"Bố mẹ đặt mục tiêu, Rangi soi lộ trình cho con."_
 
 Cái tên tự mang nghĩa "rạng" nên mọi hình ảnh ánh sáng đều thuộc về thương hiệu mà không phải giải thích: đốm sáng chỉ lối trong đêm, ngọn đèn trên bàn học, bình minh sau đêm ôn thi. Dùng cho: hero landing page, video giới thiệu, hình ảnh chủ đạo quảng cáo.
 
@@ -78,6 +79,7 @@ Không bao giờ nói thẳng chữ "rạng danh" (nghe cũ và áp lực), như
 ### Hướng 3 — Đom đóm sống trong chữ i (nội dung thị giác)
 
 Vì mascot nằm trong cái tên, mọi nội dung thị giác đều tự nhất quán. Ý tưởng chiến dịch khai thác được:
+
 - **Chấm sáng dần lên theo tiến bộ** — logo động trên app; ảnh chụp màn hình "đốm sáng tuần này của con" chia sẻ được
 - **"Mỗi tối một đốm sáng"** — nhịp nội dung hằng ngày, khớp nhịp sản phẩm (sprint là chuỗi buổi tối)
 - Video mở đầu: màn hình tối, một chấm hổ phách nhấp nháy, chữ RANG hiện ra quanh nó
@@ -86,7 +88,7 @@ Vì mascot nằm trong cái tên, mọi nội dung thị giác đều tự nhấ
 
 Phụ huynh mục tiêu là thế hệ **từng bắt đom đóm những đêm hè ở quê**. Đây là vùng ký ức chưa thương hiệu edtech nào chạm tới. Dùng cho: bài viết dài, video kể chuyện, nội dung mùa hè.
 
-⚠️ **Ranh giới pháp lý-thương hiệu quan trọng**: tuyệt đối **không dùng cụm "Đèn Đom Đóm"** — đó là tên chương trình khuyến học nổi tiếng của sữa Cô Gái Hà Lan (bằng khen Thủ tướng 2013), đúng thế hệ phụ huynh này lớn lên cùng. Mượn *chất liệu ký ức* thì được; mượn *cụm từ* là tự đâm vào thương hiệu khác.
+⚠️ **Ranh giới pháp lý-thương hiệu quan trọng**: tuyệt đối **không dùng cụm "Đèn Đom Đóm"** — đó là tên chương trình khuyến học nổi tiếng của sữa Cô Gái Hà Lan (bằng khen Thủ tướng 2013), đúng thế hệ phụ huynh này lớn lên cùng. Mượn _chất liệu ký ức_ thì được; mượn _cụm từ_ là tự đâm vào thương hiệu khác.
 
 ### Hướng 5 — "Học i tờ" (nội dung gần gũi, chống cảm giác cao siêu)
 
@@ -94,7 +96,7 @@ Khai thác chữ "i" để nói về **bước nhỏ**: "bắt đầu lại từ
 
 ### Hướng 6 — "i" là chính mình (trụ khác biệt hóa)
 
-Trục dùng để **đối lập trực diện với đối thủ**: VioEdu có đấu trường và bảng xếp hạng; nền tảng quốc gia sắp ra sẽ chuẩn hóa theo chương trình chung. Rangi đi ngược: *"Con không thi đua với ai trong lớp. Đối thủ duy nhất của con là chính con của tuần trước."*
+Trục dùng để **đối lập trực diện với đối thủ**: VioEdu có đấu trường và bảng xếp hạng; nền tảng quốc gia sắp ra sẽ chuẩn hóa theo chương trình chung. Rangi đi ngược: _"Con không thi đua với ai trong lớp. Đối thủ duy nhất của con là chính con của tuần trước."_
 
 Đây vừa là định vị marketing, vừa là **lá chắn pháp lý** (không xếp hạng người học = đứng ngoài mục 2 Danh mục AI rủi ro cao).
 
@@ -108,9 +110,9 @@ Hai âm tiết mở, không cụm phụ âm khó. Phụ huynh nghe một lần l
 
 ### 3.1 Vì sao là đom đóm
 
-**Tầng nghĩa hành vi** (giàu nhất cho giáo dục): đom đóm **phát sáng từ bên trong**, ánh sáng do chính nó tạo ra chứ không phản chiếu. Đây là ẩn dụ đắt nhất của việc học: *tri thức phát ra từ bên trong đứa trẻ, không phải rót vào*. Nó phân biệt trực tiếp với ẩn dụ "rót kiến thức" của dạy học truyền thống.
+**Tầng nghĩa hành vi** (giàu nhất cho giáo dục): đom đóm **phát sáng từ bên trong**, ánh sáng do chính nó tạo ra chứ không phản chiếu. Đây là ẩn dụ đắt nhất của việc học: _tri thức phát ra từ bên trong đứa trẻ, không phải rót vào_. Nó phân biệt trực tiếp với ẩn dụ "rót kiến thức" của dạy học truyền thống.
 
-**Tầng văn hóa Việt**: tích **"học trò nghèo bắt đom đóm làm đèn học"** — điển Xa Dận thời Tấn, vào tiếng Việt qua thành ngữ *"nang huỳnh chiếu tuyết"*, là biểu tượng kinh điển của hiếu học và vươn lên bằng tri thức. Không đối thủ mang tên tiếng Anh nào kể được câu chuyện này.
+**Tầng văn hóa Việt**: tích **"học trò nghèo bắt đom đóm làm đèn học"** — điển Xa Dận thời Tấn, vào tiếng Việt qua thành ngữ _"nang huỳnh chiếu tuyết"_, là biểu tượng kinh điển của hiếu học và vươn lên bằng tri thức. Không đối thủ mang tên tiếng Anh nào kể được câu chuyện này.
 
 **Khoảng trống thị trường** (có kiểm chứng): khỉ đã thuộc về Monkey, mèo Bitu thuộc Vuihoc, cú bị Duolingo khóa toàn cầu, robot thuộc Ruangguru. **Đom đóm chưa ai dùng trong edtech Việt Nam hay khu vực.**
 
@@ -122,6 +124,7 @@ Nghiên cứu xác nhận Duolingo **cố ý** làm mascot hơi đáng sợ và 
 2. **Định vị**: sản phẩm bán cho phụ huynh sự an tâm, không phải sự thúc ép
 
 Mô hình đúng là **Forest app**: phần thưởng cộng dồn, không trừng phạt. Cụ thể:
+
 - Học tiến bộ → đốm sáng **sáng dần lên**
 - Nghỉ một hôm → đốm sáng **mờ đi trung tính** — không mặt buồn, không "bạn đã làm tôi thất vọng"
 - **Cấm**: mắt to nhìn chằm chằm (gợi giám sát), biểu cảm thất vọng khi làm sai
@@ -137,7 +140,7 @@ Mascot có hai dạng, mỗi dạng một địa bàn — **không dạng nào l
 
 **Motif đường bay chấm gạch** (dashed flight path): đường bay của đom đóm vẽ bằng nét đứt, là họa tiết đồ họa chính thức thứ hai sau đốm sáng — dùng làm đường dẫn thị giác trong layout, pattern, trang trí. SVG: `<path>` + `stroke-dasharray`, tham số hóa trong pipeline sinh logo.
 
-**Cầu nối hai dạng**: câu chuyện chuẩn là *đom đóm đầy đủ bay theo đường chấm gạch rồi đậu xuống thành chấm chữ i*. Tĩnh: wordmark giữ nguyên, đường bay dẫn vào chấm sáng. Động (splash/hero animation): kể trọn cảnh bay-và-đậu. Nhờ đó dạng đầy đủ và wordmark không cạnh tranh nhau mà là hai khung hình của cùng một cảnh.
+**Cầu nối hai dạng**: câu chuyện chuẩn là _đom đóm đầy đủ bay theo đường chấm gạch rồi đậu xuống thành chấm chữ i_. Tĩnh: wordmark giữ nguyên, đường bay dẫn vào chấm sáng. Động (splash/hero animation): kể trọn cảnh bay-và-đậu. Nhờ đó dạng đầy đủ và wordmark không cạnh tranh nhau mà là hai khung hình của cùng một cảnh.
 
 ---
 
@@ -149,7 +152,7 @@ Mascot có hai dạng, mỗi dạng một địa bàn — **không dạng nào l
 
 **a) Đây là quang phổ thật của con đom đóm.** Ánh sáng sinh học của đom đóm nằm ở bước sóng ~560nm — vàng ngả lục. Hổ phách + lục bảo không phải hai màu ghép cho đẹp, nó là **cảnh đom đóm trong vườn đêm**.
 
-**b) "Ngọc" mở ra một điển tích giáo dục còn đắt hơn cả đèn đom đóm**: *"Ngọc bất trác bất thành khí"* — ngọc không mài giũa không thành vật quý. Ca dao Việt: *"Ngọc kia chẳng giũa chẳng mài / Cũng thành vô dụng cũng hoài ngọc đi"*. Với phụ huynh Việt: **con là viên ngọc, việc học là sự mài giũa**. Sạch, không bị thương hiệu nào chiếm.
+**b) "Ngọc" mở ra một điển tích giáo dục còn đắt hơn cả đèn đom đóm**: _"Ngọc bất trác bất thành khí"_ — ngọc không mài giũa không thành vật quý. Ca dao Việt: _"Ngọc kia chẳng giũa chẳng mài / Cũng thành vô dụng cũng hoài ngọc đi"_. Với phụ huynh Việt: **con là viên ngọc, việc học là sự mài giũa**. Sạch, không bị thương hiệu nào chiếm.
 
 ### 4.2 Khoảng trống thị trường
 
@@ -157,11 +160,11 @@ Xanh dương và xanh lá đã bão hòa (VioEdu, Vuihoc, ELSA, Ruangguru, Duoli
 
 ### 4.3 Các màu phụ và ý nghĩa
 
-| Màu | Hex | Vai trò |
-|---|---|---|
-| Xanh đêm rừng | `#0A2E26` | Nền thương hiệu — "đêm cần ánh sáng", cùng họ ngọc nên bảng màu liền mạch |
+| Màu            | Hex       | Vai trò                                                                      |
+| -------------- | --------- | ---------------------------------------------------------------------------- |
+| Xanh đêm rừng  | `#0A2E26` | Nền thương hiệu — "đêm cần ánh sáng", cùng họ ngọc nên bảng màu liền mạch    |
 | Kem trang sách | `#FBF6EA` | Nền giao diện học — khớp triết lý "một trang sách", dịu mắt khi học buổi tối |
-| Đỏ | `#DE2127` | Câu trả lời sai (xem 4.4) |
+| Đỏ             | `#DE2127` | Câu trả lời sai (xem 4.4)                                                    |
 
 ### 4.4 Vì sao dùng đỏ cho câu sai — quyết định có bằng chứng
 
@@ -199,9 +202,10 @@ Hệ quả kiến trúc: toàn bộ 15 file SVG được **sinh ra từ code** (
 
 ### 7.1 Triết lý: "Ngọn đèn nhỏ, một trang sách"
 
-**Niềm tin gốc**: *Không cần soi sáng cả con đường — chỉ cần đủ sáng một trang sách mỗi tối. Tiến bộ thật là tiến bộ nhỏ, lặp lại, đo được.*
+**Niềm tin gốc**: _Không cần soi sáng cả con đường — chỉ cần đủ sáng một trang sách mỗi tối. Tiến bộ thật là tiến bộ nhỏ, lặp lại, đo được._
 
 Ba giá trị lõi:
+
 1. Đơn vị tiến bộ là "trang sách", không phải "kỳ thi" — nhỏ, cụ thể, đo được mỗi ngày
 2. Đủ sáng, đủ dùng — không hứa cả tương lai, chỉ cam kết rõ bước tiếp theo
 3. Ngọn đèn không so với mặt trời — con so với chính mình hôm qua
@@ -212,12 +216,12 @@ Hòa cùng điển tích **"ngọc bất trác bất thành khí"** từ màu s�
 
 ### 7.2 Slogan
 
-| | Slogan | Ghi chú |
-|---|---|---|
-| Tiếng Việt | **Hoàn thiện hơn mỗi ngày** | Chốt 05/08/2026 |
-| Tiếng Anh | **A little brighter every day** | Giữ trọn ẩn dụ ánh sáng + tinh thần "một chút mỗi ngày" |
+|            | Slogan                          | Ghi chú                                                 |
+| ---------- | ------------------------------- | ------------------------------------------------------- |
+| Tiếng Việt | **Hoàn thiện hơn mỗi ngày**     | Chốt 05/08/2026                                         |
+| Tiếng Anh  | **A little brighter every day** | Giữ trọn ẩn dụ ánh sáng + tinh thần "một chút mỗi ngày" |
 
-Các ứng viên đã cân nhắc và lý do loại: *"Giỏi hơn chính mình hôm qua"* (đúng triết lý nhưng nói về triết lý chứ chưa nói sản phẩm làm gì cho phụ huynh); *"Khôn hơn mỗi ngày"* (chữ "khôn" lưỡng nghĩa tùy vùng miền); *"Lộ trình riêng, tiến bộ thật"* (rõ giá trị nhất, giữ làm câu phụ cho landing page).
+Các ứng viên đã cân nhắc và lý do loại: _"Giỏi hơn chính mình hôm qua"_ (đúng triết lý nhưng nói về triết lý chứ chưa nói sản phẩm làm gì cho phụ huynh); _"Khôn hơn mỗi ngày"_ (chữ "khôn" lưỡng nghĩa tùy vùng miền); _"Lộ trình riêng, tiến bộ thật"_ (rõ giá trị nhất, giữ làm câu phụ cho landing page).
 
 Quy tắc trình bày: trong lockup, slogan luôn được **co giãn để rộng đúng bằng khối chữ RANGI**, không bao giờ tràn hai bên. Mỗi ngôn ngữ có ảnh chia sẻ mạng xã hội riêng — không gộp hai ngôn ngữ vào một khung.
 
@@ -225,12 +229,12 @@ Quy tắc trình bày: trong lockup, slogan luôn được **co giãn để rộ
 
 ## 8. Bốn trụ thông điệp (mỗi trụ trả một phản đối)
 
-| Trụ | Câu chủ đạo | Trả lời phản đối nào |
-|---|---|---|
-| **1. Bằng chứng tiến bộ** | *"Không cần đoán con học được gì — báo cáo mỗi tối cho biết chính xác con vừa tiến thêm bước nào."* | *"Sao phải trả tiền khi ChatGPT miễn phí?"* → ChatGPT trả lời câu hỏi nhưng không đo, không báo cáo; phụ huynh vẫn mù |
-| **2. Lộ trình riêng đúng con mình** | *"Không phải hỏi gì đáp nấy — mà là tìm đúng lỗ hổng của con, dạy đúng chỗ đó, rồi đo lại xem đã lấp được chưa."* | *"Đây có phải chatbot không?"* → hệ thống tự phát hiện lỗ hổng, không cần con biết hỏi đúng câu |
-| **3. Có bên chịu trách nhiệm báo cáo** | *"Không ngồi cạnh con được mỗi tối? Báo cáo tuần vẫn cho ba mẹ biết chính xác con đang ở đâu."* | Nỗi đau phụ huynh bận — thứ họ vẫn trả tiền cho gia sư để có |
-| **4. Con so với chính mình hôm qua** | *"Con không thi đua với ai trong lớp. Đối thủ duy nhất của con là chính con của tuần trước."* | Nỗi sợ áp lực "con nhà người ta"; đồng thời né định vị thi-đua của VioEdu và nền tảng quốc gia |
+| Trụ                                    | Câu chủ đạo                                                                                                       | Trả lời phản đối nào                                                                                                  |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **1. Bằng chứng tiến bộ**              | _"Không cần đoán con học được gì — báo cáo mỗi tối cho biết chính xác con vừa tiến thêm bước nào."_               | _"Sao phải trả tiền khi ChatGPT miễn phí?"_ → ChatGPT trả lời câu hỏi nhưng không đo, không báo cáo; phụ huynh vẫn mù |
+| **2. Lộ trình riêng đúng con mình**    | _"Không phải hỏi gì đáp nấy — mà là tìm đúng lỗ hổng của con, dạy đúng chỗ đó, rồi đo lại xem đã lấp được chưa."_ | _"Đây có phải chatbot không?"_ → hệ thống tự phát hiện lỗ hổng, không cần con biết hỏi đúng câu                       |
+| **3. Có bên chịu trách nhiệm báo cáo** | _"Không ngồi cạnh con được mỗi tối? Báo cáo tuần vẫn cho ba mẹ biết chính xác con đang ở đâu."_                   | Nỗi đau phụ huynh bận — thứ họ vẫn trả tiền cho gia sư để có                                                          |
+| **4. Con so với chính mình hôm qua**   | _"Con không thi đua với ai trong lớp. Đối thủ duy nhất của con là chính con của tuần trước."_                     | Nỗi sợ áp lực "con nhà người ta"; đồng thời né định vị thi-đua của VioEdu và nền tảng quốc gia                        |
 
 Bản mẫu quốc tế đáng học: **Khanmigo for Parents** — đóng khung "công cụ cho phụ huynh" thành tính năng **đếm được** (20+ công cụ), và email tiến bộ biến "thắng nhỏ mỗi ngày thành thói quen tuần".
 
@@ -250,10 +254,10 @@ Bản mẫu quốc tế đáng học: **Khanmigo for Parents** — đóng khung 
 
 Không bao giờ dùng trong bất kỳ nội dung nào:
 
-- ❌ *"thay thế gia sư"* → định vị là công cụ bổ trợ ngoài nhà trường
-- ❌ *"dự đoán điểm thi"* → dùng **"mức sẵn sàng theo đề mô phỏng"**
-- ❌ *"chứng chỉ"*, *"tương đương điểm thi"*, *"xếp loại học lực"*
-- ❌ *"Đèn Đom Đóm"* → trùng chương trình khuyến học của Dutch Lady
+- ❌ _"thay thế gia sư"_ → định vị là công cụ bổ trợ ngoài nhà trường
+- ❌ _"dự đoán điểm thi"_ → dùng **"mức sẵn sàng theo đề mô phỏng"**
+- ❌ _"chứng chỉ"_, _"tương đương điểm thi"_, _"xếp loại học lực"_
+- ❌ _"Đèn Đom Đóm"_ → trùng chương trình khuyến học của Dutch Lady
 - ❌ Mọi ngôn ngữ so sánh học sinh với nhau
 
 Ba mục đầu và mục cuối không chỉ là lựa chọn thẩm mỹ — chúng là **ranh giới giữ sản phẩm nằm ngoài Danh mục AI rủi ro cao** (Quyết định 33/2026/QĐ-TTg). Chi tiết: `docs/background/bao-cao-phap-ly-ai-du-an-gia-su.md` mục 4.
@@ -262,13 +266,13 @@ Ba mục đầu và mục cuối không chỉ là lựa chọn thẩm mỹ — c
 
 ## 11. Việc còn treo
 
-| Việc | Trạng thái |
-|---|---|
-| Tra nhãn hiệu "RANGI" tại Cục SHTT nhóm 41 + 9/42 | **Chặn** — làm sớm vì repo/tên đã public, VN theo nguyên tắc nộp trước được ưu tiên |
-| Giữ domain (rangi.vn, rangi.edu.vn, getrangi.com, rangi.app) + handle Facebook/Zalo/TikTok | Sau khi tra nhãn hiệu sạch |
-| Test slogan và câu chuyện thương hiệu với phụ huynh thật | Gộp vào buổi đưa báo cáo mẫu cho 5 phụ huynh (đã có trong TASKS) |
-| Tên mascot riêng (nếu cần) | Chưa quyết — ứng viên cũ "Lani" bị loại vì trùng cơ sở giáo dục; hiện mascot chưa cần tên riêng vì nó là chấm chữ i |
+| Việc                                                                                       | Trạng thái                                                                                                          |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| Tra nhãn hiệu "RANGI" tại Cục SHTT nhóm 41 + 9/42                                          | **Chặn** — làm sớm vì repo/tên đã public, VN theo nguyên tắc nộp trước được ưu tiên                                 |
+| Giữ domain (rangi.vn, rangi.edu.vn, getrangi.com, rangi.app) + handle Facebook/Zalo/TikTok | Sau khi tra nhãn hiệu sạch                                                                                          |
+| Test slogan và câu chuyện thương hiệu với phụ huynh thật                                   | Gộp vào buổi đưa báo cáo mẫu cho 5 phụ huynh (đã có trong TASKS)                                                    |
+| Tên mascot riêng (nếu cần)                                                                 | Chưa quyết — ứng viên cũ "Lani" bị loại vì trùng cơ sở giáo dục; hiện mascot chưa cần tên riêng vì nó là chấm chữ i |
 
 ---
 
-*Ghi chú: mọi tuyên bố về "chưa ai chiếm" trong tài liệu này dựa trên tra cứu hiện diện công khai (app store, mạng xã hội, thương mại), chưa phải tra cứu nhãn hiệu chính thức. Slogan và triết lý là sáng tác chưa test với phụ huynh thật.*
+_Ghi chú: mọi tuyên bố về "chưa ai chiếm" trong tài liệu này dựa trên tra cứu hiện diện công khai (app store, mạng xã hội, thương mại), chưa phải tra cứu nhãn hiệu chính thức. Slogan và triết lý là sáng tác chưa test với phụ huynh thật._
