@@ -43,3 +43,17 @@ describe("vertical lockup", () => {
     );
   });
 });
+
+describe("patterns", () => {
+  it.each(["pattern-light.svg", "pattern-dark.svg"])(
+    "%s là tile 240 seamless",
+    (f) => {
+      const s = read(f);
+      expect(s).toContain('viewBox="0 0 240 240"');
+      expect(s).toContain("stroke-dasharray");
+      // seamless: path vẽ 3 bản lệch -240/0/+240 theo trục x
+      expect(s).toContain('transform="translate(-240 0)"');
+      expect(s).toContain('transform="translate(240 0)"');
+    },
+  );
+});

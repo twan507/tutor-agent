@@ -265,4 +265,33 @@ const fpToDot =
 fs.writeFileSync(path.join(OUT_SVG, "flight-path-horizontal.svg"), fpHorizontal);
 fs.writeFileSync(path.join(OUT_SVG, "flight-path-to-dot.svg"), fpToDot);
 
+// ---- Background patterns: sparse sparks + one flight path, seamless tile 240 ----
+function patternSVG(mode) {
+  const spark = mode === "dark" ? "#F5A623" : "#EF8D08";
+  const sparkOp = mode === "dark" ? 0.5 : 0.4;
+  const strokeOp = mode === "dark" ? 0.28 : 0.22;
+  const sparks = [
+    [40, 64, 3],
+    [150, 186, 2.2],
+    [214, 38, 2.6],
+  ]
+    .map(
+      ([x, y, r]) =>
+        `<circle cx="${x}" cy="${y}" r="${r}" fill="${spark}" opacity="${sparkOp}"/>`,
+    )
+    .join("");
+  const fp = flightPathEl({
+    from: [-20, 210],
+    to: [260, 150],
+    curve: 46,
+    stroke: spark,
+    width: 1.5,
+    dash: "1 8",
+  });
+  const fpBand = `<g opacity="${strokeOp}">${fp}<g transform="translate(-240 0)">${fp}</g><g transform="translate(240 0)">${fp}</g></g>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Rangi pattern">${fpBand}${sparks}</svg>`;
+}
+fs.writeFileSync(path.join(OUT_SVG, "pattern-light.svg"), patternSVG("light"));
+fs.writeFileSync(path.join(OUT_SVG, "pattern-dark.svg"), patternSVG("dark"));
+
 console.log("generated:", fs.readdirSync(OUT_SVG).join(", "));
