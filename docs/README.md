@@ -31,6 +31,7 @@ Cấu trúc: `background/` bản nháp định hướng (demo, chưa chốt) | `
 - [specs/2026-08-05-goi-logo-rangi.md](specs/2026-08-05-goi-logo-rangi.md) — spec gói logo Rangi: generator fontkit → SVG, component React animation CSS, xuất PNG (TRẠNG THÁI: đã thực thi 05/08/2026)
 
 - [specs/2026-08-05-lenh-chay-du-an.md](specs/2026-08-05-lenh-chay-du-an.md) — spec bộ 5 lệnh chạy dự án thay Makefile: dev-start/dev-stop/docker-up/docker-down/docker-clean, ma trận tác động, ranh giới dữ liệu (TRẠNG THÁI: đã thực thi 05/08/2026)
+- [specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md](specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md) — spec gói mở rộng nhận diện SVG: pose sheet đom đóm geometric, motif đường bay, lockup dọc, 20 icon × 2 bộ outline/filled, pattern nền, animation RangiSplash (TRẠNG THÁI: chờ duyệt)
 
 ## plans/ — kế hoạch thực thi
 
