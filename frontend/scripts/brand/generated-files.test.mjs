@@ -19,3 +19,27 @@ describe("flight path assets", () => {
     expect(s).toContain("#F5A623");
   });
 });
+
+describe("vertical lockup", () => {
+  const files = [
+    "rangi-lockup-vertical-dark.svg",
+    "rangi-lockup-vertical-light.svg",
+    "rangi-lockup-vertical-mono-black.svg",
+    "rangi-lockup-vertical-mono-white.svg",
+    "rangi-lockup-vertical-slogan-dark.svg",
+    "rangi-lockup-vertical-slogan-light.svg",
+    "rangi-lockup-vertical-slogan-en-dark.svg",
+    "rangi-lockup-vertical-slogan-en-light.svg",
+  ];
+  it.each(files)("%s tồn tại và là SVG hợp lệ", (f) => {
+    const s = read(f);
+    expect(s.startsWith("<svg")).toBe(true);
+    expect(s).toContain("aria-label");
+  });
+  it("bản slogan VN chứa slogan đã chốt", () => {
+    // slogan render bằng glyph path, không phải text — kiểm qua aria-label
+    expect(read("rangi-lockup-vertical-slogan-dark.svg")).toContain(
+      "Hoàn thiện hơn mỗi ngày",
+    );
+  });
+});
