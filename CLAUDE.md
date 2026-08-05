@@ -122,7 +122,7 @@ memory/
 - Worker: **Celery cùng codebase Django**, process riêng — SymPy verify, PDF parsing, batch job. Không tách thành service/repo riêng
 - Database: **PostgreSQL + pgvector** self-host
 - Streaming: **SSE** (không WebSocket ở MVP — Channels chỉ thêm khi tính năng liên lạc 2 chiều được chốt)
-- Proxy: **Nginx**; hạ tầng: **VPS + Docker Compose 2 tầng** — `infra` (postgres, CI không bao giờ đụng) + `app`; Makefile `make up`/`make deploy`
+- Proxy: **Nginx**; hạ tầng: **VPS + Docker Compose 2 tầng** — `infra` (postgres, CI không bao giờ đụng) + `app`; **5 lệnh gõ**: `dev-start` / `dev-stop` / `docker-up` / `docker-down` / `docker-clean` (logic trong `scripts/stack.mjs`; `.bat` cho Windows, `.sh` cho Linux — xem README.md mục "Chạy dự án"). Deploy VPS **KHÔNG** dùng script này — CI/CD giai đoạn 2 gọi thẳng `docker compose` qua SSH, VPS chỉ cần Docker, không cần Node.
 - Storage: **Cloudflare R2**; Monitoring: Sentry + PostHog; Redis: chỉ thêm khi có nhu cầu thật
 - CI/CD: GitHub Actions (lint, test, `makemigrations --check`, codegen check, build) + branch protection main; production deploy phải người dùng approve
 - Chi phí LLM: model routing từ đầu, không dùng một model đắt cho mọi việc
@@ -130,7 +130,7 @@ memory/
 **Quy tắc kiến trúc cứng:**
 1. App **stateless**: session trong DB, file user upload lên R2 (không ghi disk local), config qua env var
 2. Migration **backward-compatible**: thêm cột nullable trước, xóa cột sau ít nhất 1 release; không sửa migration đã merge
-3. **Cấm `docker compose down -v`** với project infra; pin version Postgres cụ thể (không `latest`)
+3. **Ranh giới dữ liệu**: được phép `stop`/`down` container (dựng lại được, kể cả tầng infra); **CẤM VĨNH VIỄN** cờ `-v`/`--volumes` trong mọi lệnh docker — đó là ranh giới giữa "xóa container" và "mất dữ liệu"; hook `guard-bash.sh` chặn cứng. Pin version Postgres cụ thể (không `latest`)
 4. Backup Postgres ra R2 + test restore định kỳ — nghĩa vụ pháp lý với dữ liệu trẻ em
 5. SSE endpoint: nhớ `proxy_buffering off` phía nginx
 6. **API-first cho mobile tương lai**: mọi business logic nằm sau API Django (django-ninja) — Next.js là thin client, KHÔNG nhét logic nghiệp vụ vào server actions/server components. App Android/iOS (dự kiến React Native + Expo) sẽ dùng chung đúng API này; auth thiết kế sẵn sàng cho token-based bên cạnh session cookie

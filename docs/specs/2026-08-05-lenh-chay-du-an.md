@@ -58,7 +58,7 @@ Thứ tự thực hiện:
 7. Log gộp, mỗi dòng có nhãn `[be]`/`[fe]` màu khác nhau
 8. Ctrl+C → tắt cả hai tiến trình con (Windows dùng `taskkill /T /F` để giết cả cây tiến trình, tránh để lại `node.exe` ma); Postgres **vẫn chạy**
 
-Kiểm tra trước khi chạy: cổng 5432/8000/3000 bận → báo rõ tên cổng và dừng, không để người dùng nhận lỗi khó hiểu.
+Kiểm tra cổng 8000 và 3000 (KHÔNG kiểm 5432 — Postgres của dự án thường đã chiếm cổng này và đó là trạng thái đúng) → bận thì báo rõ tên cổng và dừng, không để người dùng nhận lỗi khó hiểu.
 
 ## Chi tiết `docker-clean`
 
@@ -86,7 +86,7 @@ Thay quy tắc cũ *"Makefile KHÔNG có lệnh down/stop cho infra"* bằng:
 4. `docker-up` → `curl localhost` trả 200, `curl localhost/api/healthz` trả ok
 5. `docker-down` → `docker ps -a` không còn container dự án; `docker volume ls` **vẫn còn** `tutor-infra_pgdata`
 6. `dev-start` lại sau `docker-down` → DB vẫn còn dữ liệu cũ (chứng minh volume sống sót)
-7. `docker-clean` → in bảng trước/sau, giải phóng ≥ 10 GB (build cache 15.75 GB đang có), `tutor-infra_pgdata` còn nguyên
+7. `docker-clean` → in bảng dung lượng trước/sau, giải phóng phần build cache + image mồ côi + volume vô danh hiện có (con số tùy trạng thái máy), và `tutor-infra_pgdata` còn nguyên — bất biến này mới là tiêu chí pass
 8. `pnpm test && pnpm lint && pnpm format:check && pnpm build` sạch; CI xanh
 
 ## Không làm
