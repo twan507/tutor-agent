@@ -7,7 +7,14 @@ const THEMES = {
   "mono-white": { text: "#FFFFFF", dot: "#FFFFFF", halo: null },
   "mono-black": { text: "#0B0B0B", dot: "#0B0B0B", halo: null },
 } as const;
-const HALO_BASE = { dark: 0.2, light: 0.28 } as const;
+// Static (progress-less) halo opacity per variant/theme, matched to the
+// generator's own static SVGs: wordmarkSVG uses COLORS[theme].haloOp
+// (0.2/0.28), iconSVG uses ICON[theme].haloOp (0.25/0.3) — they differ
+// intentionally, so this must stay keyed by variant.
+const HALO_BASE = {
+  wordmark: { dark: 0.2, light: 0.28 },
+  icon: { dark: 0.25, light: 0.3 },
+} as const;
 
 export interface RangiLogoProps {
   variant: "wordmark" | "icon";
@@ -18,13 +25,13 @@ export interface RangiLogoProps {
   className?: string;
 }
 
-function dotState(theme: keyof typeof THEMES, progress?: number) {
+function dotState(variant: "wordmark" | "icon", theme: keyof typeof THEMES, progress?: number) {
   const isMono = theme.startsWith("mono");
   if (progress === undefined) {
     return {
       rMul: 1,
       dotOp: 1,
-      haloOp: isMono ? 0 : HALO_BASE[theme as "dark" | "light"],
+      haloOp: isMono ? 0 : HALO_BASE[variant][theme as "dark" | "light"],
       haloMul: 1,
     };
   }
@@ -42,7 +49,7 @@ export function RangiLogo({
   className,
 }: RangiLogoProps) {
   const c = THEMES[theme];
-  const s = dotState(theme, progress);
+  const s = dotState(variant, theme, progress);
   const cls = [animated ? styles.breath : "", className ?? ""].join(" ").trim();
   const brightness = progress === undefined ? 1 : Math.max(0, Math.min(1, progress));
   const svgStyle = { ["--breath-scale" as string]: (1 + 0.06 * brightness).toFixed(4) };

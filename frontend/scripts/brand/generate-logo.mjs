@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { execSync } from "node:child_process";
 import * as fontkit from "fontkit";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -28,7 +29,7 @@ const COLORS = {
   "mono-black": { text: "#0B0B0B", dot: "#0B0B0B", halo: null, haloOp: 0 },
 };
 
-function layoutText(font, text, fontSize) {
+function layoutText(font, text, fontSize, letterSpacing = 0) {
   const scale = fontSize / font.unitsPerEm;
   const run = font.layout(text);
   const glyphs = [];
@@ -37,7 +38,7 @@ function layoutText(font, text, fontSize) {
     const g = run.glyphs[i];
     const p = run.positions[i];
     glyphs.push({ d: g.path.toSVG(), tx: x + p.xOffset * scale, ty: p.yOffset * scale });
-    x += p.xAdvance * scale + (i < run.glyphs.length - 1 ? R.ls : 0);
+    x += p.xAdvance * scale + (i < run.glyphs.length - 1 ? letterSpacing : 0);
   }
   return { glyphs, width: x, scale, capHeight: (font.capHeight || 700) * scale };
 }
@@ -46,7 +47,7 @@ const phuduFile = fontkit.openSync(path.join(__dirname, "fonts/Phudu-wght.ttf"))
 const phudu = phuduFile.getVariation ? phuduFile.getVariation({ wght: 700 }) : phuduFile;
 const bvp = fontkit.openSync(path.join(__dirname, "fonts/BeVietnamPro-Medium.ttf"));
 
-const wm = layoutText(phudu, "RANG", FS);
+const wm = layoutText(phudu, "RANG", FS, R.ls);
 // padTop 0.16*FS (not 0.10*FS): with capHeight≈0.70*FS, dotCyUp=0.608*FS and
 // haloR=0.225*FS, the halo's top edge sits at padTop - 13.3 units from the
 // canvas top — 0.10*FS clipped it (-3.3). 0.16*FS keeps >=1 unit of clearance
@@ -85,7 +86,7 @@ function wordmarkSVG(theme) {
   const halo = c.halo
     ? `<circle cx="${I.dotCx.toFixed(2)}" cy="${I.dotCy.toFixed(2)}" r="${I.haloR}" fill="${c.halo}" opacity="${c.haloOp}"/>`
     : "";
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${totalW.toFixed(2)} ${totalH.toFixed(2)}" role="img" aria-label="Rangi"><title>Rangi</title>${halo}<circle cx="${I.dotCx.toFixed(2)}" cy="${I.dotCy.toFixed(2)}" r="${I.dotR}" fill="${c.dot}"/><rect x="${I.stemX.toFixed(2)}" y="${I.stemY.toFixed(2)}" width="${I.stemW}" height="${I.stemH}" rx="${I.rx}" fill="${c.text}"/>${glyphEls(wm.glyphs, wm.scale, c.text, baseline)}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${totalW.toFixed(2)} ${totalH.toFixed(2)}" role="img" aria-label="Rangi"><title>Rangi</title>${halo}<circle cx="${I.dotCx.toFixed(2)}" cy="${I.dotCy.toFixed(2)}" r="${I.dotR}" fill="${c.dot}"/><rect x="${I.stemX.toFixed(2)}" y="${I.stemY.toFixed(2)}" width="${I.stemW.toFixed(2)}" height="${I.stemH.toFixed(2)}" rx="${I.rx.toFixed(2)}" fill="${c.text}"/>${glyphEls(wm.glyphs, wm.scale, c.text, baseline)}</svg>`;
 }
 
 const ICON = {
@@ -104,10 +105,20 @@ function iconSVG(theme) {
 }
 
 function lockupSVG(theme) {
-  const sloganColor = theme === "dark" ? "#9FE1CB" : "#0E7A5A";
-  const sl = layoutText(bvp, "Giỏi hơn chính mình hôm qua", 0.22 * FS);
+  const sloganColor = theme === "dark" ? "#84DEBE" : "#0E7A5A";
+  const slFS = 0.22 * FS;
+  // Letter-spacing scales with font size (0.033em), NOT the fixed wordmark
+  // tracking R.ls (=3.3, tuned for FS=100) — reusing R.ls here overtracked
+  // the slogan ~4.5x and pushed glyphs outside the viewBox.
+  const sl = layoutText(bvp, "Giỏi hơn chính mình hôm qua", slFS, 0.033 * slFS);
   const slY = totalH + 0.16 * FS;
-  const slPad = padX + (totalW - 2 * padX - sl.width) / 2;
+  // The slogan can be wider than the wordmark's viewBox even after fixing
+  // tracking — widen the lockup viewBox to fit it and center both the
+  // wordmark and the slogan within the wider box, rather than shrinking text.
+  const lockupW = Math.max(totalW, sl.width + 2 * padX);
+  const wmOffsetX = (lockupW - totalW) / 2;
+  const slPad = (lockupW - sl.width) / 2;
+  const lockupH = slY + 0.12 * FS;
   const slogan = sl.glyphs
     .map(
       (g) =>
@@ -117,15 +128,42 @@ function lockupSVG(theme) {
   const body = wordmarkSVG(theme)
     .replace(/^<svg[^>]*><title>Rangi<\/title>/, "")
     .replace("</svg>", "");
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${totalW.toFixed(2)} ${(slY + 0.12 * FS).toFixed(2)}" role="img" aria-label="Rangi — Giỏi hơn chính mình hôm qua"><title>Rangi</title>${body}${slogan}</svg>`;
+  const wrappedBody =
+    wmOffsetX > 0 ? `<g transform="translate(${wmOffsetX.toFixed(2)} 0)">${body}</g>` : body;
+
+  // Guard against regressions: every glyph run must stay within the viewBox.
+  const sloganLeft = slPad + (sl.glyphs[0]?.tx ?? 0);
+  const sloganRight = slPad + sl.width;
+  const wmLeft = wmOffsetX;
+  const wmRight = wmOffsetX + totalW;
+  const EPS = 0.01;
+  if (
+    sloganLeft < -EPS ||
+    sloganRight > lockupW + EPS ||
+    wmLeft < -EPS ||
+    wmRight > lockupW + EPS
+  ) {
+    throw new Error(
+      `lockupSVG(${theme}): element outside viewBox [0, ${lockupW.toFixed(2)}] — ` +
+        `sloganLeft=${sloganLeft.toFixed(2)} sloganRight=${sloganRight.toFixed(2)} ` +
+        `wmLeft=${wmLeft.toFixed(2)} wmRight=${wmRight.toFixed(2)}`,
+    );
+  }
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${lockupW.toFixed(2)} ${lockupH.toFixed(2)}" role="img" aria-label="Rangi — Giỏi hơn chính mình hôm qua"><title>Rangi</title>${wrappedBody}${slogan}</svg>`;
 }
 
 function ogSVG() {
-  const lock = lockupSVG("dark")
-    .replace(/^<svg[^>]*><title>Rangi<\/title>/, "")
-    .replace("</svg>", "");
-  const s = 560 / totalW;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#0A2E26"/><g transform="translate(${(600 - 280).toFixed(0)} ${(315 - (totalH * s) / 2 - 20).toFixed(0)}) scale(${s.toFixed(4)})">${lock}</g></svg>`;
+  const lockupFull = lockupSVG("dark");
+  // Read the lockup's actual viewBox rather than assuming it equals the
+  // wordmark's totalW/totalH — lockupSVG may widen its viewBox to fit the
+  // slogan, and hardcoding totalW here would silently mis-center the OG image.
+  const vb = lockupFull.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
+  const lockupW = parseFloat(vb[1]);
+  const lockupH = parseFloat(vb[2]);
+  const lock = lockupFull.replace(/^<svg[^>]*><title>Rangi<\/title>/, "").replace("</svg>", "");
+  const s = 560 / lockupW;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#0A2E26"/><g transform="translate(${(600 - 280).toFixed(0)} ${(315 - (lockupH * s) / 2 - 20).toFixed(0)}) scale(${s.toFixed(4)})">${lock}</g></svg>`;
 }
 
 for (const t of Object.keys(COLORS))
@@ -139,7 +177,8 @@ fs.writeFileSync(path.join(OUT_SVG, "og-image.svg"), ogSVG());
 
 const ts = `// GENERATED by scripts/brand/generate-logo.mjs — DO NOT EDIT BY HAND
 export interface GlyphPath { d: string; tx: number; ty: number }
-export const WORDMARK = ${JSON.stringify({ fs: FS, width: +totalW.toFixed(2), height: +totalH.toFixed(2), baseline: +baseline.toFixed(2), capHeight: +wm.capHeight.toFixed(2), padX, glyphScale: +wm.scale.toFixed(6), glyphs: wm.glyphs.map((g) => ({ d: g.d, tx: +g.tx.toFixed(2), ty: +g.ty.toFixed(2) })), i: Object.fromEntries(Object.entries(I).map(([k, v]) => [k, +v.toFixed(2)])) }, null, 2)} as const;
+export const WORDMARK = ${JSON.stringify({ fs: FS, width: +totalW.toFixed(2), height: +totalH.toFixed(2), baseline: +baseline.toFixed(2), capHeight: +wm.capHeight.toFixed(2), padX: +padX.toFixed(2), glyphScale: +wm.scale.toFixed(6), glyphs: wm.glyphs.map((g) => ({ d: g.d, tx: +g.tx.toFixed(2), ty: +g.ty.toFixed(2) })), i: Object.fromEntries(Object.entries(I).map(([k, v]) => [k, +v.toFixed(2)])) }, null, 2)} as const;
 `;
 fs.writeFileSync(OUT_TS, ts);
+execSync(`pnpm exec prettier --write "${OUT_TS}"`, { cwd: FE, stdio: "inherit" });
 console.log("generated:", fs.readdirSync(OUT_SVG).join(", "));

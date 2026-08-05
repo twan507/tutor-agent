@@ -1,6 +1,6 @@
 # Bộ nhận diện Rangi — assets
 
-Tất cả file trong thư mục này (kể cả `logo-paths.ts` dùng bởi component React) là **GENERATED** — nguồn gốc duy nhất là `frontend/scripts/brand/generate-logo.mjs` (SVG + logo-paths.ts) và `frontend/scripts/brand/export-png.mjs` (PNG). **KHÔNG sửa tay các file trong thư mục này.** Muốn thay đổi: sửa generator rồi chạy lại:
+Tất cả file trong thư mục này, cộng với `frontend/src/components/brand/logo-paths.ts` dùng bởi component React, là **GENERATED** — nguồn gốc duy nhất là `frontend/scripts/brand/generate-logo.mjs` (SVG + logo-paths.ts) và `frontend/scripts/brand/export-png.mjs` (PNG). **KHÔNG sửa tay các file này.** Muốn thay đổi: sửa generator rồi chạy lại:
 
 ```bash
 cd frontend && pnpm brand:generate && pnpm brand:png

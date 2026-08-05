@@ -10,7 +10,7 @@ export const WORDMARK = {
   height: 96,
   baseline: 86,
   capHeight: 70,
-  padX: 14.000000000000002,
+  padX: 14,
   glyphScale: 0.1,
   glyphs: [
     {
