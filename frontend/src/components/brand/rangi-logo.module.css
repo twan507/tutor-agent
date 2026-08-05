@@ -9,7 +9,7 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.06);
+    transform: scale(var(--breath-scale, 1.06));
   }
 }
 @media (prefers-reduced-motion: reduce) {

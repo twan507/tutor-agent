@@ -40,3 +40,14 @@ test("animated=false không gắn class breath", () => {
   const { container } = render(<RangiLogo variant="icon" theme="dark" animated={false} />);
   expect(container.querySelector("svg")!.className.baseVal).not.toMatch(/breath/);
 });
+
+test("animated mặc định gắn class breath", () => {
+  const { container } = render(<RangiLogo variant="icon" theme="dark" />);
+  expect(container.querySelector("svg")!.className.baseVal).toMatch(/breath/);
+});
+
+test("progress 0 có --breath-scale là 1", () => {
+  const { container } = render(<RangiLogo variant="wordmark" theme="dark" progress={0} />);
+  const style = container.querySelector("svg")!.getAttribute("style");
+  expect(style).toContain("--breath-scale: 1.0000");
+});

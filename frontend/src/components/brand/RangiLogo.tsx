@@ -44,11 +44,13 @@ export function RangiLogo({
   const c = THEMES[theme];
   const s = dotState(theme, progress);
   const cls = [animated ? styles.breath : "", className ?? ""].join(" ").trim();
+  const brightness = progress === undefined ? 1 : Math.max(0, Math.min(1, progress));
+  const svgStyle = { ["--breath-scale" as string]: (1 + 0.06 * brightness).toFixed(4) };
 
   if (variant === "icon") {
     const bg = theme === "dark" ? "#0A2E26" : theme === "light" ? "#FBF6EA" : null;
     return (
-      <svg viewBox="0 0 48 48" role="img" aria-label={title} className={cls}>
+      <svg viewBox="0 0 48 48" role="img" aria-label={title} className={cls} style={svgStyle}>
         <title>{title}</title>
         {bg && <rect width="48" height="48" rx="11" fill={bg} />}
         {s.haloOp > 0 && (
@@ -76,7 +78,13 @@ export function RangiLogo({
 
   const W = WORDMARK;
   return (
-    <svg viewBox={`0 0 ${W.width} ${W.height}`} role="img" aria-label={title} className={cls}>
+    <svg
+      viewBox={`0 0 ${W.width} ${W.height}`}
+      role="img"
+      aria-label={title}
+      className={cls}
+      style={svgStyle}
+    >
       <title>{title}</title>
       {s.haloOp > 0 && (
         <circle
