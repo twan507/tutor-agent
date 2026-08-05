@@ -16,6 +16,7 @@ Cấu trúc: `background/` bản nháp định hướng (demo, chưa chốt) | `
 - [research/nghien-cuu-chien-luoc-test.md](research/nghien-cuu-chien-luoc-test.md) — chiến lược test ĐÃ CHỐT 04/08/2026: pytest/Vitest/Playwright-chromium/DeepEval/promptfoo/mutmut, 9 quy tắc + anti-pattern + kiểm chứng "Playwright nặng"
 - [research/nghien-cuu-ky-thuat-agent-memory.md](research/nghien-cuu-ky-thuat-agent-memory.md) — khảo sát 9 hệ thống agent memory; kết luận: file-based + index trần cứng + phân loại 3 type + reflection loop
 - [research/nghien-cuu-chuan-hoa-ky-su-cao-cap.md](research/nghien-cuu-chuan-hoa-ky-su-cao-cap.md) — chuẩn hóa hành vi senior engineer: 2 tầng quy tắc mềm/cứng, xếp hạng 7 pattern, anti-pattern
+- [research/nghien-cuu-nao-ai-orchestrator.md](research/nghien-cuu-nao-ai-orchestrator.md) — "não" AI sản phẩm: kiểm chứng MiniMax M3 (⚠️ ToS under-16), so sánh orchestrator (đề xuất Gemini Flash + Sonnet fallback), chi phí/học sinh/tháng, harness tự viết + ai_call() + litellm (TRẠNG THÁI: đề xuất, chờ eval tiếng Việt nội bộ trước khi chốt model)
 
 ## specs/ — đặc tả tính năng
 
