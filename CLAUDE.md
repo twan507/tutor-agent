@@ -137,6 +137,23 @@ memory/
 
 Đổi bất kỳ phần nào của stack phải bàn với người dùng trước.
 
+## Não AI sản phẩm — ĐÃ CHỐT (05/08/2026, xem docs/research/nghien-cuu-nao-ai-orchestrator.md)
+
+**Model: MiniMax M3** cho cả orchestrator lẫn worker (quyết định ngân sách của người dùng — $0.30/$1.20 per 1M token). Routing table giữ nguyên thiết kế: nâng cấp/thêm não to sau này chỉ là sửa config, không sửa code.
+
+**Harness: TỰ VIẾT, cấm framework agent** (LangGraph/CrewAI/AutoGen — theo Anthropic guidance + pattern Khanmigo/Duolingo). 5 nguyên tắc cứng:
+
+1. **Một cửa duy nhất `ai_call()`**: mọi lời gọi LLM đi qua đúng một hàm — pseudonymize → hard-cap check → adapter (litellm SDK bọc trong) → log `ai_runs` (model, token, chi phí, mục đích, latency) → trả kết quả. CẤM gọi SDK provider rải rác ngoài hàm này.
+2. **`routing_table` là config**: map (loại tác vụ → model_id); không hardcode model name trong logic nghiệp vụ.
+3. **Teaching policy là state machine ở code** — bước dạy, chuyển bước, kéo về chủ đề đều deterministic và test được; prompt chỉ lo diễn đạt; session state lưu Postgres mỗi turn, không giữ RAM.
+4. **Retry/fallback trong ai_call()**: backoff + jitter, circuit breaker, provider dự phòng sau cùng interface.
+5. **Guardrail trẻ em ở CẢ prompt LẪN code**: post-check "không đưa đáp án trực tiếp", lớp chống jailbreak độc lập ngoài prompt.
+
+**Điều kiện bắt buộc đi kèm M3** (do rủi ro ToS under-16 + model Trung Quốc, người dùng chấp nhận với điều kiện code bảo vệ):
+- Pseudonymize **TRIỆT ĐỂ**: không tên thật, không định danh, không thông tin liên hệ, không dữ liệu nào truy ngược được về trẻ rời khỏi hệ thống tới API — enforce tại `ai_call()`, có test riêng cho lớp này
+- Minh bạch với phụ huynh: công bố model nào xử lý phần dữ liệu nào
+- Kiểm chứng ToS API MiniMax về giới hạn tuổi khi đăng ký tài khoản (TASKS.md)
+
 ## Chiến lược test — ĐÃ CHỐT (04/08/2026, xem docs/research/nghien-cuu-chien-luoc-test.md)
 
 **Công cụ**: pytest + pytest-django + factory_boy (backend; API qua `ninja.testing.TestClient`) | Vitest + React Testing Library + MSW (frontend) | Playwright **chỉ cài Chromium** (E2E: 10-20 smoke test critical path, <10 phút/PR) | DeepEval (eval LLM) + promptfoo (red-team jailbreak) + mutmut (mutation testing) — 3 món sau chỉ cài khi có tính năng LLM thật.

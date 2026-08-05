@@ -12,6 +12,7 @@ Mỗi dòng: `- [name](đường-dẫn) — hook một câu`. Chi tiết nằm t
 
 - [docs-la-ban-nhap](semantic/docs-la-ban-nhap.md) — kiến trúc/kế hoạch trong docs bao-cao-* chỉ là demo, user chốt lại từng phần trước khi build; ràng buộc pháp lý vẫn giữ
 - [tech-stack-da-chot](semantic/tech-stack-da-chot.md) — stack ĐÃ chốt 04/08 (Django/Next/Postgres/VPS, lý do từng vòng); tên "Flibby" CHƯA chốt, code dùng tên trung tính tutor-agent
+- [nao-ai-da-chot](semantic/nao-ai-da-chot.md) — 05/08: MiniMax M3 mọi vai (lý do ngân sách), harness tự viết ai_call()/routing/state-machine, điều kiện pseudonymize triệt để + kiểm ToS under-16
 
 ## Episodic (nhật ký quyết định theo phiên — được phép cũ đi)
 

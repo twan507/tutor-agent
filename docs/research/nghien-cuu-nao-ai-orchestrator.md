@@ -1,6 +1,6 @@
 # Nghiên cứu: "Não" AI của sản phẩm — chọn model orchestrator/worker + xây harness
 
-Ngày: 05/08/2026. Trạng thái: ĐỀ XUẤT — chờ người dùng chốt. Bối cảnh: kiến trúc orchestrator ("não to") + worker nhỏ; người dùng đề xuất MiniMax M3 làm worker; tiêu chí: tối ưu chi phí, tiếng Việt, edtech trẻ em VN.
+Ngày: 05/08/2026. Trạng thái: **ĐÃ CHỐT 05/08/2026** — người dùng chọn **MiniMax M3 cho cả orchestrator lẫn worker** (lý do ngân sách; đề xuất Gemini Flash trong mục 6 giữ làm tham khảo nâng cấp), kèm điều kiện pseudonymize triệt để. Harness chốt theo mục 5. Quy tắc rút gọn: CLAUDE.md mục "Não AI sản phẩm". Bối cảnh: kiến trúc orchestrator ("não to") + worker nhỏ; người dùng đề xuất MiniMax M3 làm worker; tiêu chí: tối ưu chi phí, tiếng Việt, edtech trẻ em VN.
 
 ## 1. Kiểm chứng MiniMax M3 (worker do người dùng đề xuất)
 

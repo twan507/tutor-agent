@@ -14,7 +14,11 @@ Backlog theo dõi công việc. Quy ước: `[ ]` chưa làm, `[x]` xong, `[~]` 
 - [ ] Lập danh sách 30-50 phụ huynh tiềm năng cho beta → lưu trong `private/`, KHÔNG commit (USER)
 - [ ] Tìm giáo viên Toán quen kiểm chứng skill graph (USER)
 
+- [ ] **Kiểm chứng ToS API platform MiniMax về giới hạn tuổi (under-16)** khi đăng ký tài khoản API — trang ToS không fetch tự động được; nếu ToS API cấm end-user dưới 16 thì phải bàn lại model (USER)
+
 ## Việc kỹ thuật (ứng viên từ tài liệu nháp — làm sau khi nghiên cứu lại và chốt từng phần)
+
+- [ ] Bộ eval tiếng Việt nội bộ 30-50 câu (Toán THCS + tình huống sư phạm) để VALIDATE chất lượng M3 — không còn là gate chọn model nhưng là bằng chứng chất lượng trước beta; dùng nền DeepEval (AGENT, khi có tính năng LLM đầu tiên)
 
 - [ ] Thiết kế accountability layer trên giấy (CẢ HAI)
 - [ ] Skill graph Toán phạm vi một kỳ thi từ yêu cầu cần đạt GDPT 2018 (CẢ HAI)
