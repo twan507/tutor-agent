@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { execSync } from "node:child_process";
 import * as fontkit from "fontkit";
+import { flightPathEl, sparkEl } from "./motifs.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FE = path.resolve(__dirname, "../..");
@@ -195,4 +196,17 @@ export const WORDMARK = ${JSON.stringify({ fs: FS, width: +totalW.toFixed(2), he
 `;
 fs.writeFileSync(OUT_TS, ts);
 execSync(`pnpm exec prettier --write "${OUT_TS}"`, { cwd: FE, stdio: "inherit" });
+// ---- Flight-path motif assets (sổ tay thương hiệu §3.3) ----
+const fpHorizontal =
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 60" role="img" aria-label="Rangi flight path">` +
+  flightPathEl({ from: [8, 44], to: [392, 20], curve: 34, id: "flight-path" }) +
+  `</svg>`;
+const fpToDot =
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" role="img" aria-label="Rangi flight path to spark">` +
+  flightPathEl({ from: [8, 96], to: [348, 52], curve: 56, id: "flight-path" }) +
+  sparkEl({ cx: 360, cy: 52, r: 7, haloR: 16, haloOp: 0.22 }) +
+  `</svg>`;
+fs.writeFileSync(path.join(OUT_SVG, "flight-path-horizontal.svg"), fpHorizontal);
+fs.writeFileSync(path.join(OUT_SVG, "flight-path-to-dot.svg"), fpToDot);
+
 console.log("generated:", fs.readdirSync(OUT_SVG).join(", "));
