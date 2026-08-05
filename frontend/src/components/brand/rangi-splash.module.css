@@ -1,0 +1,39 @@
+.reveal {
+  opacity: 0;
+  animation: splash-reveal calc(var(--splash-dur, 2.2s) * 0.5) ease-out forwards;
+  animation-delay: calc(var(--splash-dur, 2.2s) * 0.35);
+}
+.land {
+  opacity: 0;
+  animation: splash-land 0.3s ease-out forwards;
+  animation-delay: calc(var(--splash-dur, 2.2s) * 0.92);
+}
+.flier {
+  animation: splash-flier-out 0.3s ease-out forwards;
+  animation-delay: calc(var(--splash-dur, 2.2s) * 0.95);
+}
+.trail {
+  opacity: 0.5;
+  animation: splash-trail-out 0.6s ease-out forwards;
+  animation-delay: calc(var(--splash-dur, 2.2s) * 0.9);
+}
+@keyframes splash-reveal {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes splash-land {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes splash-flier-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes splash-trail-out {
+  to {
+    opacity: 0;
+  }
+}
