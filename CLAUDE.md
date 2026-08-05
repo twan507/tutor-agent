@@ -137,6 +137,11 @@ memory/
 
 Đổi bất kỳ phần nào của stack phải bàn với người dùng trước.
 
+**Môi trường dev — bẫy đã biết (đọc trước khi báo lỗi):**
+
+1. **Line ending**: repo có `.gitattributes` ép LF (`* text=auto eol=lf`). Nếu clone lên máy Windows mới mà `pnpm format:check` báo lỗi format HÀNG LOẠT file dù không ai sửa gì → đó là CRLF do `core.autocrlf`, KHÔNG phải lỗi thật. Kiểm chứng bằng `pnpm exec prettier --check --end-of-line auto .` (sạch = đúng là báo động giả), chữa bằng `git rm --cached -r . && git reset --hard` để checkout lại theo `.gitattributes`. Đừng chạy `prettier --write` hàng loạt để "sửa" — sẽ tạo diff rác toàn repo.
+2. **Kho gói pnpm nằm ngoài repo** (`D:\.pnpm-store` trên máy hiện tại): đây là mặc định của pnpm — kho dùng chung phải cùng ổ đĩa với `node_modules` để hardlink được. Không phải cấu hình sai, không đưa vào repo. Dọn rác kho: `pnpm store prune`.
+
 ## Não AI sản phẩm — ĐÃ CHỐT (05/08/2026, xem docs/research/nghien-cuu-nao-ai-orchestrator.md)
 
 **Model: MiniMax M3** cho cả orchestrator lẫn worker (quyết định ngân sách của người dùng — $0.30/$1.20 per 1M token). Routing table giữ nguyên thiết kế: nâng cấp/thêm não to sau này chỉ là sửa config, không sửa code.
