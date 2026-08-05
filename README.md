@@ -15,7 +15,9 @@ Nền tảng gia sư AI parent-first cho thị trường Việt Nam. Bán quyề
 
 ## Chạy dự án
 
-Yêu cầu: Docker (Desktop hoặc Engine) đang chạy, Node.js (đã cần cho Next.js), và file `.env` ở gốc repo (copy từ `.env.example`, điền secret local — script tự chép nếu thiếu).
+Yêu cầu: Docker (Desktop hoặc Engine) đang chạy, Node.js (đã cần cho Next.js), [pnpm](https://pnpm.io/installation) (quản lý gói frontend), [uv](https://docs.astral.sh/uv/getting-started/installation/) (quản lý gói + venv backend), và file `.env` ở gốc repo (copy từ `.env.example`, điền secret local — script tự chép nếu thiếu).
+
+**Chuẩn bị lần đầu** (sau khi clone): `cd frontend && pnpm install` — bắt buộc, vì `pnpm dev`/`pnpm build` sẽ lỗi nếu chưa có `node_modules`. Backend thì không cần bước tương ứng: `uv run ...` (được `dev-start` gọi bên trong) tự tạo/đồng bộ venv từ `backend/pyproject.toml` trước khi chạy.
 
 Toàn bộ logic nằm trong `scripts/stack.mjs` (Node thuần, không thêm dependency); các file `.bat`/`.sh` ở gốc repo chỉ là cửa vào. Gõ trực tiếp tên lệnh, không có tiền tố `make`:
 
@@ -50,6 +52,17 @@ Toàn bộ logic nằm trong `scripts/stack.mjs` (Node thuần, không thêm dep
 ### Dừng `dev-start`
 
 Nhấn **Ctrl+C thật trong cửa sổ terminal** đang chạy lệnh — đây là cách duy nhất được kiểm chứng hoạt động trên Windows. **Không** dùng `kill -INT` từ Git Bash để gửi tín hiệu tới tiến trình `node.exe` — đã kiểm chứng tín hiệu đó không tới được tiến trình Node trên Windows, script sẽ không tắt sạch. Ctrl+C tắt cả Django lẫn Next.js, Postgres vẫn chạy (dùng `dev-stop` nếu muốn tắt luôn Postgres).
+
+### Test / lint
+
+Không còn `make test`/`make lint` (Makefile đã xóa) — gọi trực tiếp:
+
+| Việc | Frontend (`cd frontend`) | Backend (`cd backend`) |
+|---|---|---|
+| Test | `pnpm test` | `uv run pytest` |
+| Lint | `pnpm lint` | `uv run ruff check .` |
+| Format check | `pnpm format:check` | — |
+| Build | `pnpm build` | — |
 
 ### Ranh giới: máy lập trình vs. deploy VPS
 
