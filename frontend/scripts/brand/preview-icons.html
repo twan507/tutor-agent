@@ -35,6 +35,33 @@
   }
 </style>
 <div id="root"></div>
+<div class="row light" id="mascot-light"></div>
+<div class="row dark" id="mascot-dark"></div>
+<label
+  >--rangi-glow
+  <input
+    type="range"
+    min="0"
+    max="1"
+    step="0.05"
+    value="1"
+    oninput="document.querySelectorAll('.mascot-obj').forEach(o=>o.contentDocument?.documentElement.style.setProperty('--rangi-glow',this.value))"
+/></label>
+<script>
+  for (const mode of ["light", "dark"]) {
+    document.getElementById(`mascot-${mode}`).innerHTML = [
+      "firefly-glowing",
+      "firefly-flying",
+      "firefly-resting",
+      "firefly-greeting",
+    ]
+      .map(
+        (n) =>
+          `<figure><object class="mascot-obj" data="../../public/brand/mascot/${n}.svg" type="image/svg+xml" style="width:96px;height:96px"></object><figcaption>${n}</figcaption></figure>`,
+      )
+      .join("");
+  }
+</script>
 <script>
   const names = [
     "lesson",

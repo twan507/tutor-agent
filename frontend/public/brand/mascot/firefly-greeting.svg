@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Rangi firefly greeting">
+  <g transform="rotate(6 48 48)">
+    <g id="halo" style="opacity:calc(0.3*var(--rangi-glow, 1))">
+      <circle cx="48" cy="62" r="18" fill="var(--rangi-spark, #F5A623)"/>
+    </g>
+    <g id="wings" fill="var(--rangi-wing, #84DEBE)" opacity="0.7">
+      <ellipse cx="36" cy="40" rx="7" ry="16" transform="rotate(-28 36 40)"/>
+      <ellipse cx="60" cy="40" rx="7" ry="16" transform="rotate(28 60 40)"/>
+    </g>
+    <g id="body" fill="var(--rangi-body, #0E7A5A)">
+      <ellipse cx="48" cy="44" rx="11" ry="14"/>
+      <circle cx="48" cy="27" r="8"/>
+      <path d="M44 20 Q40 13 34 13M52 20 Q54 14 59 12" fill="none" stroke="var(--rangi-body, #0E7A5A)" stroke-width="1.75" stroke-linecap="round"/>
+    </g>
+    <g id="eyes" fill="var(--rangi-cream, #FBF6EA)">
+      <circle cx="44.5" cy="26.5" r="1.3"/>
+      <circle cx="51.5" cy="26.5" r="1.3"/>
+    </g>
+    <path d="M28 18v4M26 20h4M66 12v4M64 14h4" stroke="var(--rangi-spark, #F5A623)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+    <ellipse id="spark" cx="48" cy="62" rx="9" ry="11" fill="var(--rangi-spark, #F5A623)" style="opacity:calc(0.45 + 0.55*var(--rangi-glow, 1))"/>
+  </g>
+</svg>
