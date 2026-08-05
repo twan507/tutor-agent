@@ -49,7 +49,19 @@ function ensureNetwork() {
   if (!nets.includes(NETWORK)) run("docker", ["network", "create", NETWORK]);
 }
 function portBusy(port) {
-  const out = capture(process.platform === "win32" ? "netstat" : "ss", process.platform === "win32" ? ["-ano"] : ["-ltn"]);
+  if (process.platform === "win32") {
+    // netstat -ano liệt kê MỌI kết nối (LISTENING, ESTABLISHED, TIME_WAIT…), không
+    // chỉ cổng đang lắng nghe. Nếu chỉ tìm chuỗi "port" sẽ dính false positive với
+    // các kết nối TIME_WAIT còn sót (ví dụ do curl trước đó) dù không ai lắng nghe
+    // cổng đó — nên phải lọc đúng dòng có state LISTENING và khớp cổng ở Local Address.
+    const out = capture("netstat", ["-ano"]);
+    return out.split(/\r?\n/).some((line) => {
+      if (!/\bLISTENING\b/.test(line)) return false;
+      const m = line.match(/^\s*(?:TCP|UDP)\s+(\S+)/i);
+      return !!m && m[1].endsWith(`:${port}`);
+    });
+  }
+  const out = capture("ss", ["-ltn"]);
   return new RegExp(`[.:]${port}\\s`).test(out);
 }
 function infraUp() {
@@ -91,7 +103,76 @@ function dockerClean() {
   log("volume dữ liệu tutor-infra_pgdata: còn nguyên ✓");
 }
 
-const COMMANDS = { "docker-up": dockerUp, "docker-down": dockerDown, "docker-clean": dockerClean };
+const children = [];
+function spawnLabeled(label, cmd, args, cwd, env) {
+  const color = C[label] || C.dim;
+  const p = spawn(cmd, args, { cwd, env, shell: process.platform === "win32" });
+  const pipe = (stream) => {
+    let buf = "";
+    stream.on("data", (d) => {
+      buf += d.toString();
+      const lines = buf.split(/\r?\n/);
+      buf = lines.pop();
+      for (const l of lines) console.log(`${color}[${label}]${C.off} ${l}`);
+    });
+  };
+  pipe(p.stdout);
+  pipe(p.stderr);
+  p.on("exit", (code) => console.log(`${color}[${label}]${C.off} thoát với mã ${code}`));
+  children.push(p);
+  return p;
+}
+
+function killChildren() {
+  for (const p of children) {
+    if (p.exitCode !== null) continue;
+    if (process.platform === "win32") spawnSync("taskkill", ["/pid", String(p.pid), "/T", "/F"], { stdio: "ignore" });
+    else p.kill("SIGTERM");
+  }
+}
+
+function devStart() {
+  const env = readEnvFile();
+  for (const [port, who] of [[5432, "Postgres"], [8000, "Django"], [3000, "Next.js"]]) {
+    if (port !== 5432 && portBusy(port)) die(`cổng ${port} (${who}) đang bận — tắt tiến trình đang chiếm rồi chạy lại`);
+  }
+  infraUp();
+
+  // Django chạy NGOÀI Docker: phải trỏ 127.0.0.1 thay vì tên service "postgres"
+  // (và thay vì "localhost" — trên máy này "localhost" phân giải ra ::1 trước,
+  // không có gì lắng nghe ở đó nên mỗi kết nối mất ~10s chờ rồi mới rớt về IPv4),
+  // và dùng settings dev (DEBUG, ALLOWED_HOSTS=*) thay vì prod.
+  const beEnv = { ...process.env, ...env, POSTGRES_HOST: "127.0.0.1", DJANGO_SETTINGS_MODULE: "config.settings.dev" };
+
+  log("chạy migrate…");
+  const mig = spawnSync("uv", ["run", "python", "manage.py", "migrate", "--noinput"], {
+    cwd: path.join(ROOT, "backend"), env: beEnv, stdio: "inherit", shell: process.platform === "win32",
+  });
+  if (mig.status !== 0) die("migrate thất bại — xem log phía trên");
+
+  log("bật Django :8000 và Next.js :3000 — Ctrl+C để tắt cả hai");
+  spawnLabeled("be", "uv", ["run", "python", "manage.py", "runserver", "8000"], path.join(ROOT, "backend"), beEnv);
+  spawnLabeled("fe", "pnpm", ["dev"], path.join(ROOT, "frontend"), process.env);
+
+  let closing = false;
+  process.on("SIGINT", () => {
+    if (closing) return;
+    closing = true;
+    console.log("");
+    log("đang tắt Django và Next.js… (Postgres vẫn chạy, dùng dev-stop để tắt hẳn)", C.warn);
+    killChildren();
+    setTimeout(() => process.exit(0), 800);
+  });
+}
+
+function devStop() {
+  ensureEnv();
+  log("dừng container Postgres (giữ container và volume)…");
+  run("docker", ["compose", ...INFRA, "stop"], { allowFail: true });
+  log("xong — dev-start sẽ bật lại tức thì, dữ liệu nguyên vẹn");
+}
+
+const COMMANDS = { "dev-start": devStart, "dev-stop": devStop, "docker-up": dockerUp, "docker-down": dockerDown, "docker-clean": dockerClean };
 
 const cmd = process.argv[2];
 if (!COMMANDS[cmd]) {
