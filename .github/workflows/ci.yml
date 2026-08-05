@@ -60,6 +60,7 @@ jobs:
       - run: pnpm lint
       - run: pnpm format:check
       - run: pnpm test
+      - run: pnpm brand:check
       - run: pnpm build
 
   docker:

@@ -13,6 +13,7 @@ export interface RangiSplashProps {
   theme: keyof typeof THEMES;
   title?: string;
   className?: string;
+  animate?: boolean;
 }
 
 function useReducedMotion() {
@@ -31,15 +32,22 @@ export function RangiSplash({
   theme,
   title = "Rangi",
   className,
+  animate = true,
 }: RangiSplashProps) {
   const c = THEMES[theme];
   const W = WORDMARK;
   const reduced = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   // Đường bay: vào từ ngoài khung trái-dưới, cong lên, KẾT THÚC đúng (dotCx, dotCy).
   const flightD = `M ${-0.3 * W.width} ${W.height * 1.15} Q ${W.width * 0.35} ${-W.height * 0.35}, ${W.i.dotCx} ${W.i.dotCy}`;
   const dur = `${DURATION_S}s`;
 
-  if (reduced) {
+  // SSR/first paint luôn tĩnh (tránh mismatch hydrate); chỉ nâng cấp sang
+  // nhánh động sau khi mount, khi caller cho phép và không reduced-motion.
+  if (!animate || reduced || !mounted) {
     // Tĩnh hoàn toàn — cùng markup wordmark, không animation.
     return (
       <svg
@@ -49,13 +57,7 @@ export function RangiSplash({
         className={className}
       >
         <title>{title}</title>
-        <circle
-          cx={W.i.dotCx}
-          cy={W.i.dotCy}
-          r={W.i.haloR}
-          fill={c.halo}
-          opacity={0.28}
-        />
+        <circle cx={W.i.dotCx} cy={W.i.dotCy} r={W.i.haloR} fill={c.halo} opacity={0.28} />
         <circle cx={W.i.dotCx} cy={W.i.dotCy} r={W.i.dotR} fill={c.dot} />
         <rect
           x={W.i.stemX}
@@ -117,25 +119,13 @@ export function RangiSplash({
       </g>
       {/* chấm + quầng thật: bật ở cuối */}
       <g className={styles.land}>
-        <circle
-          cx={W.i.dotCx}
-          cy={W.i.dotCy}
-          r={W.i.haloR}
-          fill={c.halo}
-          opacity={0.28}
-        />
+        <circle cx={W.i.dotCx} cy={W.i.dotCy} r={W.i.haloR} fill={c.halo} opacity={0.28} />
         <circle cx={W.i.dotCx} cy={W.i.dotCy} r={W.i.dotR} fill={c.dot} />
       </g>
       {/* đom đóm rút gọn bay theo path rồi đứng im (freeze) đúng tại chấm */}
       <g className={styles.flier}>
         <g>
-          <ellipse
-            cx="0"
-            cy="0"
-            rx={W.i.dotR * 0.7}
-            ry={W.i.dotR * 0.9}
-            fill={c.dot}
-          />
+          <ellipse cx="0" cy="0" rx={W.i.dotR * 0.7} ry={W.i.dotR * 0.9} fill={c.dot} />
           <ellipse
             cx={-W.i.dotR * 0.9}
             cy={-W.i.dotR * 0.5}

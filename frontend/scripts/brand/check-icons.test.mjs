@@ -2,12 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import {
-  ICON_MANIFEST,
-  MASCOT_MANIFEST,
-  checkDir,
-  checkSvg,
-} from "./check-icons.mjs";
+import { ICON_MANIFEST, MASCOT_MANIFEST, checkDir, checkSvg } from "./check-icons.mjs";
 
 const VALID_OUTLINE =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="correct"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.6 2.6L16 9.5"/></svg>';
@@ -23,22 +18,16 @@ describe("checkSvg outline", () => {
     expect(checkSvg("correct", bad, "outline")).not.toEqual([]);
   });
   it("hex trần ngoài whitelist → lỗi", () => {
-    const bad = VALID_OUTLINE.replace(
-      'stroke="currentColor"',
-      'stroke="#FF0000"',
-    );
+    const bad = VALID_OUTLINE.replace('stroke="currentColor"', 'stroke="#FF0000"');
     expect(checkSvg("correct", bad, "outline")).not.toEqual([]);
   });
   it("amber KHÔNG bọc trong var() → lỗi; bọc trong var() → hợp lệ", () => {
-    const naked = VALID_OUTLINE.replace(
-      "<circle",
-      '<circle fill="#F5A623"',
-    ).replace('fill="none"', 'fill="none"');
-    expect(checkSvg("spark", naked, "outline")).not.toEqual([]);
-    const wrapped = VALID_OUTLINE.replace(
-      "<circle",
-      '<circle fill="var(--icon-accent, #F5A623)"',
+    const naked = VALID_OUTLINE.replace("<circle", '<circle fill="#F5A623"').replace(
+      'fill="none"',
+      'fill="none"',
     );
+    expect(checkSvg("spark", naked, "outline")).not.toEqual([]);
+    const wrapped = VALID_OUTLINE.replace("<circle", '<circle fill="var(--icon-accent, #F5A623)"');
     expect(checkSvg("spark", wrapped, "outline")).toEqual([]);
   });
   it("tên ngoài manifest → lỗi", () => {
@@ -67,18 +56,14 @@ describe("checkDir", () => {
   it("thiếu file trong manifest → lỗi 'thiếu'", () => {
     tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "brand-check-"));
     fs.writeFileSync(path.join(tmpDir, "correct.svg"), VALID_OUTLINE);
-    expect(checkDir(tmpDir, "outline", ["correct", "hint"])).toEqual([
-      "outline: thiếu hint.svg",
-    ]);
+    expect(checkDir(tmpDir, "outline", ["correct", "hint"])).toEqual(["outline: thiếu hint.svg"]);
   });
 
   it("file ngoài manifest → lỗi 'thừa'", () => {
     tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "brand-check-"));
     fs.writeFileSync(path.join(tmpDir, "correct.svg"), VALID_OUTLINE);
     fs.writeFileSync(path.join(tmpDir, "stray.svg"), VALID_OUTLINE);
-    expect(checkDir(tmpDir, "outline", ["correct"])).toEqual([
-      "outline: thừa stray.svg",
-    ]);
+    expect(checkDir(tmpDir, "outline", ["correct"])).toEqual(["outline: thừa stray.svg"]);
   });
 
   it("đủ đúng file hợp lệ → mảng lỗi rỗng", () => {
@@ -90,11 +75,7 @@ describe("checkDir", () => {
 });
 
 describe("manifest", () => {
-  // NOTE: spec docs/specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md §D nói "20
-  // icon" nhưng danh mục liệt kê theo 4 nhóm cộng lại ra 21 tên (5+6+5+5).
-  // Giữ đủ 21 tên (không tự ý bỏ một khái niệm sản phẩm hợp lệ) và sửa số ở
-  // đây cho khớp thực tế đã duyệt trong spec — xem task-5-report.md để người
-  // dùng chốt lại số "20" trong prose spec (đổi thành 21, hoặc bớt 1 icon).
+  // Spec docs/specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md §D đã đính chính: 21 icon (05/08/2026).
   it("đúng 21 icon, 4 mascot", () => {
     expect(ICON_MANIFEST).toHaveLength(21);
     expect(MASCOT_MANIFEST).toHaveLength(4);

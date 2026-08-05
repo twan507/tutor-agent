@@ -26,7 +26,7 @@ Bổ sung các hạng mục nhận diện còn thiếu so với danh mục chu�
 ### C. Lockup dọc (biến thể logo còn thiếu)
 
 - Bố cục: icon (chữ i + chấm sáng + quầng) ở trên, khối chữ RANG**i** ở dưới, thẳng trục giữa; tùy chọn kèm slogan fit-to-width theo quy tắc lockup hiện hành.
-- Sinh từ code trong `generate-logo.mjs` (không vẽ tay), đủ 4 biến thể màu như bộ ngang: `rangi-lockup-vertical-{dark,light,mono-black,mono-white}.svg` + 2 bản kèm slogan `-slogan-{vi,en}` cho dark/light.
+- Sinh từ code trong `generate-logo.mjs` (không vẽ tay), đủ 4 biến thể màu như bộ ngang: `rangi-lockup-vertical-{dark,light,mono-black,mono-white}.svg` + 2 bản kèm slogan: `-slogan-{dark,light}` (VN) + `-slogan-en-{dark,light}` (EN) (theo convention bộ lockup ngang hiện có).
 - Wordmark ngang GIỮ NGUYÊN — không đụng tham số hiện có.
 
 ### D. Bộ icon UI — 21 icon × 2 bộ (outline + filled)
