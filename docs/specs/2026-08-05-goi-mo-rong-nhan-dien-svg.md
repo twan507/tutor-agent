@@ -1,6 +1,6 @@
 # Spec: Gói mở rộng bộ nhận diện SVG (đom đóm đầy đủ, đường bay, icon set, pattern, animation)
 
-**Ngày**: 05/08/2026 · **Trạng thái**: CHỜ DUYỆT
+**Ngày**: 05/08/2026 · **Trạng thái**: ĐÃ DUYỆT 05/08/2026 (người dùng ghi chú: chấp nhận bộ icon sẽ chỉnh sửa theo nhu cầu thật về sau)
 **Nguồn quyết định**: review brand board của agent ngoài (hội thoại 05/08/2026) → chốt mascot hai-địa-bàn + motif đường bay (sổ tay thương hiệu §3.3); grilling vòng 1 chốt phạm vi đầy đủ, icon làm CẢ HAI bộ outline + filled.
 
 ## 1. Mục tiêu
