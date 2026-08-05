@@ -18,6 +18,7 @@ Cấu trúc: `background/` bản nháp định hướng (demo, chưa chốt) | `
 - [research/nghien-cuu-chuan-hoa-ky-su-cao-cap.md](research/nghien-cuu-chuan-hoa-ky-su-cao-cap.md) — chuẩn hóa hành vi senior engineer: 2 tầng quy tắc mềm/cứng, xếp hạng 7 pattern, anti-pattern
 - [research/nghien-cuu-nao-ai-orchestrator.md](research/nghien-cuu-nao-ai-orchestrator.md) — "não" AI sản phẩm: kiểm chứng MiniMax M3 (⚠️ ToS under-16), so sánh orchestrator (đề xuất Gemini Flash + Sonnet fallback), chi phí/học sinh/tháng, harness tự viết + ai_call() + litellm (TRẠNG THÁI: đề xuất, chờ eval tiếng Việt nội bộ trước khi chốt model)
 - [research/nghien-cuu-thuong-hieu.md](research/nghien-cuu-thuong-hieu.md) — vòng 11 branding: tên (top 3: Rangi/Compa/Yumo vs Flibby), màu hổ phách+navy (khoảng trống thị trường), mascot đom đóm (chưa ai chiếm, nguyên tắc anti-Duolingo), triết lý "ngọn đèn nhỏ", slogan, 4 trụ messaging, ⚠️ né cụm "Đèn Đom Đóm" của Dutch Lady (TRẠNG THÁI: đề xuất, chờ người dùng quyết)
+- [research/nghien-cuu-he-mau-va-font.md](research/nghien-cuu-he-mau-va-font.md) — hệ màu UI 2 mode đầy đủ (ramp 11 bậc × 6 màu + semantic token + WCAG check + bằng chứng đỏ-cho-trẻ Merrick&Fyfe) và hệ font song ngữ (Be Vietnam Pro + Inter đề xuất chính, bài toán dấu tiếng Việt, KaTeX) (TRẠNG THÁI: đề xuất, chờ chốt)
 
 ## specs/ — đặc tả tính năng
 
