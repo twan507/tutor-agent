@@ -7,6 +7,7 @@ Mỗi dòng: `- [name](đường-dẫn) — hook một câu`. Chi tiết nằm t
 
 - [architect-subagent-workflow](procedural/architect-subagent-workflow.md) — session chính là kiến trúc sư, tay chân giao Sonnet subagent, task nhỏ tự làm, không tham chiếu file ngoài repo
 - [commit-theo-moc](procedural/commit-theo-moc.md) — mỗi mốc chốt xong = commit riêng ngay + push, không dồn; user nhắc 04/08
+- [bay-moi-truong-dev](procedural/bay-moi-truong-dev.md) — CRLF gây báo động giả prettier (đã chữa bằng .gitattributes, đừng prettier --write hàng loạt); kho pnpm ngoài repo là bình thường
 
 ## Semantic (fact dự án: kiến trúc, quyết định sản phẩm)
 
