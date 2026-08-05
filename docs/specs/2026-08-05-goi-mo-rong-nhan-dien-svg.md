@@ -1,6 +1,6 @@
 # Spec: Gói mở rộng bộ nhận diện SVG (đom đóm đầy đủ, đường bay, icon set, pattern, animation)
 
-**Ngày**: 05/08/2026 · **Trạng thái**: ĐÃ DUYỆT 05/08/2026 (người dùng ghi chú: chấp nhận bộ icon sẽ chỉnh sửa theo nhu cầu thật về sau)
+**Ngày**: 05/08/2026 · **Trạng thái**: ĐÃ DUYỆT + ĐÃ THỰC THI 05/08/2026 (người dùng ghi chú: chấp nhận bộ icon sẽ chỉnh sửa theo nhu cầu thật về sau)
 **Nguồn quyết định**: review brand board của agent ngoài (hội thoại 05/08/2026) → chốt mascot hai-địa-bàn + motif đường bay (sổ tay thương hiệu §3.3); grilling vòng 1 chốt phạm vi đầy đủ, icon làm CẢ HAI bộ outline + filled.
 
 ## 1. Mục tiêu
@@ -29,15 +29,17 @@ Bổ sung các hạng mục nhận diện còn thiếu so với danh mục chu�
 - Sinh từ code trong `generate-logo.mjs` (không vẽ tay), đủ 4 biến thể màu như bộ ngang: `rangi-lockup-vertical-{dark,light,mono-black,mono-white}.svg` + 2 bản kèm slogan `-slogan-{vi,en}` cho dark/light.
 - Wordmark ngang GIỮ NGUYÊN — không đụng tham số hiện có.
 
-### D. Bộ icon UI — 20 icon × 2 bộ (outline + filled)
+### D. Bộ icon UI — 21 icon × 2 bộ (outline + filled)
+
+_(đính chính khi thực thi: nhóm Đánh giá có 6 icon nên tổng là 21; student-profile đổi learner-profile theo CONTEXT.md)_
 
 - **Hai bộ song song cùng danh mục**: `outline/` (nét 1.75px, lưới 24px, cap/join bo tròn) và `filled/` (đặc, cùng silhouette) — chọn bộ theo ngữ cảnh UI sau này (outline = mặc định UI; filled = trạng thái active/nhấn mạnh).
 - Màu: toàn bộ nét/fill chính = `currentColor`; duy nhất đốm sáng hổ phách (ở icon có nó) = `var(--icon-accent, #F5A623)`. KHÔNG hardcode hex khác.
-- Danh mục 20 icon, tên file theo tên EN canonical trong `CONTEXT.md`:
+- Danh mục 21 icon, tên file theo tên EN canonical trong `CONTEXT.md`:
   - _Học tập_: `lesson`, `learning-path`, `goal`, `learning-session`, `learning-sprint`
   - _Đánh giá_: `assessment-item`, `correct` (✓ emerald khi dùng), `incorrect` (✗ đỏ khi dùng — icon luôn đi kèm màu theo quy tắc mù màu), `hint`, `timer`, `mock-exam`
   - _Tiến bộ_: `mastery-map`, `progress-chart`, `spark` (đốm sáng/streak), `badge`, `learning-evidence`
-  - _Hệ thống_: `parent-report`, `daily-digest`, `student-profile`, `settings`, `calendar`
+  - _Hệ thống_: `parent-report`, `daily-digest`, `learner-profile`, `settings`, `calendar`
 - Vị trí: `frontend/public/brand/icons/{outline,filled}/<tên>.svg`.
 - **Script kiểm chuẩn tự động** `scripts/brand/check-icons.mjs`: viewBox `0 0 24 24`, có `currentColor`, không hex ngoài whitelist (`#F5A623` trong var fallback), có `fill="none"` đúng chỗ (outline), tên file thuộc danh mục đã duyệt. Chạy được trong CI (`pnpm brand:check`).
 
@@ -56,7 +58,7 @@ Bổ sung các hạng mục nhận diện còn thiếu so với danh mục chu�
 
 - Không đổi wordmark ngang, app icon, favicon, og-image hiện có (trừ khi lỗi phát hiện trong lúc làm — báo trước).
 - Không làm mockup in ấn/biển hiệu (chờ tra nhãn hiệu SHTT).
-- Không thêm icon ngoài danh mục 20 (thiếu thì đề xuất bổ sung danh mục trước, không tự thêm).
+- Không thêm icon ngoài danh mục 21 (thiếu thì đề xuất bổ sung danh mục trước, không tự thêm).
 - Không thêm dependency ngoài devDependencies hiện có + SVGO (nếu cần optimize — hỏi trước khi thêm).
 
 ## 4. Ràng buộc bắt buộc (kế thừa, nhắc để reviewer soi)
@@ -69,7 +71,7 @@ Bổ sung các hạng mục nhận diện còn thiếu so với danh mục chu�
 ## 5. Definition of Done (bất biến, kiểm chứng được)
 
 1. `pnpm brand:generate` chạy sạch, xuất đủ file mục B + C; chạy lại 2 lần liên tiếp cho output y hệt (deterministic).
-2. `pnpm brand:check` pass trên toàn bộ 40 icon (20 × 2 bộ) và fail được khi cố tình đưa icon sai chuẩn (có test chứng minh cả hai chiều).
+2. `pnpm brand:check` pass trên toàn bộ 42 icon (21 × 2 bộ) và fail được khi cố tình đưa icon sai chuẩn (có test chứng minh cả hai chiều).
 3. Đủ 4 pose mascot + 2 pattern + 2 flight path asset, mỗi file render đúng trên cả nền sáng và nền tối (kiểm bằng browser tool, chụp bằng chứng).
 4. `RangiSplash` chạy trên trang chủ dev: animation kết thúc với đom đóm đúng vị trí chấm chữ i (sai số ≤1px so với tọa độ `dotCx/dotCy` của generator); bật `prefers-reduced-motion` thì không có chuyển động.
 5. Test hiện có không hỏng: `pnpm test` (frontend) pass toàn bộ.

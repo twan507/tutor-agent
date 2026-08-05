@@ -129,5 +129,7 @@ if (isMain) {
     );
     process.exit(1);
   }
-  console.log("brand:check PASS: 40 icon + 4 mascot đạt chuẩn");
+  console.log(
+    `brand:check PASS: ${ICON_MANIFEST.length * 2} icon + ${MASCOT_MANIFEST.length} mascot đạt chuẩn`,
+  );
 }

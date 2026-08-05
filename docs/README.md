@@ -24,6 +24,7 @@ Cấu trúc: `background/` bản nháp định hướng (demo, chưa chốt) | `
 - [research/nghien-cuu-thuong-hieu.md](research/nghien-cuu-thuong-hieu.md) — vòng 11 branding: tên (top 3: Rangi/Compa/Yumo vs Flibby), màu hổ phách+navy (khoảng trống thị trường), mascot đom đóm (chưa ai chiếm, nguyên tắc anti-Duolingo), triết lý "ngọn đèn nhỏ", slogan, 4 trụ messaging, ⚠️ né cụm "Đèn Đom Đóm" của Dutch Lady (TRẠNG THÁI: đề xuất, chờ người dùng quyết)
 - [research/nghien-cuu-skills-mattpocock.md](research/nghien-cuu-skills-mattpocock.md) — khảo sát repo skills của Matt Pocock 05/08/2026: 5 kỹ thuật đã nhận vào harness (CONTEXT.md glossary, grilling frontier, debug kỷ luật, review hai trục, cắt tỉa tài liệu) + 4 nhóm bị loại kèm lý do và điều kiện xem lại
 - [research/nghien-cuu-he-mau-va-font.md](research/nghien-cuu-he-mau-va-font.md) — hệ màu UI 2 mode đầy đủ (ramp 11 bậc × 6 màu + semantic token + WCAG check + bằng chứng đỏ-cho-trẻ Merrick&Fyfe) và hệ font song ngữ (Be Vietnam Pro + Inter đề xuất chính, bài toán dấu tiếng Việt, KaTeX) (TRẠNG THÁI: đề xuất, chờ chốt)
+- [research/danh-gia-tham-my-mascot-icon-2026-08-05.md](research/danh-gia-tham-my-mascot-icon-2026-08-05.md) — đánh giá thẳng chất lượng mascot/icon gói SVG 05/08 + nguyên nhân gốc + hướng làm lại; kèm đánh giá hướng logo mềm — chờ người dùng chốt
 
 ## specs/ — đặc tả tính năng
 
@@ -31,11 +32,11 @@ Cấu trúc: `background/` bản nháp định hướng (demo, chưa chốt) | `
 - [specs/2026-08-05-goi-logo-rangi.md](specs/2026-08-05-goi-logo-rangi.md) — spec gói logo Rangi: generator fontkit → SVG, component React animation CSS, xuất PNG (TRẠNG THÁI: đã thực thi 05/08/2026)
 
 - [specs/2026-08-05-lenh-chay-du-an.md](specs/2026-08-05-lenh-chay-du-an.md) — spec bộ 5 lệnh chạy dự án thay Makefile: dev-start/dev-stop/docker-up/docker-down/docker-clean, ma trận tác động, ranh giới dữ liệu (TRẠNG THÁI: đã thực thi 05/08/2026)
-- [specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md](specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md) — spec gói mở rộng nhận diện SVG: pose sheet đom đóm geometric, motif đường bay, lockup dọc, 20 icon × 2 bộ outline/filled, pattern nền, animation RangiSplash (TRẠNG THÁI: chờ duyệt)
+- [specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md](specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md) — spec gói mở rộng nhận diện SVG: pose sheet đom đóm geometric, motif đường bay, lockup dọc, 21 icon × 2 bộ outline/filled, pattern nền, animation RangiSplash (TRẠNG THÁI: đã duyệt + đã thực thi 05/08/2026)
 
 ## plans/ — kế hoạch thực thi
 
 - [plans/2026-08-04-scaffold-monorepo-plan.md](plans/2026-08-04-scaffold-monorepo-plan.md) — implementation plan 8 task chi tiết từng file/lệnh/expected cho scaffold (TRẠNG THÁI: đã thực thi 04/08/2026 — verify E2E 4/4 tiêu chí DoD PASS, xem `.superpowers/sdd/2026-08-04-scaffold-monorepo-plan/task-7-report.md`)
 - [plans/2026-08-05-goi-logo-rangi-plan.md](plans/2026-08-05-goi-logo-rangi-plan.md) — implementation plan 4 task cho gói logo Rangi: generator + SVG, component React, xuất PNG, tích hợp trang chủ + tài liệu (TRẠNG THÁI: đã thực thi 05/08/2026 — xem `.superpowers/sdd/2026-08-05-goi-logo-rangi-plan/task-4-report.md`)
 - [plans/2026-08-05-lenh-chay-du-an-plan.md](plans/2026-08-05-lenh-chay-du-an-plan.md) — plan 3 task: script lõi + lệnh docker, dev-start/dev-stop hot-reload, tài liệu + verify (TRẠNG THÁI: đã thực thi 05/08/2026)
-- [plans/2026-08-05-goi-mo-rong-nhan-dien-svg-plan.md](plans/2026-08-05-goi-mo-rong-nhan-dien-svg-plan.md) — plan 11 task cho gói mở rộng nhận diện: motifs module TDD, flight path, lockup dọc, checker brand:check, 40 icon, mascot 4 pose, pattern, RangiSplash, docs + review + verify (TRẠNG THÁI: chưa thực thi)
+- [plans/2026-08-05-goi-mo-rong-nhan-dien-svg-plan.md](plans/2026-08-05-goi-mo-rong-nhan-dien-svg-plan.md) — plan 11 task cho gói mở rộng nhận diện: motifs module TDD, flight path, lockup dọc, checker brand:check, 21 × 2 icon, mascot 4 pose, pattern, RangiSplash, docs + review + verify (TRẠNG THÁI: đã thực thi 05/08/2026)

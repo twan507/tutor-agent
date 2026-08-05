@@ -144,6 +144,23 @@ Mascot có hai dạng, mỗi dạng một địa bàn — **không dạng nào l
 
 ---
 
+### 3.4 Kho asset và cách dùng (bổ sung sau khi thực thi gói SVG 05/08/2026)
+
+Tất cả nằm trong `frontend/public/brand/`:
+
+| Nhóm       | File                            | Dùng cho                                | Quy tắc                                                                |
+| ---------- | ------------------------------- | --------------------------------------- | ---------------------------------------------------------------------- |
+| Icon UI    | `icons/outline/*.svg` (21)      | mặc định trong UI                       | màu qua `currentColor`; accent hổ phách tự có trong file               |
+| Icon UI    | `icons/filled/*.svg` (21)       | trạng thái active/nhấn mạnh             | cùng silhouette với bản outline cùng tên                               |
+| Mascot     | `mascot/firefly-*.svg` (4 pose) | minh họa, empty state, onboarding       | KHÔNG dùng trong logo; độ sáng chỉnh bằng CSS var `--rangi-glow` (0→1) |
+| Đường bay  | `flight-path-*.svg`             | trang trí section, kể chuyện bay-và-đậu | sinh từ code, sửa tham số trong `generate-logo.mjs`                    |
+| Pattern    | `pattern-{light,dark}.svg`      | nền section, tương phản thấp            | tile 240px, `background-repeat` cả hai chiều                           |
+| Lockup dọc | `rangi-lockup-vertical-*.svg`   | không gian đứng (poster, story, bìa)    | không tự chế biến thể mới ngoài generator                              |
+
+Gate chất lượng: `pnpm brand:check` (chạy trong `frontend/`) — icon/mascot sai chuẩn (viewBox, hex trần, tên ngoài danh mục) sẽ fail CI. Thêm icon mới = thêm tên vào `ICON_MANIFEST` trong `scripts/brand/check-icons.mjs` + vẽ đủ HAI bộ outline/filled.
+
+---
+
 ## 4. Màu sắc và câu chuyện của nó
 
 ### 4.1 Hai màu chính
