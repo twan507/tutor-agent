@@ -43,11 +43,20 @@ Nguyên tắc gốc: **hành xử như kỹ sư cao cấp trong một team — m
 4. THỰC THI theo plan (skill subagent-driven-development hoặc executing-plans)
    — TDD trong từng task: test đỏ đúng lý do trước, code sau
 5. REVIEW bằng subagent code-reviewer (.claude/agents/code-reviewer.md, context sạch)
+   — review HAI TRỤC: Chuẩn (đúng đắn/ràng buộc/test) + Spec (thiếu/sai/scope creep so với spec đã duyệt)
 6. VERIFY bằng chứng thật (skill verification-before-completion) — dán output
 7. merge + commit theo mốc
 ```
 
 Ba gate không được nhảy: **spec được duyệt**, **plan tồn tại trước khi giao việc**, **test đỏ trước khi viết implementation**. Cả spec lẫn plan đều thêm dòng vào `docs/README.md`. Backlog theo dõi trong `TASKS.md` ở gốc repo.
+
+**Cách brainstorm — grilling theo frontier** (bổ sung 05/08/2026, áp dụng trong bước 1):
+
+- Mô hình hóa buổi làm rõ yêu cầu thành **cây quyết định**: mỗi quyết định mở ra các quyết định con phụ thuộc nó.
+- Hỏi theo **vòng**: mỗi vòng hỏi TOÀN BỘ frontier — các câu đã đủ tiền đề trả lời ngay. Câu phụ thuộc câu còn mở thì để vòng sau, không hỏi gộp.
+- Mỗi câu đánh số, **kèm đề xuất trả lời của agent** để người dùng chỉ cần xác nhận hoặc bẻ.
+- **Fact thì agent tự tra** (codebase, docs, web — giao subagent nếu rộng), chỉ **quyết định** mới đặt cho người dùng. Không bao giờ hỏi thứ tự tra được.
+- Xong khi frontier rỗng — không còn nhánh nào bị giả định ngầm. Thuật ngữ mới nảy ra trong buổi grilling → cập nhật `CONTEXT.md` ngay.
 
 ## Quy tắc bộ nhớ (memory/)
 
@@ -63,7 +72,7 @@ memory/
 └── episodic/      # nhật ký quyết định theo phiên (được phép cũ đi)
 ```
 
-**Bốn quy tắc:**
+**Sáu quy tắc:**
 
 1. **Index nhỏ, lazy-load chi tiết**: `MEMORY.md` chỉ chứa mỗi memory một dòng (tên + hook). Trần cứng 150 dòng — vượt là phải thu gọn trước khi thêm mới. Chi tiết nằm trong file con, chỉ đọc khi cần.
 2. **Mỗi memory một file**, có frontmatter: `name`, `type` (semantic/procedural/episodic), `created`, `modified`, `description` một dòng. Đặt file đúng thư mục theo type.
@@ -76,6 +85,10 @@ memory/
    - `CLAUDE.md` — **quy tắc bắt buộc** rút gọn (thứ agent phải tuân khi build)
 
    Tiền lệ: bộ nhận diện Rangi chốt xong nhưng toàn bộ phần giải nghĩa (ba tầng nghĩa của tên, các hướng khai thác marketing, điển tích văn hóa) suýt chết theo phiên vì chỉ tồn tại trong hội thoại — người dùng phải tự nhớ và yêu cầu mới có `docs/brand/so-tay-thuong-hieu-rangi.md`. **Không được để người dùng phải là bộ nhớ dự phòng.**
+
+   **Bộ lọc "quyết định lớn"** (đủ CẢ BA mới đáng một file research; thiếu một → chỉ cần dòng episodic hoặc commit message): (a) khó đảo ngược — đổi ý sau này tốn kém thật; (b) gây ngạc nhiên nếu thiếu context — người đọc sau sẽ hỏi "sao lại làm thế này?"; (c) có trade-off thật — có phương án thay thế nghiêm túc đã bị loại vì lý do cụ thể.
+
+6. **Kỷ luật cắt tỉa khi reflection** (bổ sung 05/08/2026): tài liệu cho agent đọc (CLAUDE.md, MEMORY.md, CONTEXT.md) mặc định sẽ bồi lắng — thêm thì thấy an toàn, xóa thì thấy rủi ro. Hai phép thử khi soát: (a) **săn no-op** — câu lệnh mà model mặc định đã làm đúng thì tốn token để nói điều vô nghĩa, xóa cả câu; (b) **môi trường là source of truth** — thứ tra được từ config/`--help`/cấu trúc thư mục/code mà tài liệu chép lại là cache dễ ôi, chỉ ghi thứ KHÔNG tra được: quy ước bất thành văn, lý do, bẫy.
 
 ## Quy tắc làm việc (theo Karpathy guidelines)
 
@@ -100,6 +113,12 @@ memory/
 - Việc nhiều bước: nêu kế hoạch đánh số, mỗi bước có cách verify.
 - Lặp đến khi verify đạt. Không tuyên bố "xong" khi chưa chạy kiểm chứng.
 
+### 5. Debug có kỷ luật (bổ sung 05/08/2026, dùng cùng skill systematic-debugging)
+
+- **Chưa có "lệnh đỏ" thì chưa được đặt giả thuyết.** Trước khi đọc code xây lý thuyết, phải nêu được MỘT lệnh (test/curl/script) đã chạy thật ít nhất một lần, deterministic, nhanh (giây, không phút), và đỏ đúng triệu chứng người dùng mô tả — không phải "chạy không lỗi". Bug chập chờn: không cần repro sạch, cần **nâng tỷ lệ tái hiện** (lặp 100×, stress, thu hẹp timing) đến mức debug được. Thật sự không dựng được vòng lặp → dừng, liệt kê đã thử gì, xin người dùng artifact (log, HAR, recording) — không đoán mò tiếp.
+- **Sinh 3-5 giả thuyết xếp hạng trước khi kiểm bất kỳ cái nào** — bám giả thuyết đầu tiên là anchor bias. Mỗi giả thuyết phải falsifiable: "nếu X là nguyên nhân thì đổi Y bug biến mất". Không phát biểu được dự đoán → đó là cảm giác, loại. Đưa danh sách cho người dùng xem (họ hay re-rank tức thì), nhưng không block nếu họ vắng.
+- **Mọi log debug gắn prefix duy nhất** kiểu `[DEBUG-a4f2]` — dọn dẹp cuối cùng là một lệnh grep; log không tag sẽ sống sót lọt vào commit. Trước khi báo xong: repro gốc hết tái hiện, regression test pass, grep prefix ra 0 kết quả.
+
 ## Ràng buộc sản phẩm bất biến
 
 Đây là ranh giới pháp lý và thiết kế đã chốt (Luật TTNT 134/2025/QH15, QĐ 33/2026/QĐ-TTg, Luật BVDLCN 91/2025/QH15). **Không code nào được vượt qua, kể cả prototype:**
@@ -116,6 +135,7 @@ memory/
 ## Ngôn ngữ và thuật ngữ
 
 - Giao tiếp với người dùng repo này bằng **tiếng Việt**. Code, tên biến, commit message bằng tiếng Anh.
+- **Thuật ngữ domain tra `CONTEXT.md`** (glossary song ngữ, nguồn duy nhất): hội thoại/UI dùng tên VN canonical, code dùng tên EN canonical, không dùng từ trong danh sách `_Tránh_`. Khái niệm domain mới xuất hiện hoặc hai người đang gọi một thứ bằng hai tên → chốt tên và cập nhật `CONTEXT.md` ngay trong phiên. `CONTEXT.md` chỉ là glossary — không nhét implementation detail hay quy tắc vào đó.
 - Ngôn ngữ sản phẩm — không bao giờ dùng:
   - ~~"thay thế gia sư"~~ → định vị là công cụ bổ trợ ngoài nhà trường
   - ~~"dự đoán điểm thi"~~ → dùng **"mức sẵn sàng theo đề mô phỏng"**
@@ -193,6 +213,7 @@ Chi tiết + lý do: docs/research/nghien-cuu-thuong-hieu.md và nghien-cuu-he-m
 7. **Chống test giả (TDD với agent)**: trước khi viết implementation, phải chạy test và nêu rõ assertion nào đỏ, vì sao — không chấp nhận "đã có test đỏ" hình thức. Assert giá trị cụ thể (không chỉ `status==200`/không-throw). Mỗi test có ít nhất một case biên hoặc case sai.
 8. **Coverage không có ngưỡng % cứng** — chỉ là tín hiệu tham khảo. Riêng module deterministic quan trọng (SymPy verify, mastery, calibration) chủ đích giữ coverage cao + mutation testing định kỳ.
 9. **Dev-time**: agent dùng browser tool tự xác minh UI ngay sau khi sửa, rồi cập nhật smoke test tương ứng — công cụ agent nuôi bộ CI test, không thay thế nó.
+10. **Seam chốt trước, test tại seam** (bổ sung 05/08/2026): test đặt tại ranh giới public (interface mà caller thật đi qua), KHÔNG test internals; các seam sẽ test phải được liệt kê trong plan và được duyệt cùng plan — không viết test tại seam chưa chốt. Nhận diện thêm một dạng test giả: **tautological test** — expected value tự tính lại theo đúng cách code tính (`expect(add(a,b)).toBe(a+b)`), pass by construction; expected phải đến từ nguồn độc lập (literal đã biết đúng, ví dụ giải tay, spec).
 
 ## Dữ liệu nhạy cảm — quy tắc cứng
 
