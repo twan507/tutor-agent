@@ -1,0 +1,19 @@
+.breath [data-part="dot"] {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: breath 2.4s ease-in-out infinite;
+}
+@keyframes breath {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .breath [data-part="dot"] {
+    animation: none;
+  }
+}
