@@ -12,7 +12,8 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "brand:generate": "node scripts/brand/generate-logo.mjs",
-    "brand:png": "node scripts/brand/export-png.mjs"
+    "brand:png": "node scripts/brand/export-png.mjs",
+    "brand:check": "node scripts/brand/check-icons.mjs"
   },
   "dependencies": {
     "next": "^15.1.6",
