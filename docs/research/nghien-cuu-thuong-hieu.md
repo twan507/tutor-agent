@@ -1,6 +1,6 @@
 # Nghiên cứu bộ nhận diện thương hiệu + marketing (vòng 11)
 
-Ngày: 05/08/2026. Trạng thái: ĐỀ XUẤT — chờ người dùng quyết. Ba nghiên cứu song song: tên / thị giác-mascot / triết lý-slogan-messaging. Đứng trên di sản 10 vòng chọn tên cũ (docs/background/nhat-ky mục 7 — không đề xuất lại tên đã loại).
+Ngày: 05/08/2026. Trạng thái: **ĐÃ CHỐT 05/08/2026** — tên RANGI + bộ hội tụ (màu do người dùng chỉnh sang hổ phách+lục bảo, xem nghien-cuu-he-mau-va-font.md). Quy tắc rút gọn: CLAUDE.md mục Bộ nhận diện thương hiệu. Ba nghiên cứu song song: tên / thị giác-mascot / triết lý-slogan-messaging. Đứng trên di sản 10 vòng chọn tên cũ (docs/background/nhat-ky mục 7 — không đề xuất lại tên đã loại).
 
 ## 1. TÊN — vòng 11 (14 ứng viên mới, tra cứu top 6 + tái đánh giá Flibby)
 

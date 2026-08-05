@@ -1,6 +1,6 @@
 # Nghiên cứu hệ màu UI (light/dark) + hệ font song ngữ Việt-Anh
 
-Ngày: 05/08/2026. Trạng thái: ĐỀ XUẤT — chờ người dùng chốt. Nối tiếp bộ màu thương hiệu đã duyệt sơ (hổ phách #F5A623 + ngọc lục bảo #0E7A5A). Yêu cầu người dùng: brand cố định đủ tương phản 2 mode; hệ semantic đầy đủ (có ĐỎ cho câu sai — "xanh đỏ đi theo cặp"); font phủ mọi mục đích, hỗ trợ đầy đủ tiếng Việt.
+Ngày: 05/08/2026. Trạng thái: **ĐÃ CHỐT 05/08/2026** — hệ màu giữ nguyên đề xuất; font chốt PHƯƠNG ÁN C (PhuDu display song ngữ + nền A + Lexend chat). Quy tắc rút gọn: CLAUDE.md mục Bộ nhận diện thương hiệu. Nối tiếp bộ màu thương hiệu đã duyệt sơ (hổ phách #F5A623 + ngọc lục bảo #0E7A5A). Yêu cầu người dùng: brand cố định đủ tương phản 2 mode; hệ semantic đầy đủ (có ĐỎ cho câu sai — "xanh đỏ đi theo cặp"); font phủ mọi mục đích, hỗ trợ đầy đủ tiếng Việt.
 
 ## PHẦN 1 — HỆ MÀU
 

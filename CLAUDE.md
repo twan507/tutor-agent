@@ -6,7 +6,7 @@ Quy tắc làm việc cho AI agent trong repo này. Áp dụng cho mọi phiên 
 
 Nền tảng gia sư AI **parent-first** cho thị trường Việt Nam. Bán quyền kiểm soát quá trình học cho phụ huynh, không chỉ bán khóa học. Không phải chatbot: hệ thống tạo lộ trình, dạy, kiểm tra, đo, điều chỉnh, báo cáo.
 
-- **Tên dự án: CHƯA CHỐT** — "Flibby" là ứng viên nhưng người dùng đang xem xét lại. Code/infra/identifier dùng tên trung tính `tutor-agent` cho tới khi chốt tên; không dùng "Flibby" trong code, domain, branding mới.
+- **Tên thương hiệu: RANGI** (chốt 05/08/2026) — "Rang" = rạng sáng/rạng rỡ/rạng danh; "i" = đốm sáng mascot (chấm chữ i) + "i tờ" (bước học đầu tiên) + chính mình. CHỜ tra nhãn hiệu Cục SHTT nhóm 41+9 trước khi dùng công khai/mua domain; code/infra vẫn dùng `tutor-agent` cho tới khi tra xong. "Flibby" cũ đã bỏ.
 - **MVP** (định hướng): Learning Sprint — ôn thi Toán THCS trong 7-14 ngày
 - **Moat**: learner profile + assessment intelligence + mastery tracking + parent reporting
 
@@ -153,6 +153,18 @@ memory/
 - Pseudonymize **TRIỆT ĐỂ**: không tên thật, không định danh, không thông tin liên hệ, không dữ liệu nào truy ngược được về trẻ rời khỏi hệ thống tới API — enforce tại `ai_call()`, có test riêng cho lớp này
 - Minh bạch với phụ huynh: công bố model nào xử lý phần dữ liệu nào
 - Kiểm chứng ToS API MiniMax về giới hạn tuổi khi đăng ký tài khoản (TASKS.md)
+
+## Bộ nhận diện thương hiệu — ĐÃ CHỐT (05/08/2026)
+
+Chi tiết + lý do: docs/research/nghien-cuu-thuong-hieu.md và nghien-cuu-he-mau-va-font.md. Tóm tắt ràng buộc khi build UI/nội dung:
+
+- **Tên**: Rangi. Wordmark: "Rang" + chữ "i" có chấm sáng hổ phách = mascot. App icon/favicon = riêng cái chấm sáng.
+- **Màu brand (cố định)**: hổ phách `#F5A623` (amber-500) + ngọc lục bảo `#0E7A5A` (emerald-700) + đêm rừng `#0A2E26` (chỉ hero/splash) + kem trang sách `#FBF6EA`. Ramp đầy đủ 11 bậc × 6 màu + semantic token 2 mode: theo bảng trong research doc — component CHỈ dùng semantic token, không hardcode hex.
+- **Quy tắc màu cứng**: amber KHÔNG BAO GIỜ làm chữ (fail contrast) — chỉ làm nền, chữ tối `#0A2E26` đè lên; câu SAI dùng đỏ `#DE2127` (light) / red-400 (dark text) — LUÔN kèm icon ✗ (mù màu đỏ-lục); ĐÚNG dùng emerald + icon ✓; warning dùng cam cháy (KHÔNG dùng amber — đá vai CTA); dark mode: emerald text → bậc 300/400, amber fill lớn → desaturate `#E6AC4C`; coral `#E07A5F` chỉ trang trí.
+- **Font (phương án C)**: **PhuDu** 500/700 — CHỈ display ≥24px (hero, tiêu đề section, song ngữ — một font cho cả Việt lẫn Anh, không đổi font theo locale); **Be Vietnam Pro** 400/500/700 — heading thường + body; **Inter** variable — UI + số liệu (`font-variant-numeric: tabular-nums`); **Lexend** 400 — chat học sinh. Qua `next/font/google`, subsets `['latin','vietnamese']`, chỉ load weight dùng thật. Line-height tiếng Việt ≥130%; đoạn chứa công thức KaTeX inline cũng ≥130% (KaTeX giữ font toán riêng — chuẩn ngành). CẤM Nunito cho body (lỗi dấu Việt đã ghi nhận).
+- **Mascot**: đom đóm/đốm sáng, sáng dần theo tiến bộ. Mô hình cảm xúc **Forest, không Duolingo**: thưởng cộng dồn, nghỉ = mờ trung tính; CẤM mắt to nhìn chằm chằm (gợi giám sát), CẤM biểu cảm buồn/thất vọng khi sai/nghỉ (trừng phạt cảm xúc). Hai dạng: đốm sáng tối giản (icon) + dạng đầy đủ geometric cho teen (không baby-face).
+- **Triết lý**: "Ngọc bất trác bất thành khí" + "ngọn đèn nhỏ đủ soi một trang sách" — tiến bộ nhỏ đo được, con chỉ so với chính mình hôm qua. **Slogan**: "Giỏi hơn chính mình hôm qua" (EN: "Better than yesterday's you").
+- **CẤM trong branding**: cụm "Đèn Đom Đóm" (trùng chương trình Dutch Lady); mọi ngôn ngữ cấm trong mục Ràng buộc sản phẩm bất biến vẫn áp dụng.
 
 ## Chiến lược test — ĐÃ CHỐT (04/08/2026, xem docs/research/nghien-cuu-chien-luoc-test.md)
 

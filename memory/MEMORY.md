@@ -11,8 +11,9 @@ Mỗi dòng: `- [name](đường-dẫn) — hook một câu`. Chi tiết nằm t
 ## Semantic (fact dự án: kiến trúc, quyết định sản phẩm)
 
 - [docs-la-ban-nhap](semantic/docs-la-ban-nhap.md) — kiến trúc/kế hoạch trong docs bao-cao-* chỉ là demo, user chốt lại từng phần trước khi build; ràng buộc pháp lý vẫn giữ
-- [tech-stack-da-chot](semantic/tech-stack-da-chot.md) — stack ĐÃ chốt 04/08 (Django/Next/Postgres/VPS, lý do từng vòng); tên "Flibby" CHƯA chốt, code dùng tên trung tính tutor-agent
+- [tech-stack-da-chot](semantic/tech-stack-da-chot.md) — stack ĐÃ chốt 04/08 (Django/Next/Postgres/VPS, lý do từng vòng); tên đã đổi: RANGI chốt 05/08 (xem thuong-hieu-da-chot)
 - [nao-ai-da-chot](semantic/nao-ai-da-chot.md) — 05/08: MiniMax M3 mọi vai (lý do ngân sách), harness tự viết ai_call()/routing/state-machine, điều kiện pseudonymize triệt để + kiểm ToS under-16
+- [thuong-hieu-da-chot](semantic/thuong-hieu-da-chot.md) — 05/08: tên RANGI (chờ tra SHTT), màu hổ phách+lục bảo user tự chỉnh, font C (PhuDu display), đỏ-cho-câu-sai có bằng chứng, mascot đom đóm anti-Duolingo
 
 ## Episodic (nhật ký quyết định theo phiên — được phép cũ đi)
 
