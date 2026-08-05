@@ -1,0 +1,15 @@
+# Mọi file text dùng LF trong working tree trên MỌI hệ điều hành.
+# Không có dòng này, Windows với core.autocrlf=true sẽ để CRLF trên đĩa và
+# Prettier (mặc định đòi LF) báo lỗi format giả cho hàng loạt file dù nội dung
+# hoàn toàn đúng — đã làm nhiều phiên làm việc mất thời gian điều tra nhầm.
+* text=auto eol=lf
+
+# Tài sản nhị phân: git không được đụng vào nội dung
+*.png binary
+*.jpg binary
+*.ico binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.pdf binary
