@@ -25,7 +25,10 @@ Cấu trúc: `background/` bản nháp định hướng (demo, chưa chốt) | `
 - [specs/2026-08-04-scaffold-monorepo.md](specs/2026-08-04-scaffold-monorepo.md) — spec scaffold khung monorepo theo stack đã chốt (TRẠNG THÁI: đã thực thi 04/08/2026)
 - [specs/2026-08-05-goi-logo-rangi.md](specs/2026-08-05-goi-logo-rangi.md) — spec gói logo Rangi: generator fontkit → SVG, component React animation CSS, xuất PNG (TRẠNG THÁI: đã thực thi 05/08/2026)
 
+- [specs/2026-08-05-lenh-chay-du-an.md](specs/2026-08-05-lenh-chay-du-an.md) — spec bộ 5 lệnh chạy dự án thay Makefile: dev-start/dev-stop/docker-up/docker-down/docker-clean, ma trận tác động, ranh giới dữ liệu (TRẠNG THÁI: đã thực thi 05/08/2026)
+
 ## plans/ — kế hoạch thực thi
 
 - [plans/2026-08-04-scaffold-monorepo-plan.md](plans/2026-08-04-scaffold-monorepo-plan.md) — implementation plan 8 task chi tiết từng file/lệnh/expected cho scaffold (TRẠNG THÁI: đã thực thi 04/08/2026 — verify E2E 4/4 tiêu chí DoD PASS, xem `.superpowers/sdd/2026-08-04-scaffold-monorepo-plan/task-7-report.md`)
 - [plans/2026-08-05-goi-logo-rangi-plan.md](plans/2026-08-05-goi-logo-rangi-plan.md) — implementation plan 4 task cho gói logo Rangi: generator + SVG, component React, xuất PNG, tích hợp trang chủ + tài liệu (TRẠNG THÁI: đã thực thi 05/08/2026 — xem `.superpowers/sdd/2026-08-05-goi-logo-rangi-plan/task-4-report.md`)
+- [plans/2026-08-05-lenh-chay-du-an-plan.md](plans/2026-08-05-lenh-chay-du-an-plan.md) — plan 3 task: script lõi + lệnh docker, dev-start/dev-stop hot-reload, tài liệu + verify (TRẠNG THÁI: đã thực thi 05/08/2026)

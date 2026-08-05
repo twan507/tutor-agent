@@ -28,7 +28,7 @@ Nguyên tắc gốc: **hành xử như kỹ sư cao cấp trong một team — m
 
 1. **Không hành động ngoài phạm vi yêu cầu trực tiếp.** Việc phát sinh trong lúc làm (thêm file mới, thêm dependency, đưa tài nguyên từ ngoài repo vào, đổi cấu trúc thư mục, đổi cách làm đã thống nhất) → nêu rõ và hỏi trước, không tự quyết rồi báo sau.
 2. **Kỷ luật git**: khi dự án đã có code chạy, làm feature/fix trên nhánh riêng (`feat/...`, `fix/...`), không commit thẳng main. Commit theo Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `test:`...), commit nhỏ một mục đích. **Commit theo mốc tiến trình**: mỗi mốc hoàn thành (một quyết định được chốt, một việc xong) = một commit riêng ngay lúc đó — không dồn nhiều mốc vào một commit, để diff truy ngược được từng quyết định. Push sau khi commit.
-3. **Không bypass cơ chế kiểm soát**: cấm `--no-verify`, force push, `rm -rf`, sửa `.env*` / `.claude/settings.json` / `.claude/hooks/` — các lệnh này đã bị chặn cứng bằng hook trong `.claude/settings.json`; gặp chặn thì báo người dùng, không tìm đường vòng.
+3. **Không bypass cơ chế kiểm soát**: cấm `--no-verify`, force push, `rm -rf`, sửa `.env*` / `.claude/settings.json` / `.claude/hooks/` — agent gõ trực tiếp các lệnh này đã bị hook trong `.claude/settings.json` chặn cứng; gặp chặn thì báo người dùng, không tìm đường vòng. Riêng `docker volume rm/prune` là ngoại lệ có kiểm soát: hook chặn agent gõ trực tiếp, nhưng lệnh `docker-clean` (chạy `docker volume prune` bên trong `scripts/stack.mjs`) là lệnh hợp lệ, được cho phép — có hàng rào riêng bên trong script (kiểm tra phiên bản Docker Engine trước khi prune, kiểm tra bất biến volume `tutor-infra_pgdata` trước/sau).
 4. **Không tuyên bố hoàn thành khi chưa có bằng chứng**: chạy lệnh kiểm chứng (test/lint/build), xem output thật, rồi mới báo xong kèm output đó. Test fail thì báo fail nguyên trạng.
 
 **Quy trình feature chuẩn — KHÔNG NHẢY CÓC BƯỚC NÀO** (dùng skill superpowers có sẵn):
@@ -122,7 +122,7 @@ memory/
 - Worker: **Celery cùng codebase Django**, process riêng — SymPy verify, PDF parsing, batch job. Không tách thành service/repo riêng
 - Database: **PostgreSQL + pgvector** self-host
 - Streaming: **SSE** (không WebSocket ở MVP — Channels chỉ thêm khi tính năng liên lạc 2 chiều được chốt)
-- Proxy: **Nginx**; hạ tầng: **VPS + Docker Compose 2 tầng** — `infra` (postgres, CI không bao giờ đụng) + `app`; Makefile `make up`/`make deploy`
+- Proxy: **Nginx**; hạ tầng: **VPS + Docker Compose 2 tầng** — `infra` (postgres, CI không bao giờ đụng) + `app`; **5 lệnh gõ**: `dev-start` / `dev-stop` / `docker-up` / `docker-down` / `docker-clean` (logic trong `scripts/stack.mjs`; `.bat` cho Windows, `.sh` cho Linux — xem README.md mục "Chạy dự án"). Deploy VPS **KHÔNG** dùng script này — CI/CD giai đoạn 2 gọi thẳng `docker compose` qua SSH, VPS chỉ cần Docker, không cần Node.
 - Storage: **Cloudflare R2**; Monitoring: Sentry + PostHog; Redis: chỉ thêm khi có nhu cầu thật
 - CI/CD: GitHub Actions (lint, test, `makemigrations --check`, codegen check, build) + branch protection main; production deploy phải người dùng approve
 - Chi phí LLM: model routing từ đầu, không dùng một model đắt cho mọi việc
@@ -130,7 +130,7 @@ memory/
 **Quy tắc kiến trúc cứng:**
 1. App **stateless**: session trong DB, file user upload lên R2 (không ghi disk local), config qua env var
 2. Migration **backward-compatible**: thêm cột nullable trước, xóa cột sau ít nhất 1 release; không sửa migration đã merge
-3. **Cấm `docker compose down -v`** với project infra; pin version Postgres cụ thể (không `latest`)
+3. **Ranh giới dữ liệu**: được phép `stop`/`down` container (dựng lại được, kể cả tầng infra); **CẤM VĨNH VIỄN** cờ `-v`/`--volumes` trong mọi lệnh docker — đó là ranh giới giữa "xóa container" và "mất dữ liệu"; hook `guard-bash.sh` chặn cứng. Pin version Postgres cụ thể (không `latest`)
 4. Backup Postgres ra R2 + test restore định kỳ — nghĩa vụ pháp lý với dữ liệu trẻ em
 5. SSE endpoint: nhớ `proxy_buffering off` phía nginx
 6. **API-first cho mobile tương lai**: mọi business logic nằm sau API Django (django-ninja) — Next.js là thin client, KHÔNG nhét logic nghiệp vụ vào server actions/server components. App Android/iOS (dự kiến React Native + Expo) sẽ dùng chung đúng API này; auth thiết kế sẵn sàng cho token-based bên cạnh session cookie
