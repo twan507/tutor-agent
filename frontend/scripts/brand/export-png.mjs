@@ -17,6 +17,7 @@ const jobs = [
     icon: true,
   })),
   { src: "og-image.svg", out: "og-image.png", w: 1200, h: 630 },
+  { src: "og-image-en.svg", out: "og-image-en.png", w: 1200, h: 630 },
   { src: "rangi-icon-dark.svg", out: "avatar-400.png", w: 400, h: 400, icon: true },
 ];
 
