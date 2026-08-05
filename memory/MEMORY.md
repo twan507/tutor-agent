@@ -1,4 +1,4 @@
-# MEMORY — chỉ mục bộ nhớ dự án Flibby
+# MEMORY — chỉ mục bộ nhớ dự án Rangi (tutor-agent)
 
 Trần cứng: 150 dòng. Vượt trần → phải thu gọn trước khi thêm entry mới.
 Mỗi dòng: `- [name](đường-dẫn) — hook một câu`. Chi tiết nằm trong file, không nằm ở đây.

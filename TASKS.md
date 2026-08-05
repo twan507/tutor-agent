@@ -1,4 +1,4 @@
-# TASKS — Flibby
+# TASKS — Rangi (tutor-agent)
 
 Backlog theo dõi công việc. Quy ước: `[ ]` chưa làm, `[x]` xong, `[~]` đang làm. Mỗi mục ghi rõ ai làm (USER / AGENT / CẢ HAI). Việc từ tài liệu nháp chỉ là ứng viên — phải được người dùng chốt trước khi thực hiện.
 

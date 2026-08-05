@@ -27,7 +27,7 @@ Các vòng phản biện của người dùng dẫn tới quyết định cuối
 
 **Quy tắc kiến trúc cứng đi kèm** (ghi trong CLAUDE.md): app stateless (session trong DB, file lên R2, không ghi disk local, config qua env); migration backward-compatible; cấm `docker compose down -v` với project infra; pin version Postgres; backup ra R2 + test restore định kỳ.
 
-**Lưu ý tên dự án**: "Flibby" CHƯA chốt (người dùng đang xem xét lại) — code/infra dùng tên trung tính `tutor-agent` cho tới khi có tên cuối.
+**Lưu ý tên dự án**: cập nhật 05/08 — tên thương hiệu chốt RANGI; code/infra giữ `tutor-agent` tới khi tra xong nhãn hiệu SHTT.
 
 ---
 

@@ -1,4 +1,4 @@
-# Flibby
+# Rangi (repo: tutor-agent)
 
 Nền tảng gia sư AI parent-first cho thị trường Việt Nam. Bán quyền kiểm soát quá trình học cho phụ huynh: hệ thống tạo lộ trình, dạy, kiểm tra, đo, điều chỉnh và báo cáo.
 
