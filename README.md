@@ -11,6 +11,7 @@ Nền tảng gia sư AI parent-first cho thị trường Việt Nam. Bán quyề
 - [docs/background/bao-cao-du-an-gia-su-ai-parent-first.md](docs/background/bao-cao-du-an-gia-su-ai-parent-first.md) — báo cáo tổng hợp dự án
 - [docs/background/bao-cao-phap-ly-ai-du-an-gia-su.md](docs/background/bao-cao-phap-ly-ai-du-an-gia-su.md) — báo cáo pháp lý AI
 - [docs/background/nhat-ky-hoi-thoai-du-an-flibby.md](docs/background/nhat-ky-hoi-thoai-du-an-flibby.md) — nhật ký brainstorm và quyết định
+- frontend/public/brand/ — bộ logo Rangi (SVG generated + PNG exports)
 
 ## Chạy dự án
 
