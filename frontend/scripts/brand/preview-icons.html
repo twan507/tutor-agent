@@ -1,0 +1,74 @@
+<!-- frontend/scripts/brand/preview-icons.html — mở trực tiếp bằng browser, không ship -->
+<!doctype html><meta charset="utf-8" /><title>Icon preview</title>
+<style>
+  body {
+    font-family: sans-serif;
+    margin: 24px;
+    display: grid;
+    gap: 24px;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: repeat(10, 64px);
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+  }
+  .light {
+    background: #fbf6ea;
+    color: #0a2e26;
+  }
+  .dark {
+    background: #0a2e26;
+    color: #fbf6ea;
+  }
+  figure {
+    margin: 0;
+    text-align: center;
+  }
+  img {
+    width: 32px;
+    height: 32px;
+  }
+  figcaption {
+    font-size: 9px;
+  }
+</style>
+<div id="root"></div>
+<script>
+  const names = [
+    "lesson",
+    "learning-path",
+    "goal",
+    "learning-session",
+    "learning-sprint",
+    "assessment-item",
+    "correct",
+    "incorrect",
+    "hint",
+    "timer",
+    "mock-exam",
+    "mastery-map",
+    "progress-chart",
+    "spark",
+    "badge",
+    "learning-evidence",
+    "parent-report",
+    "daily-digest",
+    "learner-profile",
+    "settings",
+    "calendar",
+  ];
+  for (const mode of ["light", "dark"])
+    for (const set of ["outline", "filled"]) {
+      const d = document.createElement("div");
+      d.className = `row ${mode}`;
+      d.innerHTML = names
+        .map(
+          (n) =>
+            `<figure><img src="../../public/brand/icons/${set}/${n}.svg" onerror="this.style.opacity=.15"><figcaption>${n}</figcaption></figure>`,
+        )
+        .join("");
+      document.getElementById("root").appendChild(d);
+    }
+</script>
