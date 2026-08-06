@@ -126,7 +126,7 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
       : "";
 
   return `
-<svg class="fly" viewBox="0 0 220 252" width="${size}" role="img" aria-label="Rangi firefly ${pose}" style="--rangi-glow:1">
+<svg xmlns="http://www.w3.org/2000/svg" class="fly" viewBox="0 0 220 252" width="${size}" role="img" aria-label="Rangi firefly ${pose}" style="--rangi-glow:1">
   <defs>
     <radialGradient id="halo-${s}" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#F5A623" stop-opacity=".32"/>
