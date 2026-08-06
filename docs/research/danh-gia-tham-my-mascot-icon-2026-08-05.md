@@ -44,3 +44,20 @@ Mẫu: wordmark "Rangi" chữ thường rounded (kiểu Poppins Rounded), đuôi
 ## Trạng thái
 
 Ghi nhận theo yêu cầu người dùng: "đánh giá và note lại thôi, tìm nguyên nhân, không sửa ngay". Các task 9-11 tiếp tục theo plan hiện tại; việc làm lại thẩm mỹ mascot/icon là SPEC MỚI sau khi người dùng quyết hướng.
+
+## KẾT QUẢ vòng mockup v2 (06/08/2026) — "tạm ổn, CHƯA chốt hẳn"
+
+Đã chạy vòng prototype theo hướng trên, người dùng duyệt qua nhiều vòng bẻ trực tiếp. Toàn bộ code + thành phẩm lưu tại **`frontend/scripts/brand/proto-v2/`** (chạy `node assemble.mjs` để tái sinh; giữ đầy đủ mọi hàm sinh SVG theo yêu cầu người dùng, kể cả phương án đã loại).
+
+**Các quyết định chốt trong vòng này:**
+
+1. **Logo: GIỮ NGUYÊN bản chính thức** (RANG in hoa PhuDu + chữ i đốm sáng). Phương án wordmark mềm vẽ tay monoline đã thử đến nơi đến chốn và bị người dùng LOẠI ("một trời một vực" so với mẫu tham chiếu) — hàm `wordmarkSVG()` giữ trong assemble.mjs làm tư liệu, KHÔNG dùng. Motif đường bay dưới logo cũng bị loại. Mục backlog "logo mềm" ĐÓNG.
+2. **Mascot v2 (soft illustrated) — hướng đúng, tỷ lệ đã chuẩn hóa từ SVG trace người dùng cung cấp**: đầu Ø ≈ 1.05× bề ngang thân (thân THON, không phải đầu nhỏ); thân dài/rộng 2.75; khe đầu–thân ≈ 0.26 Ø đầu; râu chữ V tách đỉnh đầu, dài ≈ 0.8 Ø; cánh GIỌT NƯỚC đầu ngoài tròn bầu (không phải hình lá nhọn), 2 cặp gần ngang (trên chếch lên ~7°, dưới chúc xuống ~24°), sải ≈ 4× bề ngang thân; gradient thân radial 5 stop + lõi sáng blur; glow radial 5 stop mượt; không vẽ mặt. 8 file SVG pose (4 pose × 2 nền) tại `proto-v2/mascot-v2/`.
+3. **Icon v2 (42 file tại `proto-v2/icons/`)**: người dùng duyệt "tạm ok" — filled thiết kế theo ngữ pháp filled riêng, 4 icon đổi ẩn dụ.
+
+**Còn mở (người dùng nói rõ "chưa ổn hẳn") — việc cho vòng tích hợp production:**
+
+- Tinh chỉnh thêm mascot theo cảm nhận người dùng (gradient/chi tiết) trước khi thay bộ `frontend/public/brand/mascot/` v1.
+- Khi tích hợp thật: nới rule mascot trong `check-icons.mjs` (viewBox 220×252, cho phép gradient stop trong họ màu brand) + cập nhật sổ tay thương hiệu §3.3-3.4 + spec mới theo đúng quy trình.
+- Icon v2 thay production đồng loạt hay chọn lọc — chưa quyết.
+- Bài học quy trình đã áp dụng từ vòng này: KHÔNG gửi bản vẽ khi chưa tự render soi (dùng sharp-cli render offline khi browser pane đóng); đo tỷ lệ từ trace/ảnh thay vì áng chừng.
