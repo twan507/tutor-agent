@@ -1,46 +1,46 @@
 <svg class="fly" viewBox="0 0 220 252" width="190" role="img" aria-label="Rangi firefly glowing" style="--rangi-glow:1">
   <defs>
-    <radialGradient id="halo-f-glowing" cx="50%" cy="50%" r="50%">
+    <radialGradient id="halo-fl-glowing" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#F5A623" stop-opacity=".32"/>
       <stop offset="30%" stop-color="#F5A623" stop-opacity=".20"/>
       <stop offset="58%" stop-color="#F5A623" stop-opacity=".09"/>
       <stop offset="82%" stop-color="#F5A623" stop-opacity=".025"/>
       <stop offset="100%" stop-color="#F5A623" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="body-f-glowing" cx="50%" cy="52%" r="62%" fx="50%" fy="55%">
+    <radialGradient id="body-fl-glowing" cx="50%" cy="52%" r="62%" fx="50%" fy="55%">
       <stop offset="0%" stop-color="#FFF4D2"/>
       <stop offset="32%" stop-color="#FFE29A"/>
       <stop offset="62%" stop-color="#F9B93F"/>
       <stop offset="88%" stop-color="#EF9714"/>
       <stop offset="100%" stop-color="#E8890B"/>
     </radialGradient>
-    <radialGradient id="head-f-glowing" cx="50%" cy="42%" r="65%">
+    <radialGradient id="head-fl-glowing" cx="50%" cy="42%" r="65%">
       <stop offset="0%" stop-color="#FFDF9E"/><stop offset="68%" stop-color="#F5A623"/><stop offset="100%" stop-color="#EE8F0C"/>
     </radialGradient>
-    <linearGradient id="wing-f-glowing" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#CFE4D5" stop-opacity=".55"/>
-      <stop offset="55%" stop-color="#C5DECC" stop-opacity=".28"/>
-      <stop offset="100%" stop-color="#BFD9C9" stop-opacity=".05"/>
+    <linearGradient id="wing-fl-glowing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8FC3A9" stop-opacity=".8"/>
+      <stop offset="55%" stop-color="#7FB99A" stop-opacity=".5"/>
+      <stop offset="100%" stop-color="#74B08F" stop-opacity=".18"/>
     </linearGradient>
-    <filter id="soft-f-glowing" x="-40%" y="-40%" width="180%" height="180%">
+    <filter id="soft-fl-glowing" x="-40%" y="-40%" width="180%" height="180%">
       <feGaussianBlur stdDeviation="2.4"/>
     </filter>
   </defs>
   
   <g  style="opacity:1">
     <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
-      <circle cx="110" cy="132" r="84" fill="url(#halo-f-glowing)"/>
+      <circle cx="110" cy="132" r="84" fill="url(#halo-fl-glowing)"/>
       <ellipse cx="110" cy="198" rx="62" ry="13" fill="#F5A623" opacity=".05"/>
     </g>
     <g>
-    <path d="M0 0 C-9.5 9.0 -10.5 22.3 -8.8 28.8 C-6.3 35.6 6.3 35.6 8.8 28.8 C10.5 22.3 9.5 9.0 0 0 Z" transform="translate(101 103) rotate(66)" fill="url(#wing-f-glowing)" opacity="0.6"/><path d="M0 0 C-9.5 9.0 -10.5 22.3 -8.8 28.8 C-6.3 35.6 6.3 35.6 8.8 28.8 C10.5 22.3 9.5 9.0 0 0 Z" transform="translate(119 103) rotate(-66)" fill="url(#wing-f-glowing)" opacity="0.6"/>
-    <path d="M0 0 C-11.7 12.0 -13.0 29.8 -10.9 38.4 C-7.8 47.5 7.8 47.5 10.9 38.4 C13.0 29.8 11.7 12.0 0 0 Z" transform="translate(101 103) rotate(97)" fill="url(#wing-f-glowing)" opacity="0.8"/><path d="M0 0 C-11.7 12.0 -13.0 29.8 -10.9 38.4 C-7.8 47.5 7.8 47.5 10.9 38.4 C13.0 29.8 11.7 12.0 0 0 Z" transform="translate(119 103) rotate(-97)" fill="url(#wing-f-glowing)" opacity="0.8"/>
+    <path d="M0 0 C-9.5 9.0 -10.5 22.3 -8.8 28.8 C-6.3 35.6 6.3 35.6 8.8 28.8 C10.5 22.3 9.5 9.0 0 0 Z" transform="translate(101 103) rotate(66)" fill="url(#wing-fl-glowing)" opacity="0.6"/><path d="M0 0 C-9.5 9.0 -10.5 22.3 -8.8 28.8 C-6.3 35.6 6.3 35.6 8.8 28.8 C10.5 22.3 9.5 9.0 0 0 Z" transform="translate(119 103) rotate(-66)" fill="url(#wing-fl-glowing)" opacity="0.6"/>
+    <path d="M0 0 C-11.7 12.0 -13.0 29.8 -10.9 38.4 C-7.8 47.5 7.8 47.5 10.9 38.4 C13.0 29.8 11.7 12.0 0 0 Z" transform="translate(101 103) rotate(97)" fill="url(#wing-fl-glowing)" opacity="0.8"/><path d="M0 0 C-11.7 12.0 -13.0 29.8 -10.9 38.4 C-7.8 47.5 7.8 47.5 10.9 38.4 C13.0 29.8 11.7 12.0 0 0 Z" transform="translate(119 103) rotate(-97)" fill="url(#wing-fl-glowing)" opacity="0.8"/>
   </g>
     <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z"
-          fill="url(#body-f-glowing)"/>
-    <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-f-glowing)"
+          fill="url(#body-fl-glowing)"/>
+    <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-fl-glowing)"
              style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
-    <circle cx="110" cy="73" r="15.7" fill="url(#head-f-glowing)"/>
+    <circle cx="110" cy="73" r="15.7" fill="url(#head-fl-glowing)"/>
     <g stroke="var(--fly-line,#D9B36A)" stroke-width="2.2" stroke-linecap="round" fill="none">
       <path d="M104 50 C99 43 92 34 84 28"/>
       <path d="M116 50 C121 43 128 34 136 28"/>

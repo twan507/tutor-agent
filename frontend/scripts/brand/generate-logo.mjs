@@ -164,47 +164,6 @@ function lockupSVG(theme, lang) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${totalW.toFixed(2)} ${lockupH.toFixed(2)}" role="img" aria-label="Rangi — ${SLOGANS[lang]}"><title>Rangi</title>${wordmarkBody(theme)}${sloganEls(sl, slY, color)}</svg>`;
 }
 
-// ---- Vertical lockup: icon (i + spark + halo) centered above the wordmark ----
-function lockupVerticalSVG(theme, lang = null) {
-  const c = COLORS[theme];
-  const k = 1.35; // icon i lớn hơn i trong wordmark 35% cho cân khối
-  const gapV = 0.14 * FS;
-  const top = c.halo ? I.dotCy - I.haloR : I.dotCy - I.dotR;
-  const bottom = I.stemY + I.stemH;
-  const iconH = (bottom - top) * k;
-  // dịch primitives của chữ i (scale k quanh gốc) sao cho dot nằm giữa trục totalW/2
-  const tx = totalW / 2 - I.dotCx * k;
-  const ty = -top * k;
-  const halo = c.halo
-    ? `<circle cx="${I.dotCx.toFixed(2)}" cy="${I.dotCy.toFixed(2)}" r="${I.haloR}" fill="${c.halo}" opacity="${c.haloOp}"/>`
-    : "";
-  const iconBlock =
-    `<g transform="translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${k})">` +
-    halo +
-    `<circle cx="${I.dotCx.toFixed(2)}" cy="${I.dotCy.toFixed(2)}" r="${I.dotR}" fill="${c.dot}"/>` +
-    `<rect x="${I.stemX.toFixed(2)}" y="${I.stemY.toFixed(2)}" width="${I.stemW.toFixed(2)}" height="${I.stemH.toFixed(2)}" rx="${I.rx.toFixed(2)}" fill="${c.text}"/>` +
-    `</g>`;
-  const wordY = iconH + gapV;
-  let h = wordY + totalH;
-  let sloganBlock = "";
-  if (lang) {
-    const sl = fitSlogan(SLOGANS[lang]);
-    const slY = h + 0.13 * FS;
-    assertFits(`lockupVerticalSVG(${theme},${lang})`, sl, totalW);
-    const color = theme === "dark" ? "#84DEBE" : "#0E7A5A";
-    sloganBlock = `<g transform="translate(0 0)">${sloganEls(sl, slY, color)}</g>`;
-    h = slY + 0.12 * FS;
-  }
-  const label = lang ? `Rangi — ${SLOGANS[lang]}` : "Rangi";
-  return (
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${totalW.toFixed(2)} ${h.toFixed(2)}" role="img" aria-label="${label}"><title>Rangi</title>` +
-    iconBlock +
-    `<g transform="translate(0 ${wordY.toFixed(2)})">${wordmarkBody(theme)}</g>` +
-    sloganBlock +
-    `</svg>`
-  );
-}
-
 // One OG image per language — a bilingual site points og:image at the file
 // matching the page's locale, so the two never share a frame.
 function ogSVG(lang) {
@@ -226,21 +185,6 @@ for (const t of Object.keys(ICON))
 for (const t of ["dark", "light"]) {
   fs.writeFileSync(path.join(OUT_SVG, `rangi-lockup-slogan-${t}.svg`), lockupSVG(t, "vn"));
   fs.writeFileSync(path.join(OUT_SVG, `rangi-lockup-slogan-en-${t}.svg`), lockupSVG(t, "en"));
-}
-for (const t of Object.keys(COLORS))
-  fs.writeFileSync(
-    path.join(OUT_SVG, `rangi-lockup-vertical-${t}.svg`),
-    lockupVerticalSVG(t),
-  );
-for (const t of ["dark", "light"]) {
-  fs.writeFileSync(
-    path.join(OUT_SVG, `rangi-lockup-vertical-slogan-${t}.svg`),
-    lockupVerticalSVG(t, "vn"),
-  );
-  fs.writeFileSync(
-    path.join(OUT_SVG, `rangi-lockup-vertical-slogan-en-${t}.svg`),
-    lockupVerticalSVG(t, "en"),
-  );
 }
 fs.writeFileSync(path.join(OUT_SVG, "favicon.svg"), iconSVG("dark"));
 fs.writeFileSync(path.join(OUT_SVG, "og-image.svg"), ogSVG("vn"));
@@ -276,8 +220,7 @@ function patternSVG(mode) {
     [214, 38, 2.6],
   ]
     .map(
-      ([x, y, r]) =>
-        `<circle cx="${x}" cy="${y}" r="${r}" fill="${spark}" opacity="${sparkOp}"/>`,
+      ([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${spark}" opacity="${sparkOp}"/>`,
     )
     .join("");
   const fp = flightPathEl({

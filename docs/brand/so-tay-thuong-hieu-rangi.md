@@ -144,20 +144,21 @@ Mascot có hai dạng, mỗi dạng một địa bàn — **không dạng nào l
 
 ---
 
-### 3.4 Kho asset và cách dùng (bổ sung sau khi thực thi gói SVG 05/08/2026)
+### 3.4 Kho asset và cách dùng (cập nhật 06/08/2026 — mascot/icon đã lên v2)
 
 Tất cả nằm trong `frontend/public/brand/`:
 
-| Nhóm       | File                            | Dùng cho                                | Quy tắc                                                                |
-| ---------- | ------------------------------- | --------------------------------------- | ---------------------------------------------------------------------- |
-| Icon UI    | `icons/outline/*.svg` (21)      | mặc định trong UI                       | màu qua `currentColor`; accent hổ phách tự có trong file               |
-| Icon UI    | `icons/filled/*.svg` (21)       | trạng thái active/nhấn mạnh             | cùng silhouette với bản outline cùng tên                               |
-| Mascot     | `mascot/firefly-*.svg` (4 pose) | minh họa, empty state, onboarding       | KHÔNG dùng trong logo; độ sáng chỉnh bằng CSS var `--rangi-glow` (0→1) |
-| Đường bay  | `flight-path-*.svg`             | trang trí section, kể chuyện bay-và-đậu | sinh từ code, sửa tham số trong `generate-logo.mjs`                    |
-| Pattern    | `pattern-{light,dark}.svg`      | nền section, tương phản thấp            | tile 240px, `background-repeat` cả hai chiều                           |
-| Lockup dọc | `rangi-lockup-vertical-*.svg`   | không gian đứng (poster, story, bìa)    | không tự chế biến thể mới ngoài generator                              |
+| Nhóm      | File                                          | Dùng cho                                | Quy tắc                                                                                                                                                                              |
+| --------- | --------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Icon UI   | `icons/outline/*.svg` (21, v2)                | mặc định trong UI                       | màu qua `currentColor`; accent hổ phách tự có trong file                                                                                                                             |
+| Icon UI   | `icons/filled/*.svg` (21, v2)                 | trạng thái active/nhấn mạnh             | thiết kế theo ngữ pháp filled riêng (không phải outline tô đặc)                                                                                                                      |
+| Mascot v2 | `mascot/firefly-{pose}[-light].svg` (4×2 nền) | minh họa, empty state, onboarding       | soft illustrated, tỷ lệ chuẩn từ trace (đầu ≈ 1.05× bề ngang thân); bản `-light` cho nền sáng (cánh đậm hơn); độ sáng chỉnh bằng CSS var `--rangi-glow` (0→1); KHÔNG dùng trong logo |
+| Đường bay | `flight-path-*.svg`                           | trang trí section, kể chuyện bay-và-đậu | sinh từ code, sửa tham số trong `generate-logo.mjs`; KHÔNG đặt dưới logo (quyết 06/08)                                                                                               |
+| Pattern   | `pattern-{light,dark}.svg`                    | nền section, tương phản thấp            | tile 240px, `background-repeat` cả hai chiều                                                                                                                                         |
 
-Gate chất lượng: `pnpm brand:check` (chạy trong `frontend/`) — icon/mascot sai chuẩn (viewBox, hex trần, tên ngoài danh mục) sẽ fail CI. Thêm icon mới = thêm tên vào `ICON_MANIFEST` trong `scripts/brand/check-icons.mjs` + vẽ đủ HAI bộ outline/filled.
+Đã loại 06/08/2026: bộ lockup dọc `rangi-lockup-vertical-*.svg` (người dùng bỏ — xóa cả code sinh lẫn file); mascot v1 geometric (thay bằng v2, nguồn + hàm sinh tại `frontend/scripts/brand/proto-v2/`, còn tinh chỉnh tiếp).
+
+Gate chất lượng: `pnpm brand:check` (chạy trong `frontend/`, có trong CI) — icon sai chuẩn (viewBox 24, hex trần ngoài var, tên ngoài danh mục) hoặc mascot sai chuẩn v2 (viewBox 220×252, hex ngoài whitelist amber/mint) sẽ fail. Thêm icon mới = thêm tên vào `ICON_MANIFEST` trong `scripts/brand/check-icons.mjs` + vẽ đủ HAI bộ outline/filled.
 
 ---
 
