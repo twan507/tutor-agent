@@ -1,32 +1,17 @@
-// Conformance gate for hand-authored brand SVGs (icons + mascot).
-// Rules: docs/specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md §D.
+// Conformance gate for brand SVGs.
+// Icon: sinh từ Tabler theo icon-manifest.mjs — docs/specs/2026-08-07-bo-icon-tabler.md §5.5.
+// Mascot: vẽ tay từ proto-v2 — docs/specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md §D.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { ICONS, ALIASES } from "./icon-manifest.mjs";
+import { checkManifest } from "./check-manifest.mjs";
 
-export const ICON_MANIFEST = [
-  "lesson",
-  "learning-path",
-  "goal",
-  "learning-session",
-  "learning-sprint",
-  "assessment-item",
-  "correct",
-  "incorrect",
-  "hint",
-  "timer",
-  "mock-exam",
-  "mastery-map",
-  "progress-chart",
-  "spark",
-  "badge",
-  "learning-evidence",
-  "parent-report",
-  "daily-digest",
-  "learner-profile",
-  "settings",
-  "calendar",
-].sort();
+// Outline phủ TOÀN BỘ khái niệm; filled chỉ phủ khái niệm khai filled: true.
+export const ICON_MANIFEST = Object.keys(ICONS).sort();
+export const FILLED_MANIFEST = Object.keys(ICONS)
+  .filter((n) => ICONS[n].filled)
+  .sort();
 export const MASCOT_MANIFEST = [
   "firefly-glowing",
   "firefly-glowing-light",
@@ -71,10 +56,14 @@ const VIEWBOX = {
   mascot: "0 0 220 252",
 };
 
+const MANIFEST_OF = { mascot: () => MASCOT_MANIFEST, filled: () => FILLED_MANIFEST };
+
 export function checkSvg(name, content, kind) {
   const errors = [];
-  const manifest = kind === "mascot" ? MASCOT_MANIFEST : ICON_MANIFEST;
+  const manifest = (MANIFEST_OF[kind] ?? (() => ICON_MANIFEST))();
   if (!manifest.includes(name)) errors.push(`${name}: tên không thuộc manifest ${kind}`);
+  if (kind !== "mascot" && !content.includes(`aria-label="${name}"`))
+    errors.push(`${name}: thiếu aria-label đúng tên khái niệm`);
   if (!content.includes(`viewBox="${VIEWBOX[kind]}"`))
     errors.push(`${name}: viewBox phải là "${VIEWBOX[kind]}"`);
   if (kind === "outline") {
@@ -125,8 +114,9 @@ const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPat
 if (isMain) {
   const FE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
   const all = [
+    ...checkManifest(ICONS, ALIASES),
     ...checkDir(path.join(FE, "public/brand/icons/outline"), "outline", ICON_MANIFEST),
-    ...checkDir(path.join(FE, "public/brand/icons/filled"), "filled", ICON_MANIFEST),
+    ...checkDir(path.join(FE, "public/brand/icons/filled"), "filled", FILLED_MANIFEST),
     ...checkDir(path.join(FE, "public/brand/mascot"), "mascot", MASCOT_MANIFEST),
   ];
   if (all.length) {
@@ -134,6 +124,6 @@ if (isMain) {
     process.exit(1);
   }
   console.log(
-    `brand:check PASS: ${ICON_MANIFEST.length * 2} icon + ${MASCOT_MANIFEST.length} mascot đạt chuẩn`,
+    `brand:check PASS: ${ICON_MANIFEST.length} outline + ${FILLED_MANIFEST.length} filled + ${MASCOT_MANIFEST.length} mascot đạt chuẩn`,
   );
 }

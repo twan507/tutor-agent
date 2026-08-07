@@ -2,7 +2,14 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { ICON_MANIFEST, MASCOT_MANIFEST, checkDir, checkSvg } from "./check-icons.mjs";
+import {
+  FILLED_MANIFEST,
+  ICON_MANIFEST,
+  MASCOT_MANIFEST,
+  checkDir,
+  checkSvg,
+} from "./check-icons.mjs";
+import { ICONS } from "./icon-manifest.mjs";
 
 const VALID_OUTLINE =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="correct"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.6 2.6L16 9.5"/></svg>';
@@ -21,14 +28,13 @@ describe("checkSvg outline", () => {
     const bad = VALID_OUTLINE.replace('stroke="currentColor"', 'stroke="#FF0000"');
     expect(checkSvg("correct", bad, "outline")).not.toEqual([]);
   });
-  it("amber KHÔNG bọc trong var() → lỗi; bọc trong var() → hợp lệ", () => {
-    const naked = VALID_OUTLINE.replace("<circle", '<circle fill="#F5A623"').replace(
-      'fill="none"',
-      'fill="none"',
-    );
-    expect(checkSvg("spark", naked, "outline")).not.toEqual([]);
-    const wrapped = VALID_OUTLINE.replace("<circle", '<circle fill="var(--icon-accent, #F5A623)"');
-    expect(checkSvg("spark", wrapped, "outline")).toEqual([]);
+  it("thiếu aria-label đúng tên → lỗi", () => {
+    const bad = VALID_OUTLINE.replace('aria-label="correct"', 'aria-label="khac"');
+    expect(checkSvg("correct", bad, "outline").join(" ")).toContain("aria-label");
+  });
+  it("sai độ dày nét → lỗi", () => {
+    const bad = VALID_OUTLINE.replace('stroke-width="1.75"', 'stroke-width="2"');
+    expect(checkSvg("correct", bad, "outline").join(" ")).toContain("1.75");
   });
   it("tên ngoài manifest → lỗi", () => {
     expect(checkSvg("random-icon", VALID_OUTLINE, "outline")).not.toEqual([]);
@@ -69,16 +75,24 @@ describe("checkDir", () => {
   it("đủ đúng file hợp lệ → mảng lỗi rỗng", () => {
     tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "brand-check-"));
     fs.writeFileSync(path.join(tmpDir, "correct.svg"), VALID_OUTLINE);
-    fs.writeFileSync(path.join(tmpDir, "hint.svg"), VALID_OUTLINE);
+    fs.writeFileSync(
+      path.join(tmpDir, "hint.svg"),
+      VALID_OUTLINE.replaceAll('aria-label="correct"', 'aria-label="hint"'),
+    );
     expect(checkDir(tmpDir, "outline", ["correct", "hint"])).toEqual([]);
   });
 });
 
 describe("manifest", () => {
-  // Spec docs/specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md §D đã đính chính: 21 icon (05/08/2026).
+  // Icon nay sinh từ Tabler theo icon-manifest.mjs (spec 2026-08-07).
   // Pose "flying" đã bỏ cùng motif đường bay (07/08/2026) → còn 3 pose × 2 nền.
-  it("đúng 21 icon, 6 mascot (v2: 3 pose × 2 nền)", () => {
-    expect(ICON_MANIFEST).toHaveLength(21);
+  it("outline phủ toàn bộ khái niệm, filled chỉ phủ khái niệm khai filled", () => {
+    expect(ICON_MANIFEST).toHaveLength(127);
+    expect(FILLED_MANIFEST).toHaveLength(93);
+    expect(FILLED_MANIFEST.every((n) => ICONS[n].filled)).toBe(true);
+    expect(ICON_MANIFEST.filter((n) => !ICONS[n].filled)).toHaveLength(34);
+  });
+  it("mascot: 6 file, không còn pose flying", () => {
     expect(MASCOT_MANIFEST).toHaveLength(6);
     expect(MASCOT_MANIFEST.some((n) => n.includes("flying"))).toBe(false);
   });
