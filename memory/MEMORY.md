@@ -21,4 +21,4 @@ Mỗi dòng: `- [name](đường-dẫn) — hook một câu`. Chi tiết nằm t
 
 ## Episodic (nhật ký quyết định theo phiên — được phép cũ đi)
 
-(chưa có)
+- [2026-08-07-docker-desktop-ket-va-chuyen-pnpm-scripts](episodic/2026-08-07-docker-desktop-ket-va-chuyen-pnpm-scripts.md) — chuyển 5 lệnh sang pnpm scripts (wrapper lưu trữ scripts/); bẫy Docker Desktop kẹt vì socket mồ côi dockerInference + kỹ thuật test Ctrl+C bằng GenerateConsoleCtrlEvent
