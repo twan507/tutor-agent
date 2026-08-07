@@ -122,6 +122,7 @@ memory/
 - **Chưa có "lệnh đỏ" thì chưa được đặt giả thuyết.** Trước khi đọc code xây lý thuyết, phải nêu được MỘT lệnh (test/curl/script) đã chạy thật ít nhất một lần, deterministic, nhanh (giây, không phút), và đỏ đúng triệu chứng người dùng mô tả — không phải "chạy không lỗi". Bug chập chờn: không cần repro sạch, cần **nâng tỷ lệ tái hiện** (lặp 100×, stress, thu hẹp timing) đến mức debug được. Thật sự không dựng được vòng lặp → dừng, liệt kê đã thử gì, xin người dùng artifact (log, HAR, recording) — không đoán mò tiếp.
 - **Sinh 3-5 giả thuyết xếp hạng trước khi kiểm bất kỳ cái nào** — bám giả thuyết đầu tiên là anchor bias. Mỗi giả thuyết phải falsifiable: "nếu X là nguyên nhân thì đổi Y bug biến mất". Không phát biểu được dự đoán → đó là cảm giác, loại. Đưa danh sách cho người dùng xem (họ hay re-rank tức thì), nhưng không block nếu họ vắng.
 - **Mọi log debug gắn prefix duy nhất** kiểu `[DEBUG-a4f2]` — dọn dẹp cuối cùng là một lệnh grep; log không tag sẽ sống sót lọt vào commit. Trước khi báo xong: repro gốc hết tái hiện, regression test pass, grep prefix ra 0 kết quả.
+- **Redact secret trong output debug** (bổ sung 07/08/2026): API key, token, password, connection string → thay bằng `<REDACTED>` trước khi hiện output hoặc ghi file; lệnh debug hiện shape qua biến môi trường (`"Authorization: Bearer $API_TOKEN"`) chứ không hiện giá trị thật; artifact người dùng đưa (log, HAR) chỉ quote dòng mang tín hiệu chẩn đoán. Output đã redact không đủ chẩn đoán → nói thẳng và hỏi, không đoán mò.
 
 ## Ràng buộc sản phẩm bất biến
 

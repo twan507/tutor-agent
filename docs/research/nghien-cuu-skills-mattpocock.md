@@ -41,6 +41,13 @@ Harness hiện tại (CLAUDE.md + superpowers + code-reviewer + memory/) đã é
 3. **`git-guardrails`** — `guard-bash.sh` hiện tại đã chặn rộng hơn (rm -rf, --no-verify, .env, docker volume) so với bản của Pocock (chỉ git).
 4. **`tdd`, `handoff`, `research`, `prototype` (phần lớn nội dung)** — trùng superpowers TDD, cơ chế compact của Claude Code, quy ước `docs/research/` sẵn có. Chỉ nhặt hai mảnh từ `tdd`: khái niệm **seam chốt trước** (test đặt tại ranh giới public đã duyệt trong plan) và anti-pattern **tautological test** — cả hai đã vào quy tắc test số 10.
 
+## Rà lại 07/08/2026
+
+Soát lại repo hai ngày sau lần khảo sát đầu (commit history qua GitHub API). Không có skill thêm/xóa; hai thay đổi chạm tới kỹ thuật đã tích hợp:
+
+1. **`diagnosing-bugs` thêm mục Redact (06/08, sau audit Snyk W007 HIGH) — ĐÃ NHẬN.** Che secret/token/credential trong output debug, hiện shape lệnh qua biến môi trường thay vì giá trị thật, artifact người dùng chỉ quote dòng mang tín hiệu chẩn đoán. Lý do nhận: khoảng trống thật — pseudonymize tại `ai_call()` chỉ bảo vệ dữ liệu học sinh gửi lên LLM, không che credential nội bộ (DB connection string, key R2/Sentry) có thể lộ khi agent dán output debug. Đã thêm bullet vào CLAUDE.md mục Debug có kỷ luật §5.
+2. **`code-review` sửa wording harness-neutral (06/08) — LOẠI.** Thuần generalization để skill chạy trên Codex; kỹ thuật review hai trục không đổi. Dự án chỉ chạy Claude Code, harness-neutral hóa là trừu tượng thừa.
+
 ## Vị trí các thay đổi
 
 | Kỹ thuật                        | File                                                      |
@@ -48,6 +55,7 @@ Harness hiện tại (CLAUDE.md + superpowers + code-reviewer + memory/) đã é
 | Glossary song ngữ               | `CONTEXT.md` (gốc repo)                                   |
 | Grilling frontier               | `CLAUDE.md` mục Quy trình feature chuẩn                   |
 | Debug kỷ luật                   | `CLAUDE.md` mục Quy tắc làm việc §5                       |
+| Redact secret khi debug (07/08) | `CLAUDE.md` mục Quy tắc làm việc §5                       |
 | Review hai trục                 | `.claude/agents/code-reviewer.md` + dòng bước 5 quy trình |
 | Bộ lọc quyết định lớn + cắt tỉa | `CLAUDE.md` mục Quy tắc bộ nhớ §5-6                       |
 | Seam + tautological test        | `CLAUDE.md` mục Chiến lược test §10                       |
