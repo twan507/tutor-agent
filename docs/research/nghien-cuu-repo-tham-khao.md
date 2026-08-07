@@ -1,16 +1,15 @@
-# Nghiên cứu CI/CD tham khảo — repo CI-CD-Beginner
+# Kho repo tham khảo
 
-**Ngày**: 07/08/2026 · **Trạng thái**: đã áp dụng một phần (đợt 1), phần còn lại chờ giai đoạn CD
+**Ngày lập**: 07/08/2026 · Kho lưu link các repo/tài liệu đáng tham khảo đã khảo sát, kèm kết luận đã rút ra — để khi dự án mở rộng không phải nghiên cứu lại từ đầu. Gặp repo đáng giá mới → thêm dòng vào bảng, khảo sát sâu thì mở doc research riêng và trỏ link ở cột chi tiết.
 
-Kho lưu các repo/tài liệu CI/CD đáng tham khảo cho dự án, kèm kết luận đã rút ra — để khi dự án mở rộng không phải nghiên cứu lại từ đầu.
+## Danh sách
 
-## Repo tham khảo
+| Repo | Chủ đề | Giá trị | Chi tiết |
+| --- | --- | --- | --- |
+| [taovietducofficial/CI-CD-Beginner](https://github.com/taovietducofficial/CI-CD-Beginner) | CI/CD | Template GitHub Actions cho Node.js, nặng về supply-chain security; comment giải thích lý do thiết kế ngay trong YAML. Apache-2.0; tên "Beginner" nhưng nội dung advanced; deploy thật chỉ là placeholder | Mục CI/CD bên dưới (khảo sát 07/08/2026) |
+| [mattpocock/skills](https://github.com/mattpocock/skills) | Agent skills | "Skills For Real Engineers" — bộ skill kỷ luật kỹ sư cho AI agent; nguồn của 6 kỹ thuật đã nhận vào harness (CONTEXT.md glossary, grilling frontier, debug kỷ luật, review hai trục, cắt tỉa tài liệu, redact secret khi debug) | [nghien-cuu-skills-mattpocock.md](nghien-cuu-skills-mattpocock.md) (khảo sát 05/08, rà lại 07/08/2026) |
 
-| Repo | Giá trị | Ghi chú |
-| --- | --- | --- |
-| [taovietducofficial/CI-CD-Beginner](https://github.com/taovietducofficial/CI-CD-Beginner) | Template CI/CD GitHub Actions cho Node.js, nặng về supply-chain security; comment giải thích lý do thiết kế ngay trong YAML | Apache-2.0; tên "Beginner" nhưng nội dung advanced; deploy thật chỉ là placeholder |
-
-## Repo đó dạy gì (tóm tắt đã kiểm chứng 07/08/2026)
+## CI/CD — CI-CD-Beginner dạy gì (tóm tắt đã kiểm chứng 07/08/2026)
 
 - **CI**: lint/typecheck/test matrix Node 22+24 qua reusable workflow (`workflow_call`), lint tiêu đề PR theo Conventional Commits, CodeQL, dependency-review chặn CVE high, Trivy, zizmor (lint bảo mật cho chính file workflow).
 - **CD**: release-please → build Docker multi-arch (buildx + QEMU, cache `type=gha`, SBOM + SLSA provenance) → smoke test container thật (boot + poll `/health`) → ký cosign keyless theo digest → deploy staging tự động → deploy production qua **GitHub Environment có required reviewer**.
