@@ -9,6 +9,9 @@
 | [taovietducofficial/CI-CD-Beginner](https://github.com/taovietducofficial/CI-CD-Beginner) | CI/CD | Template GitHub Actions cho Node.js, nặng về supply-chain security; comment giải thích lý do thiết kế ngay trong YAML. Apache-2.0; tên "Beginner" nhưng nội dung advanced; deploy thật chỉ là placeholder | Mục CI/CD bên dưới (khảo sát 07/08/2026) |
 | [mattpocock/skills](https://github.com/mattpocock/skills) | Agent skills | "Skills For Real Engineers" — bộ skill kỷ luật kỹ sư cho AI agent; nguồn của 6 kỹ thuật đã nhận vào harness (CONTEXT.md glossary, grilling frontier, debug kỷ luật, review hai trục, cắt tỉa tài liệu, redact secret khi debug) | [nghien-cuu-skills-mattpocock.md](nghien-cuu-skills-mattpocock.md) (khảo sát 05/08, rà lại 07/08/2026) |
 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | UI/UX skill | Database UI/UX tra cứu offline (84 styles, 192 palettes, 74 font pairings, 98 UX guidelines, 25 chart types, 22 stacks) + script search BM25 thuần Python stdlib, không gọi mạng. MIT | Mục UI/UX bên dưới — ĐÃ TÍCH HỢP v2.13.0 vào `.claude/skills/ui-ux-pro-max/` (07/08/2026) |
+| [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | React/Next.js | ~29.8k sao, maintain tích cực. Đáng giá nhất: `react-best-practices` — 70 rule perf, mỗi rule 1 file có code Incorrect/Correct, thuần markdown offline. ⚠️ License: MIT khai ở frontmatter từng SKILL.md, repo KHÔNG có file LICENSE (API /license trả 404) | Mục khảo sát skill bên dưới — `react-best-practices` CHỜ NGƯỜI DÙNG QUYẾT; `react-native-skills` chờ giai đoạn mobile |
+| [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | Knowledge graph | ~104k sao, Apache-2.0, offline thật (tree-sitter AST + networkx local, đã kiểm dependency không gọi mạng). Biến codebase/docs/PDF thành knowledge graph tra cứu | CHỜ: chỉ đáng cài khi codebase/docs phình to — hiện tại Grep vẫn đủ |
+| [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | SDLC pipeline | ~83k sao, MIT. Toàn bộ pipeline spec→ship TRÙNG superpowers — không cài; riêng `agents/security-auditor.md` (checklist auth/IDOR/PII/secrets cụ thể) đáng mượn MỘT FILE | CHỜ: mượn security-auditor.md khi có API xử lý dữ liệu trẻ em thật |
 
 ## CI/CD — CI-CD-Beginner dạy gì (tóm tắt đã kiểm chứng 07/08/2026)
 
@@ -50,3 +53,21 @@ Tích hợp mức **project** tại `.claude/skills/ui-ux-pro-max/` (SKILL.md + 
 1. **Không cài bằng CLI chính chủ** (`uipro init --ai claude`) — nó cài kèm 6 skill anh em không xin. Cách đúng: copy tay — SKILL.md + references/ lấy từ `.claude/skills/ui-ux-pro-max/` của repo nguồn (bản viết tay, số liệu đúng), data/ + scripts/ lấy từ `src/ui-ux-pro-max/` (nguồn canonical); KHÔNG lấy templates/ (chỉ CLI dùng, số liệu trong `templates/platforms/claude.json` đang lệch cũ).
 2. **Phải sửa path trong SKILL.md sau khi copy**: bản gốc dùng `${CLAUDE_PLUGIN_ROOT}/...` — biến chỉ tồn tại khi cài dạng plugin marketplace; bản project skill phải đổi thành path tương đối từ gốc repo `.claude/skills/ui-ux-pro-max/scripts/search.py`. Đã kiểm chứng chạy thật từ gốc repo (exit 0).
 3. **Rào brand đã chèn đầu SKILL.md**: cấm `--design-system` và domain `color`/`typography`/`google-fonts` trong repo này — skill không có cơ chế "bring your own design system", các lệnh đó sẽ đề xuất palette/font đè brand Rangi đã chốt. Cập nhật version mới phải chèn lại rào này.
+
+## Khảo sát skill 07/08/2026 — kết luận toàn cảnh (3 subagent song song)
+
+**Skill chính chủ Anthropic (`anthropics/skills`)**: có đúng 17 skill, môi trường người dùng ĐÃ CÓ ĐỦ 17/17 qua plugin anthropic-skills, pin đúng commit mới nhất (24/07/2026). Không thiếu gì — sau này chỉ cần soát lại khi Anthropic thêm skill mới.
+
+**Đã khảo sát và LOẠI (kèm lý do — đừng nghiên cứu lại)**:
+
+| Repo | Sao | Lý do loại |
+| --- | --- | --- |
+| multica-ai/andrej-karpathy-skills | ~200k | Đã hấp thụ 100% từ trước — chính là mục "Quy tắc làm việc (theo Karpathy guidelines)" trong CLAUDE.md |
+| affaan-m/ECC, ruvnet/ruflo | ~238k, ~67k | Meta-harness đa agent, trùng phạm vi superpowers |
+| JuliusBrussee/caveman | ~97k | ⚠️ CẢNH BÁO: nén CLAUDE.md/docs thành "caveman-speak" tiết kiệm token — kỹ thuật thật nhưng GHI ĐÈ file gốc, sẽ phá CLAUDE.md tiếng Việt mang sắc thái pháp lý. Không bao giờ cài |
+| Leonxlnx/taste-skill | ~74k | Nội dung thật nhưng nhắm landing/portfolio SaaS, chồng phạm vi ui-ux-pro-max |
+| mvanhorn/last30days-skill | ~58k | Gọi mạng Reddit/X/YouTube/HN lúc runtime — vi phạm tiêu chí offline |
+| vercel: web-design-guidelines, writing-guidelines | — | Fetch-live ruleset từ internet mỗi lần chạy + trùng ui-ux-pro-max/frontend-design |
+| vercel: vercel-optimize, deploy-to-vercel, CLI | — | Gắn hạ tầng Vercel; dự án dùng VPS + Docker |
+
+**Khoảng trống đã xác nhận**: KHÔNG tồn tại bộ skill cộng đồng nổi tiếng nào cho Django/pytest/Celery/PDF đề thi/SymPy (kết quả cao nhất chỉ 2-46 sao) — mảng domain này phải tự viết skill khi cần.
