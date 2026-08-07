@@ -92,3 +92,18 @@ Ba bài học phương pháp từ vòng này:
 1. **Vẫn phải gọt, nhưng gọt bằng con dao nhòe.** Hành trình mất 3 vòng: (a) mask sắc cạnh → khe đều nhưng để lại mép cụt thô; (b) bỏ hẳn mask, chỉ đặt gốc cánh lệch ra ngoài → hết mép cụt nhưng mép trong cánh cắm thẳng, không còn ôm theo sườn thân; (c) đáp án: **giữ mask nhưng làm nhòe chính con dao** (`feGaussianBlur` trên nội dung mask) — mép trong vẫn cong đúng theo đường bao thân, còn chỗ giao giữa vết gọt và viền cánh thì tan mềm thay vì tạo góc nhọn. Bài học tổng quát: khi một vết cắt hình học là đúng về hình nhưng sai về cảm giác, hãy làm mềm CÔNG CỤ cắt chứ đừng bỏ vết cắt.
 2. **Bảng biến thể rẻ hơn tranh luận.** Mỗi vòng render một lưới 9 ô PNG (2 trục × 3 mức) rồi để người dùng chỉ mặt, thay vì mô tả bằng lời. Hội tụ sau 4 vòng.
 3. Thông số hình học phải nằm trong **hằng số có tên** ở đầu file sinh, không rải số ma thuật trong path — vòng sau chỉnh một dòng là xong.
+
+### Lỗi tiềm ẩn phát hiện khi làm pose nghỉ (07/08/2026)
+
+Người dùng hỏi "pose 1 và 3 khác gì nhau" → đo mới lộ ra: **`opacity:calc(0.2 + 0.8*var(--rangi-glow,1))` không có tác dụng ngoài trình duyệt.** sharp/librsvg, trình xem ảnh và mọi đường xuất PNG đều bỏ qua `calc()` + `var()`, nên file luôn hiện ở độ sáng tối đa bất kể pose. Cơ chế "mascot sáng dần theo tiến bộ" — điểm khác biệt sản phẩm ghi trong sổ tay §3.2 — vì thế **chỉ chạy được trong trình duyệt**, và mọi ảnh tĩnh xuất ra từ trước tới nay đều là bản sáng nhất.
+
+Cách chữa đã áp dụng: ghi **cả hai** — thuộc tính `opacity="<số đã tính>"` cho trình render tĩnh, và `style="opacity:calc(...)"` cho trình duyệt (style thắng attribute nên bản động vẫn nguyên). Kiểm chứng bằng cách đọc pixel thật ở lõi thân và đầu, không tin mắt:
+
+| | lõi thân | đầu |
+| --- | --- | --- |
+| glowing | 242,234,207 | 235,201,129 |
+| resting | 196,194,163 | 189,168,110 |
+
+Bài học: **thuộc tính CSS động trong file SVG phải luôn kèm giá trị tĩnh tương đương**, vì SVG được tiêu thụ ở hai thế giới (DOM và trình render ảnh) và thế giới thứ hai không có CSS engine. Cùng đó: khi hai biến thể "phải khác nhau", hãy đo pixel để chứng minh — pose `resting` cũ chỉ chênh 5% opacity nên trên thực tế là bản sao của `glowing`.
+
+Pose `resting` sau khi sửa: `RESTING_GLOW` 0.35 (quầng + lõi dịu hẳn), `RESTING_BODY_OPACITY` 0.72 (phải hạ cả thân vì lõi sáng nằm đè lên gradient thân vốn gần trắng — hạ mỗi quầng thì mắt không thấy), cánh cụp sát thân 20°/5°. Vẫn tuyệt đối không thêm biểu cảm buồn — đúng quy tắc nghỉ = mờ trung tính.

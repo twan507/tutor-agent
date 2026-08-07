@@ -382,8 +382,8 @@
     </filter>
     <mask id="wingcut-gd" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="252"><rect width="220" height="252" fill="#fff"/><g filter="url(#cutsoft-gd)"><path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="#000" stroke="#000" stroke-width="8" stroke-linejoin="round"/><circle cx="110" cy="76.5" r="19.7" fill="#000"/></g></mask>
   </defs>
-  <g  style="opacity:1">
-    <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
+  <g >
+    <g opacity="1.000" style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
       <g filter="url(#glowblur-gd)">
         <circle cx="110" cy="132" r="105" fill="url(#halo2-gd)"/>
         <circle cx="110" cy="132" r="88" fill="url(#halo-gd)"/>
@@ -397,6 +397,7 @@
     <g opacity="0.92">
       <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="url(#body-gd)"/>
       <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-gd)"
+               opacity="0.900"
                style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
       <circle cx="110" cy="76.5" r="15.7" fill="url(#head-gd)"/>
     </g>
@@ -413,7 +414,7 @@
           </figure>
           <figure class="mcard on-dark">
             
-<svg xmlns="http://www.w3.org/2000/svg" class="fly" viewBox="0 0 220 252" width="190" role="img" aria-label="Rangi firefly resting" style="--rangi-glow:1">
+<svg xmlns="http://www.w3.org/2000/svg" class="fly" viewBox="0 0 220 252" width="190" role="img" aria-label="Rangi firefly resting" style="--rangi-glow:0.35">
   <defs>
     <radialGradient id="halo-rd" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#F5A623" stop-opacity=".34"/>
@@ -457,8 +458,8 @@
     </filter>
     <mask id="wingcut-rd" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="252"><rect width="220" height="252" fill="#fff"/><g filter="url(#cutsoft-rd)"><path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="#000" stroke="#000" stroke-width="8" stroke-linejoin="round"/><circle cx="110" cy="76.5" r="19.7" fill="#000"/></g></mask>
   </defs>
-  <g  style="opacity:0.95">
-    <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
+  <g >
+    <g opacity="0.480" style="opacity:calc(0.2 + 0.8*var(--rangi-glow,0.35))">
       <g filter="url(#glowblur-rd)">
         <circle cx="110" cy="132" r="105" fill="url(#halo2-rd)"/>
         <circle cx="110" cy="132" r="88" fill="url(#halo-rd)"/>
@@ -466,13 +467,14 @@
       <ellipse cx="110" cy="198" rx="62" ry="13" fill="#F5A623" opacity=".05"/>
     </g>
     <g mask="url(#wingcut-rd)">
-    <path d="M0 0 C8.58 9.92 24.70 26.04 27.50 42.16 C29.60 54.56 23.35 62.00 14.00 62.00 C4.65 62.00 -4.40 54.56 -6.50 42.16 C-9.30 26.04 -2.98 9.92 0 0 Z" transform="translate(97 102) rotate(16)" fill="url(#wing-rd)" opacity="0.5"/><path d="M0 0 C2.98 9.92 9.30 26.04 6.50 42.16 C4.40 54.56 -4.65 62.00 -14.00 62.00 C-23.35 62.00 -29.60 54.56 -27.50 42.16 C-24.70 26.04 -8.58 9.92 0 0 Z" transform="translate(123 102) rotate(-16)" fill="url(#wing-rd)" opacity="0.5"/>
-    <path d="M0 0 C8.58 9.92 24.70 26.04 27.50 42.16 C29.60 54.56 23.35 62.00 14.00 62.00 C4.65 62.00 -4.40 54.56 -6.50 42.16 C-9.30 26.04 -2.98 9.92 0 0 Z" transform="translate(97 102) rotate(40)" fill="url(#wing-rd)" opacity="0.62"/><path d="M0 0 C2.98 9.92 9.30 26.04 6.50 42.16 C4.40 54.56 -4.65 62.00 -14.00 62.00 C-23.35 62.00 -29.60 54.56 -27.50 42.16 C-24.70 26.04 -8.58 9.92 0 0 Z" transform="translate(123 102) rotate(-40)" fill="url(#wing-rd)" opacity="0.62"/>
+    <path d="M0 0 C8.58 9.92 24.70 26.04 27.50 42.16 C29.60 54.56 23.35 62.00 14.00 62.00 C4.65 62.00 -4.40 54.56 -6.50 42.16 C-9.30 26.04 -2.98 9.92 0 0 Z" transform="translate(97 102) rotate(5)" fill="url(#wing-rd)" opacity="0.5"/><path d="M0 0 C2.98 9.92 9.30 26.04 6.50 42.16 C4.40 54.56 -4.65 62.00 -14.00 62.00 C-23.35 62.00 -29.60 54.56 -27.50 42.16 C-24.70 26.04 -8.58 9.92 0 0 Z" transform="translate(123 102) rotate(-5)" fill="url(#wing-rd)" opacity="0.5"/>
+    <path d="M0 0 C8.58 9.92 24.70 26.04 27.50 42.16 C29.60 54.56 23.35 62.00 14.00 62.00 C4.65 62.00 -4.40 54.56 -6.50 42.16 C-9.30 26.04 -2.98 9.92 0 0 Z" transform="translate(97 102) rotate(20)" fill="url(#wing-rd)" opacity="0.62"/><path d="M0 0 C2.98 9.92 9.30 26.04 6.50 42.16 C4.40 54.56 -4.65 62.00 -14.00 62.00 C-23.35 62.00 -29.60 54.56 -27.50 42.16 C-24.70 26.04 -8.58 9.92 0 0 Z" transform="translate(123 102) rotate(-20)" fill="url(#wing-rd)" opacity="0.62"/>
   </g>
-    <g opacity="0.92">
+    <g opacity="0.72">
       <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="url(#body-rd)"/>
       <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-rd)"
-               style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
+               opacity="0.477"
+               style="opacity:calc(0.25 + 0.65*var(--rangi-glow,0.35))"/>
       <circle cx="110" cy="76.5" r="15.7" fill="url(#head-rd)"/>
     </g>
     <g stroke="var(--fly-line,#D9B36A)" stroke-width="2.2" stroke-linecap="round" fill="none">
@@ -532,8 +534,8 @@
     </filter>
     <mask id="wingcut-grd" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="252"><rect width="220" height="252" fill="#fff"/><g filter="url(#cutsoft-grd)"><path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="#000" stroke="#000" stroke-width="8" stroke-linejoin="round"/><circle cx="110" cy="76.5" r="19.7" fill="#000"/></g></mask>
   </defs>
-  <g transform="rotate(4 110 130)" style="opacity:1">
-    <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
+  <g transform="rotate(4 110 130)">
+    <g opacity="1.000" style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
       <g filter="url(#glowblur-grd)">
         <circle cx="110" cy="132" r="105" fill="url(#halo2-grd)"/>
         <circle cx="110" cy="132" r="88" fill="url(#halo-grd)"/>
@@ -547,6 +549,7 @@
     <g opacity="0.92">
       <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="url(#body-grd)"/>
       <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-grd)"
+               opacity="0.900"
                style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
       <circle cx="110" cy="76.5" r="15.7" fill="url(#head-grd)"/>
     </g>
@@ -611,8 +614,8 @@
     </filter>
     <mask id="wingcut-gl" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="252"><rect width="220" height="252" fill="#fff"/><g filter="url(#cutsoft-gl)"><path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="#000" stroke="#000" stroke-width="8" stroke-linejoin="round"/><circle cx="110" cy="76.5" r="19.7" fill="#000"/></g></mask>
   </defs>
-  <g  style="opacity:1">
-    <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
+  <g >
+    <g opacity="1.000" style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
       <g filter="url(#glowblur-gl)">
         <circle cx="110" cy="132" r="105" fill="url(#halo2-gl)"/>
         <circle cx="110" cy="132" r="88" fill="url(#halo-gl)"/>
@@ -626,6 +629,7 @@
     <g opacity="0.92">
       <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="url(#body-gl)"/>
       <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-gl)"
+               opacity="0.900"
                style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
       <circle cx="110" cy="76.5" r="15.7" fill="url(#head-gl)"/>
     </g>
@@ -642,7 +646,7 @@
           </figure>
           <figure class="mcard on-light">
             
-<svg xmlns="http://www.w3.org/2000/svg" class="fly" viewBox="0 0 220 252" width="190" role="img" aria-label="Rangi firefly resting" style="--rangi-glow:1">
+<svg xmlns="http://www.w3.org/2000/svg" class="fly" viewBox="0 0 220 252" width="190" role="img" aria-label="Rangi firefly resting" style="--rangi-glow:0.35">
   <defs>
     <radialGradient id="halo-rl" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#F5A623" stop-opacity=".34"/>
@@ -686,8 +690,8 @@
     </filter>
     <mask id="wingcut-rl" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="252"><rect width="220" height="252" fill="#fff"/><g filter="url(#cutsoft-rl)"><path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="#000" stroke="#000" stroke-width="8" stroke-linejoin="round"/><circle cx="110" cy="76.5" r="19.7" fill="#000"/></g></mask>
   </defs>
-  <g  style="opacity:0.95">
-    <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
+  <g >
+    <g opacity="0.480" style="opacity:calc(0.2 + 0.8*var(--rangi-glow,0.35))">
       <g filter="url(#glowblur-rl)">
         <circle cx="110" cy="132" r="105" fill="url(#halo2-rl)"/>
         <circle cx="110" cy="132" r="88" fill="url(#halo-rl)"/>
@@ -695,13 +699,14 @@
       <ellipse cx="110" cy="198" rx="62" ry="13" fill="#F5A623" opacity=".05"/>
     </g>
     <g mask="url(#wingcut-rl)">
-    <path d="M0 0 C8.58 9.92 24.70 26.04 27.50 42.16 C29.60 54.56 23.35 62.00 14.00 62.00 C4.65 62.00 -4.40 54.56 -6.50 42.16 C-9.30 26.04 -2.98 9.92 0 0 Z" transform="translate(97 102) rotate(16)" fill="url(#wing-rl)" opacity="0.5"/><path d="M0 0 C2.98 9.92 9.30 26.04 6.50 42.16 C4.40 54.56 -4.65 62.00 -14.00 62.00 C-23.35 62.00 -29.60 54.56 -27.50 42.16 C-24.70 26.04 -8.58 9.92 0 0 Z" transform="translate(123 102) rotate(-16)" fill="url(#wing-rl)" opacity="0.5"/>
-    <path d="M0 0 C8.58 9.92 24.70 26.04 27.50 42.16 C29.60 54.56 23.35 62.00 14.00 62.00 C4.65 62.00 -4.40 54.56 -6.50 42.16 C-9.30 26.04 -2.98 9.92 0 0 Z" transform="translate(97 102) rotate(40)" fill="url(#wing-rl)" opacity="0.62"/><path d="M0 0 C2.98 9.92 9.30 26.04 6.50 42.16 C4.40 54.56 -4.65 62.00 -14.00 62.00 C-23.35 62.00 -29.60 54.56 -27.50 42.16 C-24.70 26.04 -8.58 9.92 0 0 Z" transform="translate(123 102) rotate(-40)" fill="url(#wing-rl)" opacity="0.62"/>
+    <path d="M0 0 C8.58 9.92 24.70 26.04 27.50 42.16 C29.60 54.56 23.35 62.00 14.00 62.00 C4.65 62.00 -4.40 54.56 -6.50 42.16 C-9.30 26.04 -2.98 9.92 0 0 Z" transform="translate(97 102) rotate(5)" fill="url(#wing-rl)" opacity="0.5"/><path d="M0 0 C2.98 9.92 9.30 26.04 6.50 42.16 C4.40 54.56 -4.65 62.00 -14.00 62.00 C-23.35 62.00 -29.60 54.56 -27.50 42.16 C-24.70 26.04 -8.58 9.92 0 0 Z" transform="translate(123 102) rotate(-5)" fill="url(#wing-rl)" opacity="0.5"/>
+    <path d="M0 0 C8.58 9.92 24.70 26.04 27.50 42.16 C29.60 54.56 23.35 62.00 14.00 62.00 C4.65 62.00 -4.40 54.56 -6.50 42.16 C-9.30 26.04 -2.98 9.92 0 0 Z" transform="translate(97 102) rotate(20)" fill="url(#wing-rl)" opacity="0.62"/><path d="M0 0 C2.98 9.92 9.30 26.04 6.50 42.16 C4.40 54.56 -4.65 62.00 -14.00 62.00 C-23.35 62.00 -29.60 54.56 -27.50 42.16 C-24.70 26.04 -8.58 9.92 0 0 Z" transform="translate(123 102) rotate(-20)" fill="url(#wing-rl)" opacity="0.62"/>
   </g>
-    <g opacity="0.92">
+    <g opacity="0.72">
       <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="url(#body-rl)"/>
       <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-rl)"
-               style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
+               opacity="0.477"
+               style="opacity:calc(0.25 + 0.65*var(--rangi-glow,0.35))"/>
       <circle cx="110" cy="76.5" r="15.7" fill="url(#head-rl)"/>
     </g>
     <g stroke="var(--fly-line,#D9B36A)" stroke-width="2.2" stroke-linecap="round" fill="none">
@@ -761,8 +766,8 @@
     </filter>
     <mask id="wingcut-grl" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="252"><rect width="220" height="252" fill="#fff"/><g filter="url(#cutsoft-grl)"><path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="#000" stroke="#000" stroke-width="8" stroke-linejoin="round"/><circle cx="110" cy="76.5" r="19.7" fill="#000"/></g></mask>
   </defs>
-  <g transform="rotate(4 110 130)" style="opacity:1">
-    <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
+  <g transform="rotate(4 110 130)">
+    <g opacity="1.000" style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
       <g filter="url(#glowblur-grl)">
         <circle cx="110" cy="132" r="105" fill="url(#halo2-grl)"/>
         <circle cx="110" cy="132" r="88" fill="url(#halo-grl)"/>
@@ -776,6 +781,7 @@
     <g opacity="0.92">
       <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="url(#body-grl)"/>
       <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-grl)"
+               opacity="0.900"
                style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
       <circle cx="110" cy="76.5" r="15.7" fill="url(#head-grl)"/>
     </g>
@@ -851,23 +857,27 @@
     <filter id="soft-f-glowing" x="-40%" y="-40%" width="180%" height="180%">
       <feGaussianBlur stdDeviation="2.4"/>
     </filter>
+    <filter id="cutsoft-f-glowing" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <mask id="wingcut-f-glowing" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="252"><rect width="220" height="252" fill="#fff"/><g filter="url(#cutsoft-f-glowing)"><path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="#000" stroke="#000" stroke-width="8" stroke-linejoin="round"/><circle cx="110" cy="76.5" r="19.7" fill="#000"/></g></mask>
   </defs>
-  <g  style="opacity:1">
-    <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
+  <g >
+    <g opacity="1.000" style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
       <g filter="url(#glowblur-f-glowing)">
         <circle cx="110" cy="132" r="105" fill="url(#halo2-f-glowing)"/>
         <circle cx="110" cy="132" r="88" fill="url(#halo-f-glowing)"/>
       </g>
       <ellipse cx="110" cy="198" rx="62" ry="13" fill="#F5A623" opacity=".05"/>
     </g>
-    <g>
-    <path d="M0 0 C8.58 9.92 24.70 26.04 27.50 42.16 C29.60 54.56 23.35 62.00 14.00 62.00 C4.65 62.00 -4.40 54.56 -6.50 42.16 C-9.30 26.04 -2.98 9.92 0 0 Z" transform="translate(95 102) rotate(24)" fill="url(#wing-f-glowing)" opacity="0.62"/><path d="M0 0 C2.98 9.92 9.30 26.04 6.50 42.16 C4.40 54.56 -4.65 62.00 -14.00 62.00 C-23.35 62.00 -29.60 54.56 -27.50 42.16 C-24.70 26.04 -8.58 9.92 0 0 Z" transform="translate(125 102) rotate(-24)" fill="url(#wing-f-glowing)" opacity="0.62"/>
-    <path d="M0 0 C8.58 9.92 24.70 26.04 27.50 42.16 C29.60 54.56 23.35 62.00 14.00 62.00 C4.65 62.00 -4.40 54.56 -6.50 42.16 C-9.30 26.04 -2.98 9.92 0 0 Z" transform="translate(95 102) rotate(50)" fill="url(#wing-f-glowing)" opacity="0.82"/><path d="M0 0 C2.98 9.92 9.30 26.04 6.50 42.16 C4.40 54.56 -4.65 62.00 -14.00 62.00 C-23.35 62.00 -29.60 54.56 -27.50 42.16 C-24.70 26.04 -8.58 9.92 0 0 Z" transform="translate(125 102) rotate(-50)" fill="url(#wing-f-glowing)" opacity="0.82"/>
+    <g mask="url(#wingcut-f-glowing)">
+    <path d="M0 0 C8.58 9.92 24.70 26.04 27.50 42.16 C29.60 54.56 23.35 62.00 14.00 62.00 C4.65 62.00 -4.40 54.56 -6.50 42.16 C-9.30 26.04 -2.98 9.92 0 0 Z" transform="translate(97 102) rotate(24)" fill="url(#wing-f-glowing)" opacity="0.62"/><path d="M0 0 C2.98 9.92 9.30 26.04 6.50 42.16 C4.40 54.56 -4.65 62.00 -14.00 62.00 C-23.35 62.00 -29.60 54.56 -27.50 42.16 C-24.70 26.04 -8.58 9.92 0 0 Z" transform="translate(123 102) rotate(-24)" fill="url(#wing-f-glowing)" opacity="0.62"/>
+    <path d="M0 0 C8.58 9.92 24.70 26.04 27.50 42.16 C29.60 54.56 23.35 62.00 14.00 62.00 C4.65 62.00 -4.40 54.56 -6.50 42.16 C-9.30 26.04 -2.98 9.92 0 0 Z" transform="translate(97 102) rotate(50)" fill="url(#wing-f-glowing)" opacity="0.82"/><path d="M0 0 C2.98 9.92 9.30 26.04 6.50 42.16 C4.40 54.56 -4.65 62.00 -14.00 62.00 C-23.35 62.00 -29.60 54.56 -27.50 42.16 C-24.70 26.04 -8.58 9.92 0 0 Z" transform="translate(123 102) rotate(-50)" fill="url(#wing-f-glowing)" opacity="0.82"/>
   </g>
     <g opacity="0.92">
-      <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z"
-            fill="url(#body-f-glowing)"/>
+      <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="url(#body-f-glowing)"/>
       <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-f-glowing)"
+               opacity="0.900"
                style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
       <circle cx="110" cy="76.5" r="15.7" fill="url(#head-f-glowing)"/>
     </g>
@@ -929,8 +939,8 @@
     </filter>
     <mask id="wingcut-cmp" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="252"><rect width="220" height="252" fill="#fff"/><g filter="url(#cutsoft-cmp)"><path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="#000" stroke="#000" stroke-width="8" stroke-linejoin="round"/><circle cx="110" cy="76.5" r="19.7" fill="#000"/></g></mask>
   </defs>
-  <g  style="opacity:1">
-    <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
+  <g >
+    <g opacity="1.000" style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
       <g filter="url(#glowblur-cmp)">
         <circle cx="110" cy="132" r="105" fill="url(#halo2-cmp)"/>
         <circle cx="110" cy="132" r="88" fill="url(#halo-cmp)"/>
@@ -944,6 +954,7 @@
     <g opacity="0.92">
       <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="url(#body-cmp)"/>
       <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-cmp)"
+               opacity="0.900"
                style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
       <circle cx="110" cy="76.5" r="15.7" fill="url(#head-cmp)"/>
     </g>

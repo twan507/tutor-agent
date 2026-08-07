@@ -86,6 +86,14 @@ const WING_CUT_SOFT = 3; // làm nhòe con dao → chỗ gọt bo mềm, không 
 const HEAD_CY = 76.5; // hạ đầu xuống: khe đầu–thân 8.3 → 4.8
 const HEAD_R = 15.7;
 const BODY_OPACITY = 0.92; // thân + đầu hơi trong để hòa vào glow
+// Pose nghỉ phải hạ CẢ độ đục của thân: lõi sáng nằm đè lên gradient thân vốn đã
+// gần trắng, nên chỉ hạ quầng + lớp lõi thì mắt không nhận ra (đã đo pixel).
+const RESTING_BODY_OPACITY = 0.72;
+// Pose "resting" = trạng thái nghỉ: quầng sáng dịu hẳn và cánh cụp sát thân.
+// Độ mờ được NƯỚNG VÀO FILE (không để mặc định 1 rồi trông chờ CSS lúc dùng) để
+// file tự nói lên trạng thái, dùng được cả ở nơi không đặt được biến CSS.
+// Quy tắc sổ tay: nghỉ = mờ trung tính, KHÔNG buồn bã, không biểu cảm thất vọng.
+const RESTING_GLOW = 0.35;
 const BODY_PATH =
   "M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z";
 
@@ -113,7 +121,7 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
     );
   };
   // góc tính từ phương thẳng đứng: 90° = ngang, càng nhỏ càng rủ xuống
-  const spec = resting ? { upper: 40, lower: 16 } : { upper: 50, lower: 24 };
+  const spec = resting ? { upper: 20, lower: 5 } : { upper: 50, lower: 24 };
   const dL = drop(WING_BEND);
   const dR = drop(-WING_BEND);
   const wing = (side, ang, op) =>
@@ -140,9 +148,14 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
       : "";
 
   const bodyRot = greeting ? `transform="rotate(4 110 130)"` : "";
+  // Độ sáng của pose. Ghi CẢ HAI: thuộc tính opacity là số đã tính sẵn (trình render
+  // tĩnh — sharp/librsvg, trình xem ảnh, xuất PNG — không hiểu calc()+var() nên sẽ
+  // dùng số này), còn style calc giữ cho trình duyệt để --rangi-glow vẫn chỉnh động
+  // theo tiến bộ. Thiếu con số thì file tĩnh luôn hiện sáng nhất, bất kể pose.
+  const glow = resting ? RESTING_GLOW : 1;
 
   return `
-<svg xmlns="http://www.w3.org/2000/svg" class="fly" viewBox="0 0 220 252" width="${size}" role="img" aria-label="Rangi firefly ${pose}" style="--rangi-glow:1">
+<svg xmlns="http://www.w3.org/2000/svg" class="fly" viewBox="0 0 220 252" width="${size}" role="img" aria-label="Rangi firefly ${pose}" style="--rangi-glow:${resting ? RESTING_GLOW : 1}">
   <defs>
     <radialGradient id="halo-${s}" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#F5A623" stop-opacity=".34"/>
@@ -192,8 +205,8 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
     </filter>
     ${wingMask}
   </defs>
-  <g ${bodyRot} style="opacity:${resting ? 0.95 : 1}">
-    <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
+  <g ${bodyRot}>
+    <g opacity="${(0.2 + 0.8 * glow).toFixed(3)}" style="opacity:calc(0.2 + 0.8*var(--rangi-glow,${glow}))">
       <g filter="url(#glowblur-${s})">
         <circle cx="110" cy="132" r="105" fill="url(#halo2-${s})"/>
         <circle cx="110" cy="132" r="88" fill="url(#halo-${s})"/>
@@ -201,10 +214,11 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
       <ellipse cx="110" cy="198" rx="62" ry="13" fill="#F5A623" opacity=".05"/>
     </g>
     ${wings}
-    <g opacity="${BODY_OPACITY}">
+    <g opacity="${resting ? RESTING_BODY_OPACITY : BODY_OPACITY}">
       <path d="${BODY_PATH}" fill="url(#body-${s})"/>
       <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-${s})"
-               style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
+               opacity="${(0.25 + 0.65 * glow).toFixed(3)}"
+               style="opacity:calc(0.25 + 0.65*var(--rangi-glow,${glow}))"/>
       <circle cx="110" cy="${HEAD_CY}" r="${HEAD_R}" fill="url(#head-${s})"/>
     </g>
     <g stroke="var(--fly-line,#D9B36A)" stroke-width="2.2" stroke-linecap="round" fill="none">

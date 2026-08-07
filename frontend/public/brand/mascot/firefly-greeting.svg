@@ -42,8 +42,8 @@
     </filter>
     <mask id="wingcut-f-greeting" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="252"><rect width="220" height="252" fill="#fff"/><g filter="url(#cutsoft-f-greeting)"><path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="#000" stroke="#000" stroke-width="8" stroke-linejoin="round"/><circle cx="110" cy="76.5" r="19.7" fill="#000"/></g></mask>
   </defs>
-  <g transform="rotate(4 110 130)" style="opacity:1">
-    <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
+  <g transform="rotate(4 110 130)">
+    <g opacity="1.000" style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
       <g filter="url(#glowblur-f-greeting)">
         <circle cx="110" cy="132" r="105" fill="url(#halo2-f-greeting)"/>
         <circle cx="110" cy="132" r="88" fill="url(#halo-f-greeting)"/>
@@ -57,6 +57,7 @@
     <g opacity="0.92">
       <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z" fill="url(#body-f-greeting)"/>
       <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-f-greeting)"
+               opacity="0.900"
                style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
       <circle cx="110" cy="76.5" r="15.7" fill="url(#head-f-greeting)"/>
     </g>
