@@ -79,10 +79,15 @@ function wordmarkSVG({ ink, mint, sfx, width = 560 }) {
 const WING_L = 62; // dài giọt nước
 const WING_W = 34; // chỗ phình rộng nhất
 const WING_BEND = 14; // độ uốn cong của giọt
-const WING_OFFSET = 15; // gốc cánh lệch khỏi trục dọc → khe hở với thân
+const WING_OFFSET = 13; // gốc cánh lệch khỏi trục dọc
 const WING_ROOT_Y = 102;
+const WING_GAP = 4; // khe giữa cánh và thân sau khi gọt
+const WING_CUT_SOFT = 3; // làm nhòe con dao → chỗ gọt bo mềm, không cắt gắt
 const HEAD_CY = 76.5; // hạ đầu xuống: khe đầu–thân 8.3 → 4.8
+const HEAD_R = 15.7;
 const BODY_OPACITY = 0.92; // thân + đầu hơi trong để hòa vào glow
+const BODY_PATH =
+  "M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z";
 
 function firefly(pose, sfx, size = 190, bg = "dark") {
   const s = sfx;
@@ -91,9 +96,10 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
   const greeting = pose === "greeting";
 
   // Cánh: GIỌT NƯỚC khép kín — gốc thon tròn, phình dần, đuôi bầu. `bend` uốn cong
-  // cả giọt để mép trong men theo sườn thân. Không cắt/khoét ở đâu cả: khe hở giữa
-  // cánh và thân có được bằng cách đặt gốc cánh lệch WING_OFFSET ra ngoài trục dọc.
-  // Hai cặp cánh dùng CHUNG một hình (cùng L, W, bend), chỉ khác góc rủ và độ đậm.
+  // cả giọt. Hai cặp cánh dùng CHUNG một hình (cùng L, W, bend), chỉ khác góc rủ
+  // và độ đậm. Cánh lấn vào sát thân rồi được GỌT NHẸ bằng mask lấy đường bao thân
+  // nở ra WING_GAP — nhờ vậy mép trong cong theo sườn thân. Con dao được làm nhòe
+  // WING_CUT_SOFT nên chỗ gọt bo mềm, không để lại góc cắt gắt.
   const drop = (bend) => {
     const f = (v) => v.toFixed(2);
     const h = WING_W / 2;
@@ -114,7 +120,14 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
     `<path d="${side === "L" ? dL : dR}" transform="translate(${
       side === "L" ? 110 - WING_OFFSET : 110 + WING_OFFSET
     } ${WING_ROOT_Y}) rotate(${side === "L" ? ang : -ang})" fill="url(#wing-${s})" opacity="${op}"/>`;
-  const wings = `<g>
+  const wingMask =
+    `<mask id="wingcut-${s}" maskUnits="userSpaceOnUse" x="0" y="0" width="220" height="252">` +
+    `<rect width="220" height="252" fill="#fff"/>` +
+    `<g filter="url(#cutsoft-${s})">` +
+    `<path d="${BODY_PATH}" fill="#000" stroke="#000" stroke-width="${2 * WING_GAP}" stroke-linejoin="round"/>` +
+    `<circle cx="110" cy="${HEAD_CY}" r="${HEAD_R + WING_GAP}" fill="#000"/>` +
+    `</g></mask>`;
+  const wings = `<g mask="url(#wingcut-${s})">
     ${wing("L", spec.lower, resting ? 0.5 : 0.62)}${wing("R", spec.lower, resting ? 0.5 : 0.62)}
     ${wing("L", spec.upper, resting ? 0.62 : 0.82)}${wing("R", spec.upper, resting ? 0.62 : 0.82)}
   </g>`;
@@ -174,6 +187,10 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
     <filter id="soft-${s}" x="-40%" y="-40%" width="180%" height="180%">
       <feGaussianBlur stdDeviation="2.4"/>
     </filter>
+    <filter id="cutsoft-${s}" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="${WING_CUT_SOFT}"/>
+    </filter>
+    ${wingMask}
   </defs>
   <g ${bodyRot} style="opacity:${resting ? 0.95 : 1}">
     <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
@@ -185,11 +202,10 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
     </g>
     ${wings}
     <g opacity="${BODY_OPACITY}">
-      <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z"
-            fill="url(#body-${s})"/>
+      <path d="${BODY_PATH}" fill="url(#body-${s})"/>
       <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-${s})"
                style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
-      <circle cx="110" cy="${HEAD_CY}" r="15.7" fill="url(#head-${s})"/>
+      <circle cx="110" cy="${HEAD_CY}" r="${HEAD_R}" fill="url(#head-${s})"/>
     </g>
     <g stroke="var(--fly-line,#D9B36A)" stroke-width="2.2" stroke-linecap="round" fill="none">
       <path d="${greeting ? "M104 56 C97 47 88 43 80 45" : "M104 56 C99 49 92 40 84 34"}"/>

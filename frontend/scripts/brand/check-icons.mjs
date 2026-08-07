@@ -38,10 +38,14 @@ export const MASCOT_MANIFEST = [
 
 // Mascot v2 (06/08/2026): soft illustrated — gradient nhiều bậc trong họ amber/mint,
 // hex trần được phép (nằm trong gradient stop), khác quy tắc var()-only của icon.
+// #000/#fff (07/08/2026) KHÔNG phải màu vẽ: chúng là giá trị stencil của <mask>
+// gọt mép cánh theo thân — đen = che, trắng = giữ. Không có nét nào tô hai màu này.
 const WHITELIST = {
   outline: ["#F5A623"],
   filled: ["#F5A623"],
   mascot: [
+    "#000",
+    "#fff",
     "#F5A623",
     "#FFF4D2",
     "#FFE29A",

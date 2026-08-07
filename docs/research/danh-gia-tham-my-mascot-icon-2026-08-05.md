@@ -80,7 +80,8 @@ Người dùng gửi ảnh đom đóm tham chiếu, yêu cầu **glow chuyển m
 | ------------------------------- | ------------------------------ | ---------------------- |
 | Góc cánh (từ phương thẳng đứng) | trên 97° (chếch LÊN), dưới 66° | trên 50°, dưới 24°     |
 | Hình cánh                       | cánh hoa, hai cặp KHÁC cỡ      | giọt nước, hai cặp CÙNG một hình (`WING_L` 62 × `WING_W` 34, `WING_BEND` 14) |
-| Gốc cánh                        | sát mép thân (dính vào thân)   | lệch ra `WING_OFFSET` 15 → hở khỏi thân |
+| Gốc cánh                        | sát mép thân (dính vào thân)   | lệch ra `WING_OFFSET` 13, cánh lấn vào rồi được gọt |
+| Mép trong cánh                  | không gọt                      | gọt theo đường bao thân nở `WING_GAP` 4, dao nhòe `WING_CUT_SOFT` 3 |
 | Khe đầu–thân                    | 8.3                            | 4.8 (`HEAD_CY` 73 → 76.5) |
 | Khe râu–đầu                     | 10.8                           | 4.3 (hạ râu 6 đơn vị)  |
 | Quầng sáng                      | 1 lớp, 5 mốc gradient          | 2 lớp (r 105 + r 88), 8 mốc, cả cụm qua `feGaussianBlur` 7 |
@@ -88,6 +89,6 @@ Người dùng gửi ảnh đom đóm tham chiếu, yêu cầu **glow chuyển m
 
 Ba bài học phương pháp từ vòng này:
 
-1. **Khe hở phải là hình học, không phải vết cắt.** Vòng thử đầu dùng `<mask>` khoét cánh theo đường thân nở ra — khe đều tuyệt đối nhưng để lại mép cụt thô ở chỗ dao cắt ngang thân cánh. Cách đúng: vẽ cánh là đường khép kín rồi ĐẶT gốc lệch ra ngoài thân; không có gì bị cắt thì không có mép cụt.
+1. **Vẫn phải gọt, nhưng gọt bằng con dao nhòe.** Hành trình mất 3 vòng: (a) mask sắc cạnh → khe đều nhưng để lại mép cụt thô; (b) bỏ hẳn mask, chỉ đặt gốc cánh lệch ra ngoài → hết mép cụt nhưng mép trong cánh cắm thẳng, không còn ôm theo sườn thân; (c) đáp án: **giữ mask nhưng làm nhòe chính con dao** (`feGaussianBlur` trên nội dung mask) — mép trong vẫn cong đúng theo đường bao thân, còn chỗ giao giữa vết gọt và viền cánh thì tan mềm thay vì tạo góc nhọn. Bài học tổng quát: khi một vết cắt hình học là đúng về hình nhưng sai về cảm giác, hãy làm mềm CÔNG CỤ cắt chứ đừng bỏ vết cắt.
 2. **Bảng biến thể rẻ hơn tranh luận.** Mỗi vòng render một lưới 9 ô PNG (2 trục × 3 mức) rồi để người dùng chỉ mặt, thay vì mô tả bằng lời. Hội tụ sau 4 vòng.
 3. Thông số hình học phải nằm trong **hằng số có tên** ở đầu file sinh, không rải số ma thuật trong path — vòng sau chỉnh một dòng là xong.
