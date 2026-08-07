@@ -34,6 +34,8 @@ Cấu trúc: `background/` bản nháp định hướng (demo, chưa chốt) | `
 - [specs/2026-08-05-lenh-chay-du-an.md](specs/2026-08-05-lenh-chay-du-an.md) — spec bộ 5 lệnh chạy dự án thay Makefile: dev-start/dev-stop/docker-up/docker-down/docker-clean, ma trận tác động, ranh giới dữ liệu (TRẠNG THÁI: đã thực thi 05/08/2026)
 - [specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md](specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md) — spec gói mở rộng nhận diện SVG: pose sheet đom đóm geometric, motif đường bay, lockup dọc, 21 icon × 2 bộ outline/filled, pattern nền, animation RangiSplash (TRẠNG THÁI: đã duyệt + đã thực thi 05/08/2026; ⚠️ motif đường bay, pattern, lockup dọc, pose `flying` và RangiSplash ĐÃ BỊ LOẠI sau đó — spec giữ làm lịch sử, nguồn đúng hiện tại là sổ tay thương hiệu §3.3-3.4)
 
+- [specs/2026-08-07-bo-icon-tabler.md](specs/2026-08-07-bo-icon-tabler.md) — spec thay 42 icon tự vẽ bằng Tabler Icons (MIT): vì sao Tabler thắng Phosphor/Material Symbols (outline vẽ bằng nét nên restyle được), bỏ quy tắc "mọi icon phải có hai bộ", danh mục 127 khái niệm 9 nhóm + bảng ánh xạ đầy đủ (TRẠNG THÁI: chờ duyệt)
+
 ## plans/ — kế hoạch thực thi
 
 - [plans/2026-08-04-scaffold-monorepo-plan.md](plans/2026-08-04-scaffold-monorepo-plan.md) — implementation plan 8 task chi tiết từng file/lệnh/expected cho scaffold (TRẠNG THÁI: đã thực thi 04/08/2026 — verify E2E 4/4 tiêu chí DoD PASS, xem `.superpowers/sdd/2026-08-04-scaffold-monorepo-plan/task-7-report.md`)
