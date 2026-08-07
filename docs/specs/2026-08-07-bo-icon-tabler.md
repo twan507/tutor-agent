@@ -43,6 +43,12 @@ Quy tắc mới: **filled chỉ bắt buộc với icon xuất hiện ở ngữ 
 
 Theo mục "Ràng buộc sản phẩm bất biến" trong CLAUDE.md, **không đưa vào bộ**: icon camera, micro, khuôn mặt, ánh mắt, vân tay (cấm vĩnh viễn mọi dữ liệu sinh trắc) và icon bảng xếp hạng / bục huy chương / cúp thi đua (cấm leaderboard xuyên học sinh). Icon nằm sẵn trong repo là một lời mời dùng nó — không để sẵn thứ mình đã cấm.
 
+Ba hệ quả cụ thể của rà soát này:
+
+- **Loại `streak` (ngọn lửa chuỗi ngày).** Đây đúng là cơ chế loss-aversion của Duolingo, trong khi CLAUDE.md chốt mô hình cảm xúc **Forest, không Duolingo** — thưởng cộng dồn, nghỉ là mờ trung tính, không trừng phạt. `streak` cũng không có trong `CONTEXT.md`, tức là một khái niệm sản phẩm mới lọt vào qua cửa sau là spec icon. Muốn có cơ chế chuỗi ngày thì phải là một quyết định sản phẩm riêng, không phải hệ quả của việc chọn icon.
+- **Loại `mood-empty` (mặt người vô cảm) cho trạng thái rỗng**, thay bằng `folder-open`. Quy tắc cấm biểu cảm buồn/thất vọng đang viết cho mascot, nhưng một khuôn mặt vô cảm đặt ở màn hình "chưa có gì" thì cùng bản chất — không mượn nét mặt để nói chuyện thiếu vắng.
+- **`visible`/`hidden` dùng `eye`/`eye-off` là hợp lệ**: đây là nút ẩn/hiện nội dung (kiểu xem mật khẩu), không liên quan tới theo dõi ánh mắt. Ghi lại đây để lần soát sau không phải suy đoán.
+
 ## 3. Nguồn của danh mục khái niệm
 
 Danh mục 127 khái niệm không tự nghĩ ra, rút từ ba nguồn:
@@ -58,7 +64,7 @@ Nhóm "Thanh toán & hỗ trợ" giữ lại vì phụ huynh là người mua �
 - **127 khái niệm** chia 9 nhóm.
 - **93 khái niệm có cặp** outline + filled; **34 khái niệm chỉ outline** → **220 file SVG**.
 - **4 alias** (tên phụ trỏ vào cùng file, không nhân bản): `success`→`correct`, `privacy`→`locked`, `timer`→`clock`, `expand`→`chevron-down` → tổng **131 tên gọi**.
-- Đã kiểm bằng script: **0 khái niệm trùng hình với khái niệm khác**, **0 tên Tabler không tồn tại**.
+- **0 khái niệm trùng hình với khái niệm khác**, **0 tên Tabler không tồn tại** — và đây không phải lời hứa suông: cả hai điều kiện trở thành **rule trong `brand:check`** (§5.5), nên chúng được kiểm lại ở mọi lần chạy CI chứ không phải một lần lúc viết spec.
 
 Xóa toàn bộ 42 file icon tự vẽ hiện có trong `frontend/public/brand/icons/` và bản gốc trong `frontend/scripts/brand/proto-v2/icons/`.
 
@@ -77,6 +83,11 @@ File mới `frontend/scripts/brand/generate-icons.mjs`:
 3. Bản filled: lấy icon `<tên>-filled`, giữ `fill="currentColor"`.
 4. Ghi ra `frontend/public/brand/icons/{outline,filled}/<khái niệm>.svg`.
 5. **Fail to** nếu: tên nguồn không tồn tại, hoặc manifest khai cần filled mà `<tên>-filled` không có. Không im lặng bỏ qua — đây là hàng rào chống việc lại đi tự vẽ.
+
+Hai ràng buộc kỹ thuật bắt buộc:
+
+- **Tách phần lõi thành hàm export được** (giống `check-icons.mjs` đang làm), để test gọi thẳng hàm đó và kiểm được nó ném lỗi đúng lúc — không test bằng cách chạy cả script.
+- **Ghi file với kết thúc dòng `\n` tường minh.** Máy dev là Windows và repo ép LF qua `.gitattributes`; script Node ghi CRLF sẽ làm `pnpm format:check` đỏ hàng loạt đúng kiểu bẫy đã ghi trong CLAUDE.md mục "Môi trường dev — bẫy đã biết".
 
 Thêm script `brand:icons` vào `package.json`.
 
@@ -98,7 +109,7 @@ export const ALIASES = {
 };
 ```
 
-`check-icons.mjs` đọc chính manifest này thay cho `ICON_MANIFEST` cứng hiện tại.
+`check-icons.mjs` đọc chính manifest này thay cho `ICON_MANIFEST` cứng hiện tại, và **dẫn xuất ra hai danh sách**: thư mục `outline/` phải khớp **toàn bộ 127 khái niệm**; thư mục `filled/` phải khớp **đúng tập khái niệm có `filled: true`** (93 cái). File filled tồn tại cho khái niệm khai `filled: false` là **lỗi thừa file**, không phải chuyện vô hại — nếu không chặn thì bộ sẽ lại trôi về trạng thái mỗi icon một luật.
 
 ### 5.4 Restyle theo brand
 
@@ -117,8 +128,25 @@ export const ALIASES = {
 | Cấm hex trần                                                    | có      | có     |
 | Tên thuộc manifest                                              | có      | có     |
 | Có đủ biến thể như manifest khai                                | có      | có     |
+| Không thừa file ngoài manifest                                  | có      | có     |
+| `role="img"` + `aria-label`                                     | có      | có     |
+| `stroke-linecap`/`linejoin` = `round`                           | có      | —      |
+
+Ba rule mức manifest (kiểm chính manifest, không kiểm file):
+
+- **Không hai khái niệm nào trỏ cùng một tên Tabler** — giữ mãi tính chất "0 trùng hình" đã đạt được.
+- **Mọi `ALIASES` phải trỏ tới một khái niệm có thật** trong `ICONS`.
+- **Không tên alias nào trùng tên khái niệm.**
 
 Rule mascot giữ nguyên không đổi.
+
+### 5.7 Tài liệu và test phải sửa theo
+
+Ba chỗ đang mô tả trạng thái cũ; không sửa thì repo tự mâu thuẫn:
+
+1. **`frontend/scripts/brand/check-icons.test.mjs`** — đang `expect(ICON_MANIFEST).toHaveLength(21)` và test rule bọc accent trong `var(--icon-accent, …)`. Cả hai tiền đề đều bị spec này bỏ. Viết lại: kiểm số khái niệm, kiểm ba rule mức manifest ở trên, kiểm generator ném lỗi khi khai `filled: true` sai.
+2. **`docs/brand/so-tay-thuong-hieu-rangi.md` §3.4** — dòng 155-156 ghi "(21, v2)" và "accent hổ phách tự có trong file"; dòng 167 ghi "thêm icon mới = thêm tên vào `ICON_MANIFEST` + vẽ đủ HAI bộ outline/filled". Cập nhật: nguồn là Tabler, số lượng mới, accent do component quyết, thêm icon mới = thêm một dòng manifest và **tuyệt đối không tự vẽ**.
+3. **`frontend/public/brand/README.md`** — bảng asset và dòng giấy phép Tabler (§5.6).
 
 ### 5.6 Giấy phép
 
@@ -132,6 +160,9 @@ Tabler là MIT — được dùng thương mại, phải giữ notice. Thêm `fr
 4. `pnpm test` xanh, `pnpm lint` 0 error, `pnpm format:check` xanh.
 5. `frontend/public/brand/icons/` không còn file nào của bộ tự vẽ cũ.
 6. Trang preview `scripts/brand/preview-icons.html` hiển thị đủ 9 nhóm.
+7. Ba rule mức manifest (§5.5) có test riêng, mỗi rule một case đỏ được dựng cố ý: hai khái niệm trỏ cùng tên Tabler, alias trỏ vào khái niệm không tồn tại, alias trùng tên khái niệm.
+8. `git diff` sau khi chạy generator hai lần liên tiếp là rỗng, và không file sinh ra nào có CRLF (`git ls-files --eol frontend/public/brand/icons` chỉ hiện `lf`).
+9. Ba tài liệu ở §5.7 đã cập nhật; không còn chỗ nào trong repo nói "vẽ đủ HAI bộ" hay "accent hổ phách tự có trong file".
 
 ## 7. Ngoài phạm vi
 
@@ -142,12 +173,15 @@ Tabler là MIT — được dùng thương mại, phải giữ notice. Thêm `fr
 
 ## 8. Rủi ro và đánh đổi
 
-| Rủi ro                                            | Xử lý                                                                              |
-| ------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Icon thêm về sau không có bản filled trong Tabler | Generator fail to lúc build, buộc chọn tên khác có cặp — không im lặng để lọt      |
-| Bộ Tabler đổi hình giữa các version               | Pin version trong `package.json`; file sinh ra được commit nên diff nhìn thấy được |
-| 220 file trong repo                               | Mỗi file 200-400 byte; tổng dưới 100KB                                             |
-| Ẩn dụ Tabler không khớp domain Việt Nam           | Bảng §9 để người dùng duyệt từng dòng trước khi code                               |
+| Rủi ro                                                                                  | Xử lý                                                                                |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Icon thêm về sau không có bản filled trong Tabler                                       | Generator fail to lúc build, buộc chọn tên khác có cặp — không im lặng để lọt        |
+| Bộ Tabler đổi hình giữa các version                                                     | Pin version trong `package.json`; file sinh ra được commit nên diff nhìn thấy được   |
+| 220 file trong repo                                                                     | Mỗi file 200-400 byte; tổng dưới 100KB                                               |
+| Ẩn dụ Tabler không khớp domain Việt Nam                                                 | Bảng §9 để người dùng duyệt từng dòng trước khi code                                 |
+| Script Node ghi CRLF trên máy Windows → `format:check` đỏ hàng loạt, trông như lỗi thật | Generator ghi `\n` tường minh; tiêu chí §6.8 kiểm bằng `git ls-files --eol`          |
+| Sửa manifest xong quên cập nhật tài liệu/test → repo nói một đằng làm một nẻo           | §5.7 liệt kê đích danh ba file phải sửa; §6.9 là tiêu chí kiểm chứng bằng grep       |
+| Khái niệm mới lọt vào bộ qua cửa sau spec icon (như `streak` suýt lọt)                  | Mọi khái niệm không có trong `CONTEXT.md` phải được nêu rõ khi thêm; §2.3 là tiền lệ |
 
 ## 9. Bảng ánh xạ đầy đủ
 
@@ -203,7 +237,6 @@ Tabler là MIT — được dùng thương mại, phải giữ notice. Thêm `fr
 | Theo dõi & báo cáo  | `badge`             | `award`                  | outline + filled |
 | Theo dõi & báo cáo  | `spark`             | `sparkles`               | outline + filled |
 | Theo dõi & báo cáo  | `summary`           | `article`                | outline + filled |
-| Theo dõi & báo cáo  | `streak`            | `flame`                  | outline + filled |
 | Người dùng & quyền  | `parent`            | `users`                  | chỉ outline      |
 | Người dùng & quyền  | `student`           | `school`                 | outline + filled |
 | Người dùng & quyền  | `reviewer`          | `user-check`             | chỉ outline      |
@@ -230,6 +263,7 @@ Tabler là MIT — được dùng thương mại, phải giữ notice. Thêm `fr
 | Điều hướng          | `sidebar`           | `layout-sidebar`         | outline + filled |
 | Điều hướng          | `view-grid`         | `layout-grid`            | outline + filled |
 | Điều hướng          | `view-list`         | `list`                   | outline + filled |
+| Điều hướng          | `settings`          | `settings`               | outline + filled |
 | Hành động           | `search`            | `search`                 | outline + filled |
 | Hành động           | `filter`            | `filter`                 | outline + filled |
 | Hành động           | `sort`              | `arrows-sort`            | chỉ outline      |
@@ -255,13 +289,13 @@ Tabler là MIT — được dùng thương mại, phải giữ notice. Thêm `fr
 | Trạng thái          | `warning`           | `alert-triangle`         | outline + filled |
 | Trạng thái          | `error`             | `exclamation-circle`     | outline + filled |
 | Trạng thái          | `loading`           | `loader`                 | chỉ outline      |
-| Trạng thái          | `empty`             | `mood-empty`             | outline + filled |
+| Trạng thái          | `empty`             | `folder-open`            | outline + filled |
 | Trạng thái          | `visible`           | `eye`                    | outline + filled |
 | Trạng thái          | `hidden`            | `eye-off`                | chỉ outline      |
 | Trạng thái          | `notification`      | `bell`                   | outline + filled |
 | Trạng thái          | `notification-off`  | `bell-x`                 | outline + filled |
 | Trạng thái          | `offline`           | `cloud-off`              | chỉ outline      |
-| Trạng thái          | `sync`              | `cloud-computing`        | outline + filled |
+| Trạng thái          | `sync`              | `exchange`               | outline + filled |
 | Nội dung            | `file`              | `file`                   | outline + filled |
 | Nội dung            | `folder`            | `folder`                 | outline + filled |
 | Nội dung            | `pdf`               | `file-type-pdf`          | chỉ outline      |
