@@ -7,6 +7,7 @@ Mỗi dòng: `- [name](đường-dẫn) — hook một câu`. Chi tiết nằm t
 
 - [architect-subagent-workflow](procedural/architect-subagent-workflow.md) — session chính là kiến trúc sư, tay chân giao Sonnet subagent, task nhỏ tự làm, không tham chiếu file ngoài repo
 - [commit-theo-moc](procedural/commit-theo-moc.md) — mỗi mốc chốt xong = commit riêng ngay + push, không dồn; user nhắc 04/08
+- [cong-khai-nhanh-dang-lam](procedural/cong-khai-nhanh-dang-lam.md) — luôn báo tên nhánh + thư mục làm việc ngay khi có nhánh/worktree mới (kể cả do app tự tạo); user nhắc 07/08
 - [bay-moi-truong-dev](procedural/bay-moi-truong-dev.md) — CRLF gây báo động giả prettier (đã chữa bằng .gitattributes, đừng prettier --write hàng loạt); kho pnpm ngoài repo là bình thường
 - [khong-de-kien-thuc-chet-theo-phien](procedural/khong-de-kien-thuc-chet-theo-phien.md) — mỗi quyết định lớn để lại 3 tầng tài liệu (research/brand-spec/CLAUDE.md); user không phải bộ nhớ dự phòng
 - [viet-spec-va-bao-cao](procedural/viet-spec-va-bao-cao.md) — báo cáo thiết kế phải tường minh (user ghét ngắn gọn gây nhầm); DoD phải là bất biến, không phải con số gắn thời điểm
