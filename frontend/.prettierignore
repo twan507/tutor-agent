@@ -2,3 +2,7 @@
 node_modules
 pnpm-lock.yaml
 next-env.d.ts
+
+# Artifact sinh ra bởi scripts/brand/proto-v2/assemble.mjs — format tay sẽ bị
+# ghi đè ở lần chạy sau, làm format:check đỏ lại.
+scripts/brand/proto-v2/mockup-rangi-v2.html

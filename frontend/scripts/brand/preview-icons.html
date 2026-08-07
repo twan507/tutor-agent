@@ -45,7 +45,13 @@
     max="1"
     step="0.05"
     value="1"
-    oninput="document.querySelectorAll('.mascot-obj').forEach(o=>o.contentDocument?.documentElement.style.setProperty('--rangi-glow',this.value))"
+    oninput="
+      document
+        .querySelectorAll('.mascot-obj')
+        .forEach((o) =>
+          o.contentDocument?.documentElement.style.setProperty('--rangi-glow', this.value),
+        )
+    "
 /></label>
 <script>
   for (const mode of ["light", "dark"]) {

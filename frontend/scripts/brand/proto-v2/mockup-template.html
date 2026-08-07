@@ -1,144 +1,398 @@
 <!doctype html>
 <html lang="vi">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rangi — mockup nhận diện v2</title>
-<style>
-/*__FONT_CSS__*/
-:root{
-  --night:#0A2E26; --cream:#FBF6EA; --amber:#F5A623; --amber-deep:#EF8D08;
-  --amber-soft:#FFD98A; --amber-core:#FFE9B8; --mint:#84DEBE; --mint-soft:#B9E5D2;
-  --emerald:#0E7A5A; --ink:#0A2E26;
-}
-*{box-sizing:border-box;margin:0}
-body{font-family:'Baloo 2',system-ui,sans-serif;background:#EFEAE0;color:var(--ink)}
-section{padding:56px 24px}
-.wrap{max-width:1040px;margin:0 auto}
-h2.sec{font-size:15px;letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin-bottom:22px;font-weight:600}
-.dark{background:radial-gradient(1200px 600px at 70% 20%, #0D3A2F 0%, var(--night) 60%);color:var(--cream)}
-.dark h2.sec{opacity:.5}
-.light{background:var(--cream)}
-.note{font-family:system-ui;font-size:12.5px;opacity:.6;line-height:1.6;margin-top:14px}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rangi — mockup nhận diện v2</title>
+    <style>
+      /*__FONT_CSS__*/
+      :root {
+        --night: #0a2e26;
+        --cream: #fbf6ea;
+        --amber: #f5a623;
+        --amber-deep: #ef8d08;
+        --amber-soft: #ffd98a;
+        --amber-core: #ffe9b8;
+        --mint: #84debe;
+        --mint-soft: #b9e5d2;
+        --emerald: #0e7a5a;
+        --ink: #0a2e26;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        font-family: "Baloo 2", system-ui, sans-serif;
+        background: #efeae0;
+        color: var(--ink);
+      }
+      section {
+        padding: 56px 24px;
+      }
+      .wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+      }
+      h2.sec {
+        font-size: 15px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        opacity: 0.55;
+        margin-bottom: 22px;
+        font-weight: 600;
+      }
+      .dark {
+        background: radial-gradient(1200px 600px at 70% 20%, #0d3a2f 0%, var(--night) 60%);
+        color: var(--cream);
+      }
+      .dark h2.sec {
+        opacity: 0.5;
+      }
+      .light {
+        background: var(--cream);
+      }
+      .note {
+        font-family: system-ui;
+        font-size: 12.5px;
+        opacity: 0.6;
+        line-height: 1.6;
+        margin-top: 14px;
+      }
 
-/* ============ WORDMARK ============ */
-.lockup{position:relative;display:inline-block}
-.wordmark{position:relative;display:inline-block;font-weight:600;line-height:1;letter-spacing:.01em;white-space:nowrap}
-.wordmark .i{position:relative;display:inline-block}
-/* amber dot of the i = mascot spark */
-.wordmark .i .dot{position:absolute;left:50%;top:.24em;transform:translateX(-50%);width:.165em;height:.165em;border-radius:50%;
-  background:radial-gradient(circle at 42% 38%, #FFDF9E 0%, var(--amber) 55%, var(--amber-deep) 100%);}
-.dark .wordmark .i .dot{box-shadow:0 0 .28em .02em rgba(245,166,35,.55), 0 0 .8em .12em rgba(245,166,35,.28)}
-.light .wordmark .i .dot{box-shadow:0 0 .2em .01em rgba(245,166,35,.35)}
-/* mint spark-trail rising from the g tail toward the i dot */
-.wordmark .trail i{position:absolute;border-radius:50%;background:var(--mint);display:block}
-.wordmark .trail .t1{width:.05em;height:.05em;right:.76em;bottom:-.04em;opacity:.72}
-.wordmark .trail .t2{width:.075em;height:.075em;right:.60em;bottom:.17em;opacity:.85}
-.wordmark .trail .t3{width:.10em;height:.10em;right:.40em;bottom:.38em;opacity:.95}
-.slogan{font-weight:500;letter-spacing:.18em;white-space:nowrap}
-.dark .slogan{color:var(--mint)}
-.light .slogan{color:var(--emerald)}
+      /* ============ WORDMARK ============ */
+      .lockup {
+        position: relative;
+        display: inline-block;
+      }
+      .wordmark {
+        position: relative;
+        display: inline-block;
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+      }
+      .wordmark .i {
+        position: relative;
+        display: inline-block;
+      }
+      /* amber dot of the i = mascot spark */
+      .wordmark .i .dot {
+        position: absolute;
+        left: 50%;
+        top: 0.24em;
+        transform: translateX(-50%);
+        width: 0.165em;
+        height: 0.165em;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 42% 38%,
+          #ffdf9e 0%,
+          var(--amber) 55%,
+          var(--amber-deep) 100%
+        );
+      }
+      .dark .wordmark .i .dot {
+        box-shadow:
+          0 0 0.28em 0.02em rgba(245, 166, 35, 0.55),
+          0 0 0.8em 0.12em rgba(245, 166, 35, 0.28);
+      }
+      .light .wordmark .i .dot {
+        box-shadow: 0 0 0.2em 0.01em rgba(245, 166, 35, 0.35);
+      }
+      /* mint spark-trail rising from the g tail toward the i dot */
+      .wordmark .trail i {
+        position: absolute;
+        border-radius: 50%;
+        background: var(--mint);
+        display: block;
+      }
+      .wordmark .trail .t1 {
+        width: 0.05em;
+        height: 0.05em;
+        right: 0.76em;
+        bottom: -0.04em;
+        opacity: 0.72;
+      }
+      .wordmark .trail .t2 {
+        width: 0.075em;
+        height: 0.075em;
+        right: 0.6em;
+        bottom: 0.17em;
+        opacity: 0.85;
+      }
+      .wordmark .trail .t3 {
+        width: 0.1em;
+        height: 0.1em;
+        right: 0.4em;
+        bottom: 0.38em;
+        opacity: 0.95;
+      }
+      .slogan {
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        white-space: nowrap;
+      }
+      .dark .slogan {
+        color: var(--mint);
+      }
+      .light .slogan {
+        color: var(--emerald);
+      }
 
-/* flight path under the hero wordmark */
-.underpath{display:block;margin-top:6px}
+      /* flight path under the hero wordmark */
+      .underpath {
+        display: block;
+        margin-top: 6px;
+      }
 
-.hero-star{position:absolute;border-radius:50%;background:var(--cream);opacity:.5}
+      .hero-star {
+        position: absolute;
+        border-radius: 50%;
+        background: var(--cream);
+        opacity: 0.5;
+      }
 
-/* ============ MASCOT ============ */
-.mrow{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.mcard{border-radius:20px;padding:18px 10px 12px;text-align:center}
-.mcard.on-dark{background:radial-gradient(320px 220px at 50% 30%, #0E territory3A2F 0%, var(--night) 75%);background:radial-gradient(320px 220px at 50% 30%, #0D3A2F 0%, var(--night) 75%);color:var(--cream)}
-.mcard.on-light{background:#FFFDF6;border:1px solid #EEE5D2}
-.mcard figcaption{font-size:13px;font-weight:600;opacity:.7;margin-top:6px}
-.glowbox{margin-top:16px;font-family:system-ui;font-size:13px;display:flex;align-items:center;gap:10px}
-.compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center}
-.compare .cell{border-radius:20px;padding:22px;text-align:center;background:var(--night);color:var(--cream)}
-.compare figcaption{font-size:13px;margin-top:8px;opacity:.75}
+      /* ============ MASCOT ============ */
+      .mrow {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      .mcard {
+        border-radius: 20px;
+        padding: 18px 10px 12px;
+        text-align: center;
+      }
+      .mcard.on-dark {
+        background: radial-gradient(320px 220px at 50% 30%, #0E territory3A2F 0%, var(--night) 75%);
+        background: radial-gradient(320px 220px at 50% 30%, #0d3a2f 0%, var(--night) 75%);
+        color: var(--cream);
+      }
+      .mcard.on-light {
+        background: #fffdf6;
+        border: 1px solid #eee5d2;
+      }
+      .mcard figcaption {
+        font-size: 13px;
+        font-weight: 600;
+        opacity: 0.7;
+        margin-top: 6px;
+      }
+      .glowbox {
+        margin-top: 16px;
+        font-family: system-ui;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .compare {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        align-items: center;
+      }
+      .compare .cell {
+        border-radius: 20px;
+        padding: 22px;
+        text-align: center;
+        background: var(--night);
+        color: var(--cream);
+      }
+      .compare figcaption {
+        font-size: 13px;
+        margin-top: 8px;
+        opacity: 0.75;
+      }
 
-/* ============ ICONS ============ */
-.igrid{display:grid;grid-template-columns:repeat(11,1fr);gap:14px;margin-bottom:8px}
-.icell{display:flex;flex-direction:column;align-items:center;gap:6px}
-.icell .nm{font-family:system-ui;font-size:9.5px;opacity:.55;text-align:center}
-.iband{border-radius:20px;padding:22px;margin-bottom:18px}
-.iband.on-dark{background:var(--night);color:var(--cream)}
-.iband.on-light{background:#FFFDF6;border:1px solid #EEE5D2;color:var(--ink)}
-.iband h3{font-size:13px;font-weight:600;opacity:.6;margin-bottom:14px;font-family:system-ui}
-.icell svg{width:26px;height:26px}
-.icell.small svg{width:16px;height:16px}
-.sizerow{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-.sizerow svg{display:block}
-</style>
-</head>
-<body>
+      /* ============ ICONS ============ */
+      .igrid {
+        display: grid;
+        grid-template-columns: repeat(11, 1fr);
+        gap: 14px;
+        margin-bottom: 8px;
+      }
+      .icell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+      .icell .nm {
+        font-family: system-ui;
+        font-size: 9.5px;
+        opacity: 0.55;
+        text-align: center;
+      }
+      .iband {
+        border-radius: 20px;
+        padding: 22px;
+        margin-bottom: 18px;
+      }
+      .iband.on-dark {
+        background: var(--night);
+        color: var(--cream);
+      }
+      .iband.on-light {
+        background: #fffdf6;
+        border: 1px solid #eee5d2;
+        color: var(--ink);
+      }
+      .iband h3 {
+        font-size: 13px;
+        font-weight: 600;
+        opacity: 0.6;
+        margin-bottom: 14px;
+        font-family: system-ui;
+      }
+      .icell svg {
+        width: 26px;
+        height: 26px;
+      }
+      .icell.small svg {
+        width: 16px;
+        height: 16px;
+      }
+      .sizerow {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .sizerow svg {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ================= HERO DARK: LOGO ================= -->
+    <section class="dark" style="position: relative; overflow: hidden">
+      <span class="hero-star" style="width: 3px; height: 3px; left: 8%; top: 18%"></span>
+      <span class="hero-star" style="width: 2px; height: 2px; left: 22%; top: 64%"></span>
+      <span
+        class="hero-star"
+        style="width: 4px; height: 4px; left: 83%; top: 22%; opacity: 0.7"
+      ></span>
+      <span class="hero-star" style="width: 2px; height: 2px; left: 71%; top: 70%"></span>
+      <span class="hero-star" style="width: 3px; height: 3px; left: 92%; top: 55%"></span>
+      <div class="wrap" style="text-align: center; padding: 36px 0 20px">
+        <div class="lockup">
+          <!--__LOGO_DARK__-->
+        </div>
+      </div>
+    </section>
 
-<!-- ================= HERO DARK: LOGO ================= -->
-<section class="dark" style="position:relative;overflow:hidden">
-  <span class="hero-star" style="width:3px;height:3px;left:8%;top:18%"></span>
-  <span class="hero-star" style="width:2px;height:2px;left:22%;top:64%"></span>
-  <span class="hero-star" style="width:4px;height:4px;left:83%;top:22%;opacity:.7"></span>
-  <span class="hero-star" style="width:2px;height:2px;left:71%;top:70%"></span>
-  <span class="hero-star" style="width:3px;height:3px;left:92%;top:55%"></span>
-  <div class="wrap" style="text-align:center;padding:36px 0 20px">
-    <div class="lockup">
-      <!--__LOGO_DARK__-->
-    </div>
-  </div>
-</section>
+    <!-- ================= LIGHT: LOGO + VN ================= -->
+    <section class="light">
+      <div
+        class="wrap"
+        style="
+          display: flex;
+          gap: 48px;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+        "
+      >
+        <div class="lockup" style="text-align: center">
+          <!--__LOGO_LIGHT_EN__-->
+        </div>
+        <div class="lockup" style="text-align: center">
+          <!--__LOGO_LIGHT_VN__-->
+        </div>
+      </div>
+      <div class="wrap">
+        <p class="note" style="text-align: center">
+          Logo chính thức (RANG in hoa + chữ i đốm sáng) — giữ nguyên, không thêm trang trí.
+        </p>
+      </div>
+    </section>
 
-<!-- ================= LIGHT: LOGO + VN ================= -->
-<section class="light">
-  <div class="wrap" style="display:flex;gap:48px;align-items:center;justify-content:center;flex-wrap:wrap">
-    <div class="lockup" style="text-align:center">
-      <!--__LOGO_LIGHT_EN__-->
-    </div>
-    <div class="lockup" style="text-align:center">
-      <!--__LOGO_LIGHT_VN__-->
-    </div>
-  </div>
-  <div class="wrap">
-    <p class="note" style="text-align:center">Logo chính thức (RANG in hoa + chữ i đốm sáng) — giữ nguyên, không thêm trang trí.</p>
-  </div>
-</section>
+    <!-- ================= MASCOT V2 ================= -->
+    <section class="light" style="background: #f6f0e2">
+      <div class="wrap">
+        <h2 class="sec">Mascot v2 — đom đóm minh họa mềm (4 pose × 2 nền)</h2>
+        <div class="mrow">
+          <figure class="mcard on-dark">
+            <!--__FLY_GLOWING_DARK__-->
+            <figcaption>glowing</figcaption>
+          </figure>
+          <figure class="mcard on-dark">
+            <!--__FLY_RESTING_DARK__-->
+            <figcaption>resting (mờ trung tính)</figcaption>
+          </figure>
+          <figure class="mcard on-dark">
+            <!--__FLY_GREETING_DARK__-->
+            <figcaption>greeting</figcaption>
+          </figure>
+        </div>
+        <div style="height: 14px"></div>
+        <div class="mrow">
+          <figure class="mcard on-light">
+            <!--__FLY_GLOWING_LIGHT__-->
+            <figcaption>glowing</figcaption>
+          </figure>
+          <figure class="mcard on-light">
+            <!--__FLY_RESTING_LIGHT__-->
+            <figcaption>resting</figcaption>
+          </figure>
+          <figure class="mcard on-light">
+            <!--__FLY_GREETING_LIGHT__-->
+            <figcaption>greeting</figcaption>
+          </figure>
+        </div>
+        <div class="glowbox">
+          <label for="glow">--rangi-glow (sáng dần theo tiến bộ):</label>
+          <input
+            id="glow"
+            type="range"
+            min="0"
+            max="1"
+            step="0.05"
+            value="1"
+            oninput="
+              document
+                .querySelectorAll('.fly')
+                .forEach((s) => s.style.setProperty('--rangi-glow', this.value))
+            "
+          />
+        </div>
+        <div style="height: 26px"></div>
+        <h2 class="sec">So sánh v1 (geometric cũ) ↔ v2 (mới)</h2>
+        <div class="compare">
+          <figure class="cell">
+            <!--__V1_FIREFLY__-->
+            <figcaption>v1 — flat geometric</figcaption>
+          </figure>
+          <figure class="cell">
+            <!--__V2_FIREFLY_SMALL__-->
+            <figcaption>v2 — soft illustrated</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
 
-<!-- ================= MASCOT V2 ================= -->
-<section class="light" style="background:#F6F0E2">
-  <div class="wrap">
-    <h2 class="sec">Mascot v2 — đom đóm minh họa mềm (4 pose × 2 nền)</h2>
-    <div class="mrow">
-      <figure class="mcard on-dark"><!--__FLY_GLOWING_DARK__--><figcaption>glowing</figcaption></figure>
-      <figure class="mcard on-dark"><!--__FLY_RESTING_DARK__--><figcaption>resting (mờ trung tính)</figcaption></figure>
-      <figure class="mcard on-dark"><!--__FLY_GREETING_DARK__--><figcaption>greeting</figcaption></figure>
-    </div>
-    <div style="height:14px"></div>
-    <div class="mrow">
-      <figure class="mcard on-light"><!--__FLY_GLOWING_LIGHT__--><figcaption>glowing</figcaption></figure>
-      <figure class="mcard on-light"><!--__FLY_RESTING_LIGHT__--><figcaption>resting</figcaption></figure>
-      <figure class="mcard on-light"><!--__FLY_GREETING_LIGHT__--><figcaption>greeting</figcaption></figure>
-    </div>
-    <div class="glowbox">
-      <label for="glow">--rangi-glow (sáng dần theo tiến bộ):</label>
-      <input id="glow" type="range" min="0" max="1" step="0.05" value="1"
-        oninput="document.querySelectorAll('.fly').forEach(s=>s.style.setProperty('--rangi-glow',this.value))">
-    </div>
-    <div style="height:26px"></div>
-    <h2 class="sec">So sánh v1 (geometric cũ) ↔ v2 (mới)</h2>
-    <div class="compare">
-      <figure class="cell"><!--__V1_FIREFLY__--><figcaption>v1 — flat geometric</figcaption></figure>
-      <figure class="cell"><!--__V2_FIREFLY_SMALL__--><figcaption>v2 — soft illustrated</figcaption></figure>
-    </div>
-  </div>
-</section>
+    <!-- ================= ICONS V2 ================= -->
+    <section class="light">
+      <div class="wrap">
+        <h2 class="sec">Icon v2 — 21 outline + 21 filled</h2>
+        <!--__ICON_BANDS__-->
+      </div>
+    </section>
 
-<!-- ================= ICONS V2 ================= -->
-<section class="light">
-  <div class="wrap">
-    <h2 class="sec">Icon v2 — 21 outline + 21 filled</h2>
-    <!--__ICON_BANDS__-->
-  </div>
-</section>
-
-<footer style="padding:26px;text-align:center;font-family:system-ui;font-size:12px;opacity:.5">
-  Rangi brand mockup v2 — 05/08/2026 · font Baloo 2 (latin + vietnamese, nhúng base64) · chưa tích hợp vào dự án
-</footer>
-</body>
+    <footer
+      style="
+        padding: 26px;
+        text-align: center;
+        font-family: system-ui;
+        font-size: 12px;
+        opacity: 0.5;
+      "
+    >
+      Rangi brand mockup v2 — 05/08/2026 · font Baloo 2 (latin + vietnamese, nhúng base64) · chưa
+      tích hợp vào dự án
+    </footer>
+  </body>
 </html>
