@@ -2,16 +2,25 @@
 
 **Ngày lập**: 07/08/2026 · Kho lưu link các repo/tài liệu đáng tham khảo đã khảo sát, kèm kết luận đã rút ra — để khi dự án mở rộng không phải nghiên cứu lại từ đầu. Gặp repo đáng giá mới → thêm dòng vào bảng, khảo sát sâu thì mở doc research riêng và trỏ link ở cột chi tiết.
 
-## Danh sách
+## A. Skill đã tích hợp vào repo (`.claude/skills/`)
 
-| Repo | Chủ đề | Giá trị | Chi tiết |
+Đây là các skill đang chạy thật trong dự án — mỗi skill vendor đầy đủ, offline, git-track.
+
+| Skill | Nguồn | Version tích hợp | Ghi chú |
 | --- | --- | --- | --- |
-| [taovietducofficial/CI-CD-Beginner](https://github.com/taovietducofficial/CI-CD-Beginner) | CI/CD | Template GitHub Actions cho Node.js, nặng về supply-chain security; comment giải thích lý do thiết kế ngay trong YAML. Apache-2.0; tên "Beginner" nhưng nội dung advanced; deploy thật chỉ là placeholder | Mục CI/CD bên dưới (khảo sát 07/08/2026) |
-| [mattpocock/skills](https://github.com/mattpocock/skills) | Agent skills | "Skills For Real Engineers" — bộ skill kỷ luật kỹ sư cho AI agent; nguồn của 6 kỹ thuật đã nhận vào harness (CONTEXT.md glossary, grilling frontier, debug kỷ luật, review hai trục, cắt tỉa tài liệu, redact secret khi debug) | [nghien-cuu-skills-mattpocock.md](nghien-cuu-skills-mattpocock.md) (khảo sát 05/08, rà lại 07/08/2026) |
-| [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | UI/UX skill | Database UI/UX tra cứu offline (84 styles, 192 palettes, 74 font pairings, 98 UX guidelines, 25 chart types, 22 stacks) + script search BM25 thuần Python stdlib, không gọi mạng. MIT | Mục UI/UX bên dưới — ĐÃ TÍCH HỢP v2.13.0 vào `.claude/skills/ui-ux-pro-max/` (07/08/2026) |
-| [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | React/Next.js | ~29.8k sao, maintain tích cực. Đáng giá nhất: `react-best-practices` — 70 rule perf, mỗi rule 1 file có code Incorrect/Correct, thuần markdown offline. ⚠️ License: MIT khai ở frontmatter từng SKILL.md, repo KHÔNG có file LICENSE (API /license trả 404) | Mục khảo sát skill bên dưới — `react-best-practices` CHỜ NGƯỜI DÙNG QUYẾT; `react-native-skills` chờ giai đoạn mobile |
-| [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | Knowledge graph | ~104k sao, Apache-2.0, offline thật (tree-sitter AST + networkx local, đã kiểm dependency không gọi mạng). Biến codebase/docs/PDF thành knowledge graph tra cứu | CHỜ: chỉ đáng cài khi codebase/docs phình to — hiện tại Grep vẫn đủ |
-| [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | SDLC pipeline | ~83k sao, MIT. Toàn bộ pipeline spec→ship TRÙNG superpowers — không cài; riêng `agents/security-auditor.md` (checklist auth/IDOR/PII/secrets cụ thể) đáng mượn MỘT FILE | CHỜ: mượn security-auditor.md khi có API xử lý dữ liệu trẻ em thật |
+| `ui-ux-pro-max` | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | v2.13.0 (07/08/2026) | Database UI/UX tra cứu offline (84 styles, 98 UX guidelines, 25 chart types, 22 stacks) + search BM25 Python stdlib. MIT. Chi tiết cập nhật: mục UI/UX bên dưới |
+| `react-best-practices` | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | v1.0.0 (07/08/2026) | 70 rule perf React/Next.js, mỗi rule 1 file code Incorrect/Correct, thuần markdown không script/mạng. License MIT khai ở frontmatter SKILL.md (repo nguồn không có file LICENSE cấp repo — người dùng chấp nhận 07/08/2026). Đã chèn rào "API-first, không nhét logic vào server actions" đầu SKILL.md. Cùng repo nguồn còn `react-native-skills` — chờ giai đoạn mobile |
+
+## B. Repo tham khảo (kiến thức — KHÔNG phải skill tích hợp)
+
+Repo đã khảo sát để rút bài học hoặc để dành; không có file nào của chúng nằm trong repo này.
+
+| Repo | Chủ đề | Giá trị | Trạng thái |
+| --- | --- | --- | --- |
+| [taovietducofficial/CI-CD-Beginner](https://github.com/taovietducofficial/CI-CD-Beginner) | CI/CD | Template GitHub Actions nặng về supply-chain security; comment giải thích lý do thiết kế ngay trong YAML. Apache-2.0; deploy thật chỉ là placeholder | Đã rút bài học (pin SHA, least-privilege đã áp dụng; phần còn lại chờ giai đoạn CD — mục CI/CD bên dưới) |
+| [mattpocock/skills](https://github.com/mattpocock/skills) | Agent skills | "Skills For Real Engineers" — nguồn của 6 kỹ thuật đã hấp thụ vào CLAUDE.md/harness (CONTEXT.md glossary, grilling frontier, debug kỷ luật, review hai trục, cắt tỉa tài liệu, redact secret khi debug) | Đã hấp thụ dạng quy tắc, không cài file — [nghien-cuu-skills-mattpocock.md](nghien-cuu-skills-mattpocock.md) |
+| [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | Knowledge graph | ~104k sao, Apache-2.0, offline thật (tree-sitter AST + networkx local, đã kiểm dependency). Biến codebase/docs/PDF thành knowledge graph tra cứu | CHỜ: cài khi codebase/docs phình to — hiện tại Grep vẫn đủ |
+| [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | SDLC pipeline | ~83k sao, MIT. Pipeline spec→ship TRÙNG superpowers — không cài; riêng `agents/security-auditor.md` (checklist auth/IDOR/PII/secrets) đáng mượn MỘT FILE | CHỜ: mượn security-auditor.md khi có API xử lý dữ liệu trẻ em thật |
 
 ## CI/CD — CI-CD-Beginner dạy gì (tóm tắt đã kiểm chứng 07/08/2026)
 

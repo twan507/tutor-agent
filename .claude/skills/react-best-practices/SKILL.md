@@ -9,6 +9,8 @@ metadata:
 
 # Vercel React Best Practices
 
+> **RÀO CHO DỰ ÁN NÀY (tutor-agent/Rangi).** Kiến trúc đã chốt là API-first: mọi business logic nằm sau API Django (django-ninja), Next.js là thin client (CLAUDE.md mục "Quy tắc kiến trúc cứng" §6). Vì vậy các rule nhóm `server-` (server actions, API routes, server-side caching của Next.js) chỉ áp dụng cho phần trình bày/proxy thuần túy — KHÔNG lấy chúng làm cớ đưa logic nghiệp vụ vào server actions/server components. Các nhóm còn lại (`async-`, `bundle-`, `client-`, `rerender-`, `rendering-`, `js-`, `advanced-`) áp dụng bình thường.
+
 Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel. Contains 70 rules across 8 categories, prioritized by impact to guide automated refactoring and code generation.
 
 ## When to Apply
