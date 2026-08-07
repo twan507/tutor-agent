@@ -8,6 +8,7 @@
 | --- | --- | --- | --- |
 | [taovietducofficial/CI-CD-Beginner](https://github.com/taovietducofficial/CI-CD-Beginner) | CI/CD | Template GitHub Actions cho Node.js, nặng về supply-chain security; comment giải thích lý do thiết kế ngay trong YAML. Apache-2.0; tên "Beginner" nhưng nội dung advanced; deploy thật chỉ là placeholder | Mục CI/CD bên dưới (khảo sát 07/08/2026) |
 | [mattpocock/skills](https://github.com/mattpocock/skills) | Agent skills | "Skills For Real Engineers" — bộ skill kỷ luật kỹ sư cho AI agent; nguồn của 6 kỹ thuật đã nhận vào harness (CONTEXT.md glossary, grilling frontier, debug kỷ luật, review hai trục, cắt tỉa tài liệu, redact secret khi debug) | [nghien-cuu-skills-mattpocock.md](nghien-cuu-skills-mattpocock.md) (khảo sát 05/08, rà lại 07/08/2026) |
+| [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | UI/UX skill | Database UI/UX tra cứu offline (84 styles, 192 palettes, 74 font pairings, 98 UX guidelines, 25 chart types, 22 stacks) + script search BM25 thuần Python stdlib, không gọi mạng. MIT | Mục UI/UX bên dưới — ĐÃ TÍCH HỢP v2.13.0 vào `.claude/skills/ui-ux-pro-max/` (07/08/2026) |
 
 ## CI/CD — CI-CD-Beginner dạy gì (tóm tắt đã kiểm chứng 07/08/2026)
 
@@ -39,3 +40,13 @@ Khi làm spec CD giai đoạn 2 (deploy VPS), mang các mục sau vào brainstor
 | Cosign + SLSA provenance + verify-reproducible | Bộ này bảo vệ image phân phối công khai (fork/redistribute); ta build image tự deploy lên VPS riêng — mức đe dọa khác hẳn, tốn ~30 phút CI/lần. Vi phạm "đơn giản trước tiên" | Image được phân phối ra ngoài, hoặc có yêu cầu compliance chuỗi cung ứng |
 | Multi-arch build (amd64+arm64, QEMU) | VPS x86 thuần — chỉ tốn thời gian CI | VPS/target chạy ARM |
 | CodeQL, zizmor, Trivy | Nice-to-have, chưa phải MVP; CodeQL nếu dùng phải thêm Python, không copy nguyên workflow JS | Codebase lớn hơn, có người dùng thật / trước beta công khai |
+
+## UI/UX — ui-ux-pro-max-skill: chi tiết tích hợp (07/08/2026)
+
+Tích hợp mức **project** tại `.claude/skills/ui-ux-pro-max/` (SKILL.md + data/ + scripts/ + references/, 42 file ~1.8MB). Đồng thời đã gỡ bản cài mức user (bản đó hỏng payload — symlink git checkout thành file text trên Windows) và dọn toàn bộ skill user-level khác theo quyết định "user chỉ giữ superpowers".
+
+**Ba điều không suy ra được từ file, phải nhớ khi cập nhật skill này:**
+
+1. **Không cài bằng CLI chính chủ** (`uipro init --ai claude`) — nó cài kèm 6 skill anh em không xin. Cách đúng: copy tay — SKILL.md + references/ lấy từ `.claude/skills/ui-ux-pro-max/` của repo nguồn (bản viết tay, số liệu đúng), data/ + scripts/ lấy từ `src/ui-ux-pro-max/` (nguồn canonical); KHÔNG lấy templates/ (chỉ CLI dùng, số liệu trong `templates/platforms/claude.json` đang lệch cũ).
+2. **Phải sửa path trong SKILL.md sau khi copy**: bản gốc dùng `${CLAUDE_PLUGIN_ROOT}/...` — biến chỉ tồn tại khi cài dạng plugin marketplace; bản project skill phải đổi thành path tương đối từ gốc repo `.claude/skills/ui-ux-pro-max/scripts/search.py`. Đã kiểm chứng chạy thật từ gốc repo (exit 0).
+3. **Rào brand đã chèn đầu SKILL.md**: cấm `--design-system` và domain `color`/`typography`/`google-fonts` trong repo này — skill không có cơ chế "bring your own design system", các lệnh đó sẽ đề xuất palette/font đè brand Rangi đã chốt. Cập nhật version mới phải chèn lại rào này.
