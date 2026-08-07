@@ -21,13 +21,16 @@ export const MASCOT_MANIFEST = [
   "firefly-greeting-light",
 ].sort();
 
+// Icon (07/08/2026): sinh từ Tabler, thuần currentColor — KHÔNG màu nào được phép
+// nằm trong file, kể cả amber bọc trong var(--icon-accent, …) như bộ tự vẽ trước đây.
+// Accent do component quyết định lúc dùng (spec 2026-08-07 §5.4), nên whitelist rỗng.
 // Mascot v2 (06/08/2026): soft illustrated — gradient nhiều bậc trong họ amber/mint,
-// hex trần được phép (nằm trong gradient stop), khác quy tắc var()-only của icon.
+// hex trần được phép (nằm trong gradient stop), khác hẳn quy tắc của icon.
 // #000/#fff (07/08/2026) KHÔNG phải màu vẽ: chúng là giá trị stencil của <mask>
 // gọt mép cánh theo thân — đen = che, trắng = giữ. Không có nét nào tô hai màu này.
 const WHITELIST = {
-  outline: ["#F5A623"],
-  filled: ["#F5A623"],
+  outline: [],
+  filled: [],
   mascot: [
     "#000",
     "#fff",
@@ -62,8 +65,11 @@ export function checkSvg(name, content, kind) {
   const errors = [];
   const manifest = (MANIFEST_OF[kind] ?? (() => ICON_MANIFEST))();
   if (!manifest.includes(name)) errors.push(`${name}: tên không thuộc manifest ${kind}`);
-  if (kind !== "mascot" && !content.includes(`aria-label="${name}"`))
-    errors.push(`${name}: thiếu aria-label đúng tên khái niệm`);
+  if (kind !== "mascot") {
+    if (!content.includes(`aria-label="${name}"`))
+      errors.push(`${name}: thiếu aria-label đúng tên khái niệm`);
+    if (!content.includes('role="img"')) errors.push(`${name}: thiếu role="img"`);
+  }
   if (!content.includes(`viewBox="${VIEWBOX[kind]}"`))
     errors.push(`${name}: viewBox phải là "${VIEWBOX[kind]}"`);
   if (kind === "outline") {
@@ -72,6 +78,9 @@ export function checkSvg(name, content, kind) {
     if (!content.includes('fill="none"')) errors.push(`${name}: outline phải fill="none" ở root`);
     if (!content.includes('stroke-width="1.75"'))
       errors.push(`${name}: outline phải stroke-width="1.75"`);
+    for (const attr of ["stroke-linecap", "stroke-linejoin"])
+      if (!content.includes(`${attr}="round"`))
+        errors.push(`${name}: outline phải ${attr}="round"`);
   }
   if (kind === "filled" && !content.includes('fill="currentColor"'))
     errors.push(`${name}: filled phải fill="currentColor"`);

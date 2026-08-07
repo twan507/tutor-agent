@@ -36,6 +36,24 @@ describe("checkSvg outline", () => {
     const bad = VALID_OUTLINE.replace('stroke-width="1.75"', 'stroke-width="2"');
     expect(checkSvg("correct", bad, "outline").join(" ")).toContain("1.75");
   });
+  it("thiếu role=img → lỗi", () => {
+    const bad = VALID_OUTLINE.replace(' role="img"', "");
+    expect(checkSvg("correct", bad, "outline").join(" ")).toContain('role="img"');
+  });
+  it("thiếu bo đầu nét → lỗi từng thuộc tính", () => {
+    const noCap = VALID_OUTLINE.replace(' stroke-linecap="round"', "");
+    expect(checkSvg("correct", noCap, "outline")).toEqual([
+      'correct: outline phải stroke-linecap="round"',
+    ]);
+    const noJoin = VALID_OUTLINE.replace(' stroke-linejoin="round"', "");
+    expect(checkSvg("correct", noJoin, "outline")).toEqual([
+      'correct: outline phải stroke-linejoin="round"',
+    ]);
+  });
+  it("amber bọc trong var() nay CŨNG là lỗi — icon thuần currentColor", () => {
+    const bad = VALID_OUTLINE.replace("<circle", '<circle fill="var(--icon-accent, #F5A623)"');
+    expect(checkSvg("correct", bad, "outline")).not.toEqual([]);
+  });
   it("tên ngoài manifest → lỗi", () => {
     expect(checkSvg("random-icon", VALID_OUTLINE, "outline")).not.toEqual([]);
   });
