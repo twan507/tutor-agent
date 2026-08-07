@@ -156,7 +156,9 @@ Tất cả nằm trong `frontend/public/brand/`:
 | Icon UI   | `icons/filled/*.svg` (21, v2)                 | trạng thái active/nhấn mạnh             | thiết kế theo ngữ pháp filled riêng (không phải outline tô đặc)                                                                                                                      |
 | Mascot v2 | `mascot/firefly-{pose}[-light].svg` (3×2 nền) | minh họa, empty state, onboarding       | soft illustrated, tỷ lệ chuẩn từ trace (đầu ≈ 1.05× bề ngang thân); bản `-light` cho nền sáng (cánh đậm hơn); độ sáng chỉnh bằng CSS var `--rangi-glow` (0→1); KHÔNG dùng trong logo |
 
-Ba pose còn lại: `glowing`, `resting`, `greeting`.
+Ba pose: `glowing` (sáng rõ, có đốm lấp lánh), `greeting` (thân nghiêng 4°, ba dấu cộng lấp lánh), `resting` (quầng dịu, thân mờ hơn, cánh cụp sát thân — trạng thái nghỉ, tuyệt đối không buồn bã).
+
+**Quy tắc bắt buộc khi sửa mascot** (07/08/2026, học từ một lỗi thật): độ sáng theo tiến bộ chỉnh bằng CSS var `--rangi-glow` (0→1), nhưng **mọi opacity phụ thuộc biến này phải ghi kèm một giá trị số tĩnh** trong thuộc tính `opacity`. Trình render ảnh (sharp/librsvg, trình xem file, mọi đường xuất PNG) không có CSS engine nên bỏ qua `calc()`+`var()` — thiếu con số thì ảnh tĩnh luôn ra bản sáng nhất bất kể pose, và cơ chế "sáng dần theo tiến bộ" âm thầm không hoạt động ngoài trình duyệt.
 
 Đã loại 06/08/2026: bộ lockup dọc `rangi-lockup-vertical-*.svg` (người dùng bỏ — xóa cả code sinh lẫn file); mascot v1 geometric (thay bằng v2, nguồn + hàm sinh tại `frontend/scripts/brand/proto-v2/`, còn tinh chỉnh tiếp).
 
