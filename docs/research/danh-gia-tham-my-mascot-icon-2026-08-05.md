@@ -71,3 +71,23 @@ Cùng lượt, người dùng đánh giá **animation cũng chưa đạt yêu c�
 Giữ lại: icon `learning-path` (nét đứt là nội dung của icon ở 24px, không phải họa tiết thương hiệu). Câu "Giữ nguyên: motifs/flight-path/pattern/lockup" ở mục trên là đánh giá 05/08 — nay đã bị quyết định sau ghi đè, giữ để truy vết lịch sử.
 
 Điểm cần rút: cả hai lần loại bỏ (lockup dọc 06/08, nét đứt + animation 07/08) đều rơi vào thứ được sinh từ code theo spec mà **chưa ai chấm thẩm mỹ trước khi đưa vào bộ chuẩn** — đúng nguyên nhân gốc số 2 đã ghi ở trên (gate xanh ≠ đẹp). Hạng mục trang trí nên qua vòng render-và-duyệt của người dùng TRƯỚC khi được ghi vào sổ tay như motif chính thức.
+
+## Cập nhật 07/08/2026 — tinh chỉnh cánh và glow theo ảnh mẫu
+
+Người dùng gửi ảnh đom đóm tham chiếu, yêu cầu **glow chuyển mượt hơn** và **cánh giọt nước rủ xuống**. Chạy 4 vòng render-và-duyệt (bảng biến thể PNG, người dùng bẻ từng vòng), thông số chốt nằm trong hằng số đầu `assemble.mjs`:
+
+| Thông số                        | Cũ                             | Mới                    |
+| ------------------------------- | ------------------------------ | ---------------------- |
+| Góc cánh (từ phương thẳng đứng) | trên 97° (chếch LÊN), dưới 66° | trên 50°, dưới 24°     |
+| Hình cánh                       | cánh hoa, hai cặp KHÁC cỡ      | giọt nước, hai cặp CÙNG một hình (`WING_L` 62 × `WING_W` 34, `WING_BEND` 14) |
+| Gốc cánh                        | sát mép thân (dính vào thân)   | lệch ra `WING_OFFSET` 15 → hở khỏi thân |
+| Khe đầu–thân                    | 8.3                            | 4.8 (`HEAD_CY` 73 → 76.5) |
+| Khe râu–đầu                     | 10.8                           | 4.3 (hạ râu 6 đơn vị)  |
+| Quầng sáng                      | 1 lớp, 5 mốc gradient          | 2 lớp (r 105 + r 88), 8 mốc, cả cụm qua `feGaussianBlur` 7 |
+| Thân + đầu                      | đục hoàn toàn                  | `BODY_OPACITY` 0.92 để hòa vào glow |
+
+Ba bài học phương pháp từ vòng này:
+
+1. **Khe hở phải là hình học, không phải vết cắt.** Vòng thử đầu dùng `<mask>` khoét cánh theo đường thân nở ra — khe đều tuyệt đối nhưng để lại mép cụt thô ở chỗ dao cắt ngang thân cánh. Cách đúng: vẽ cánh là đường khép kín rồi ĐẶT gốc lệch ra ngoài thân; không có gì bị cắt thì không có mép cụt.
+2. **Bảng biến thể rẻ hơn tranh luận.** Mỗi vòng render một lưới 9 ô PNG (2 trục × 3 mức) rồi để người dùng chỉ mặt, thay vì mô tả bằng lời. Hội tụ sau 4 vòng.
+3. Thông số hình học phải nằm trong **hằng số có tên** ở đầu file sinh, không rải số ma thuật trong path — vòng sau chỉnh một dòng là xong.

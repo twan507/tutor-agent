@@ -75,33 +75,48 @@ function wordmarkSVG({ ink, mint, sfx, width = 560 }) {
 }
 
 // ================= FIREFLY v3 — slender, delicate wings, smooth ambient =================
+// Thông số hình học mascot (chốt 07/08/2026 sau 4 vòng render-và-duyệt với người dùng)
+const WING_L = 62; // dài giọt nước
+const WING_W = 34; // chỗ phình rộng nhất
+const WING_BEND = 14; // độ uốn cong của giọt
+const WING_OFFSET = 15; // gốc cánh lệch khỏi trục dọc → khe hở với thân
+const WING_ROOT_Y = 102;
+const HEAD_CY = 76.5; // hạ đầu xuống: khe đầu–thân 8.3 → 4.8
+const BODY_OPACITY = 0.92; // thân + đầu hơi trong để hòa vào glow
+
 function firefly(pose, sfx, size = 190, bg = "dark") {
   const s = sfx;
   const light = bg === "light";
   const resting = pose === "resting";
   const greeting = pose === "greeting";
 
-  // wings: DROPLET đúng nghĩa — root hẹp sát thân, ĐẦU NGOÀI TRÒN BẦU (không nhọn)
-  const petal = (L, W) => {
-    const f = (v) => v.toFixed(1);
+  // Cánh: GIỌT NƯỚC khép kín — gốc thon tròn, phình dần, đuôi bầu. `bend` uốn cong
+  // cả giọt để mép trong men theo sườn thân. Không cắt/khoét ở đâu cả: khe hở giữa
+  // cánh và thân có được bằng cách đặt gốc cánh lệch WING_OFFSET ra ngoài trục dọc.
+  // Hai cặp cánh dùng CHUNG một hình (cùng L, W, bend), chỉ khác góc rủ và độ đậm.
+  const drop = (bend) => {
+    const f = (v) => v.toFixed(2);
+    const h = WING_W / 2;
+    const b = (t) => bend * t;
     return (
-      `M0 0 C${f(-0.45 * W)} ${f(0.25 * L)} ${f(-0.5 * W)} ${f(0.62 * L)} ${f(-0.42 * W)} ${f(0.8 * L)}` +
-      ` C${f(-0.3 * W)} ${f(0.99 * L)} ${f(0.3 * W)} ${f(0.99 * L)} ${f(0.42 * W)} ${f(0.8 * L)}` +
-      ` C${f(0.5 * W)} ${f(0.62 * L)} ${f(0.45 * W)} ${f(0.25 * L)} 0 0 Z`
+      `M0 0 ` +
+      `C${f(0.34 * h + b(0.2))} ${f(0.16 * WING_L)} ${f(h + b(0.55))} ${f(0.42 * WING_L)} ${f(h + b(0.75))} ${f(0.68 * WING_L)} ` +
+      `C${f(h + b(0.9))} ${f(0.88 * WING_L)} ${f(0.55 * h + bend)} ${f(WING_L)} ${f(bend)} ${f(WING_L)} ` +
+      `C${f(-0.55 * h + bend)} ${f(WING_L)} ${f(-h + b(0.9))} ${f(0.88 * WING_L)} ${f(-h + b(0.75))} ${f(0.68 * WING_L)} ` +
+      `C${f(-h + b(0.55))} ${f(0.42 * WING_L)} ${f(-0.34 * h + b(0.2))} ${f(0.16 * WING_L)} 0 0 Z`
     );
   };
-  // góc tính từ phương thẳng đứng: ~90° = ngang; cặp trên hơi chếch lên, cặp dưới hơi chúc xuống
-  const spec = resting
-    ? { upper: [84, 40, 22], lower: [55, 30, 18] }
-    : { upper: [97, 48, 26], lower: [66, 36, 21] };
-  const wing = (side, [ang, L, W], op) => {
-    const rx = side === "L" ? 101 : 119;
-    const a = side === "L" ? ang : -ang;
-    return `<path d="${petal(L, W)}" transform="translate(${rx} 103) rotate(${a})" fill="url(#wing-${s})" opacity="${op}"/>`;
-  };
+  // góc tính từ phương thẳng đứng: 90° = ngang, càng nhỏ càng rủ xuống
+  const spec = resting ? { upper: 40, lower: 16 } : { upper: 50, lower: 24 };
+  const dL = drop(WING_BEND);
+  const dR = drop(-WING_BEND);
+  const wing = (side, ang, op) =>
+    `<path d="${side === "L" ? dL : dR}" transform="translate(${
+      side === "L" ? 110 - WING_OFFSET : 110 + WING_OFFSET
+    } ${WING_ROOT_Y}) rotate(${side === "L" ? ang : -ang})" fill="url(#wing-${s})" opacity="${op}"/>`;
   const wings = `<g>
-    ${wing("L", spec.lower, resting ? 0.45 : 0.6)}${wing("R", spec.lower, resting ? 0.45 : 0.6)}
-    ${wing("L", spec.upper, resting ? 0.55 : 0.8)}${wing("R", spec.upper, resting ? 0.55 : 0.8)}
+    ${wing("L", spec.lower, resting ? 0.5 : 0.62)}${wing("R", spec.lower, resting ? 0.5 : 0.62)}
+    ${wing("L", spec.upper, resting ? 0.62 : 0.82)}${wing("R", spec.upper, resting ? 0.62 : 0.82)}
   </g>`;
 
   const sparkles = greeting
@@ -117,12 +132,24 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
 <svg xmlns="http://www.w3.org/2000/svg" class="fly" viewBox="0 0 220 252" width="${size}" role="img" aria-label="Rangi firefly ${pose}" style="--rangi-glow:1">
   <defs>
     <radialGradient id="halo-${s}" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#F5A623" stop-opacity=".32"/>
-      <stop offset="30%" stop-color="#F5A623" stop-opacity=".20"/>
-      <stop offset="58%" stop-color="#F5A623" stop-opacity=".09"/>
-      <stop offset="82%" stop-color="#F5A623" stop-opacity=".025"/>
+      <stop offset="0%" stop-color="#F5A623" stop-opacity=".34"/>
+      <stop offset="14%" stop-color="#F5A623" stop-opacity=".28"/>
+      <stop offset="28%" stop-color="#F5A623" stop-opacity=".22"/>
+      <stop offset="42%" stop-color="#F5A623" stop-opacity=".16"/>
+      <stop offset="56%" stop-color="#F5A623" stop-opacity=".11"/>
+      <stop offset="70%" stop-color="#F5A623" stop-opacity=".068"/>
+      <stop offset="84%" stop-color="#F5A623" stop-opacity=".03"/>
       <stop offset="100%" stop-color="#F5A623" stop-opacity="0"/>
     </radialGradient>
+    <radialGradient id="halo2-${s}" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F5A623" stop-opacity=".10"/>
+      <stop offset="40%" stop-color="#F5A623" stop-opacity=".07"/>
+      <stop offset="70%" stop-color="#F5A623" stop-opacity=".03"/>
+      <stop offset="100%" stop-color="#F5A623" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glowblur-${s}" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
     <radialGradient id="body-${s}" cx="50%" cy="52%" r="62%" fx="50%" fy="55%">
       <stop offset="0%" stop-color="#FFF4D2"/>
       <stop offset="32%" stop-color="#FFE29A"/>
@@ -150,21 +177,26 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
   </defs>
   <g ${bodyRot} style="opacity:${resting ? 0.95 : 1}">
     <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
-      <circle cx="110" cy="132" r="84" fill="url(#halo-${s})"/>
+      <g filter="url(#glowblur-${s})">
+        <circle cx="110" cy="132" r="105" fill="url(#halo2-${s})"/>
+        <circle cx="110" cy="132" r="88" fill="url(#halo-${s})"/>
+      </g>
       <ellipse cx="110" cy="198" rx="62" ry="13" fill="#F5A623" opacity=".05"/>
     </g>
     ${wings}
-    <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z"
-          fill="url(#body-${s})"/>
-    <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-${s})"
-             style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
-    <circle cx="110" cy="73" r="15.7" fill="url(#head-${s})"/>
-    <g stroke="var(--fly-line,#D9B36A)" stroke-width="2.2" stroke-linecap="round" fill="none">
-      <path d="${greeting ? "M104 50 C97 41 88 37 80 39" : "M104 50 C99 43 92 34 84 28"}"/>
-      <path d="M116 50 C121 43 128 34 136 28"/>
+    <g opacity="${BODY_OPACITY}">
+      <path d="M110 97 C102.5 98 97 104 95.8 117 C94.4 142 98 179 110 179 C122 179 125.6 142 124.2 117 C123 104 117.5 98 110 97 Z"
+            fill="url(#body-${s})"/>
+      <ellipse cx="110" cy="140" rx="7" ry="26" fill="#FFF7E0" filter="url(#soft-${s})"
+               style="opacity:calc(0.25 + 0.65*var(--rangi-glow,1))"/>
+      <circle cx="110" cy="${HEAD_CY}" r="15.7" fill="url(#head-${s})"/>
     </g>
-    <circle cx="${greeting ? 79 : 83}" cy="${greeting ? 38.8 : 27.2}" r="2" fill="#F5C86B"/>
-    <circle cx="137" cy="27.2" r="2" fill="#F5C86B"/>
+    <g stroke="var(--fly-line,#D9B36A)" stroke-width="2.2" stroke-linecap="round" fill="none">
+      <path d="${greeting ? "M104 56 C97 47 88 43 80 45" : "M104 56 C99 49 92 40 84 34"}"/>
+      <path d="M116 56 C121 49 128 40 136 34"/>
+    </g>
+    <circle cx="${greeting ? 79 : 83}" cy="${greeting ? 44.8 : 33.2}" r="2" fill="#F5C86B"/>
+    <circle cx="137" cy="33.2" r="2" fill="#F5C86B"/>
   </g>
   ${sparkles}
 </svg>`;
