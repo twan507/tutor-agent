@@ -26,7 +26,6 @@
       <feGaussianBlur stdDeviation="2.4"/>
     </filter>
   </defs>
-  
   <g  style="opacity:0.95">
     <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
       <circle cx="110" cy="132" r="84" fill="url(#halo-f-resting)"/>

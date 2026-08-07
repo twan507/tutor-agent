@@ -76,8 +76,10 @@ describe("checkDir", () => {
 
 describe("manifest", () => {
   // Spec docs/specs/2026-08-05-goi-mo-rong-nhan-dien-svg.md §D đã đính chính: 21 icon (05/08/2026).
-  it("đúng 21 icon, 8 mascot (v2: 4 pose × 2 nền)", () => {
+  // Pose "flying" đã bỏ cùng motif đường bay (07/08/2026) → còn 3 pose × 2 nền.
+  it("đúng 21 icon, 6 mascot (v2: 3 pose × 2 nền)", () => {
     expect(ICON_MANIFEST).toHaveLength(21);
-    expect(MASCOT_MANIFEST).toHaveLength(8);
+    expect(MASCOT_MANIFEST).toHaveLength(6);
+    expect(MASCOT_MANIFEST.some((n) => n.includes("flying"))).toBe(false);
   });
 });

@@ -3,7 +3,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { execSync } from "node:child_process";
 import * as fontkit from "fontkit";
-import { flightPathEl, sparkEl } from "./motifs.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const FE = path.resolve(__dirname, "../..");
@@ -196,45 +195,5 @@ export const WORDMARK = ${JSON.stringify({ fs: FS, width: +totalW.toFixed(2), he
 `;
 fs.writeFileSync(OUT_TS, ts);
 execSync(`pnpm exec prettier --write "${OUT_TS}"`, { cwd: FE, stdio: "inherit" });
-// ---- Flight-path motif assets (sổ tay thương hiệu §3.3) ----
-const fpHorizontal =
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 60" role="img" aria-label="Rangi flight path">` +
-  flightPathEl({ from: [8, 44], to: [392, 20], curve: 34, id: "flight-path" }) +
-  `</svg>`;
-const fpToDot =
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" role="img" aria-label="Rangi flight path to spark">` +
-  flightPathEl({ from: [8, 96], to: [348, 52], curve: 56, id: "flight-path" }) +
-  sparkEl({ cx: 360, cy: 52, r: 7, haloR: 16, haloOp: 0.22 }) +
-  `</svg>`;
-fs.writeFileSync(path.join(OUT_SVG, "flight-path-horizontal.svg"), fpHorizontal);
-fs.writeFileSync(path.join(OUT_SVG, "flight-path-to-dot.svg"), fpToDot);
-
-// ---- Background patterns: sparse sparks + one flight path, seamless tile 240 ----
-function patternSVG(mode) {
-  const spark = mode === "dark" ? "#F5A623" : "#EF8D08";
-  const sparkOp = mode === "dark" ? 0.5 : 0.4;
-  const strokeOp = mode === "dark" ? 0.28 : 0.22;
-  const sparks = [
-    [40, 64, 3],
-    [150, 186, 2.2],
-    [214, 38, 2.6],
-  ]
-    .map(
-      ([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${spark}" opacity="${sparkOp}"/>`,
-    )
-    .join("");
-  const fp = flightPathEl({
-    from: [-20, 210],
-    to: [260, 150],
-    curve: 46,
-    stroke: spark,
-    width: 1.5,
-    dash: "1 8",
-  });
-  const fpBand = `<g opacity="${strokeOp}">${fp}<g transform="translate(-240 0)">${fp}</g><g transform="translate(240 0)">${fp}</g></g>`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Rangi pattern">${fpBand}${sparks}</svg>`;
-}
-fs.writeFileSync(path.join(OUT_SVG, "pattern-light.svg"), patternSVG("light"));
-fs.writeFileSync(path.join(OUT_SVG, "pattern-dark.svg"), patternSVG("dark"));
 
 console.log("generated:", fs.readdirSync(OUT_SVG).join(", "));

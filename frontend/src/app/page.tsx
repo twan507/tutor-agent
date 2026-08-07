@@ -1,11 +1,11 @@
 import { Health } from "@/components/Health";
-import { RangiSplash } from "@/components/brand/RangiSplash";
+import { RangiLogo } from "@/components/brand/RangiLogo";
 
 export default function Home() {
   return (
     <main>
       <div style={{ maxWidth: 260 }}>
-        <RangiSplash theme="light" />
+        <RangiLogo variant="wordmark" theme="light" />
       </div>
       <p>Khung dự án đã chạy.</p>
       <Health status="unknown" />

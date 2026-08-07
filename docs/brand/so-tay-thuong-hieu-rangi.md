@@ -131,16 +131,18 @@ Mô hình đúng là **Forest app**: phần thưởng cộng dồn, không trừ
 
 Cơ chế "mascot sáng dần theo tiến bộ" **chưa có tiền lệ trong edtech** — đây là điểm khác biệt thật, không phải trang trí.
 
-### 3.3 Dạng đầy đủ và motif đường bay (chốt 05/08/2026)
+### 3.3 Hai dạng mascot (chốt 05/08/2026; motif đường bay đã LOẠI 07/08/2026)
 
 Mascot có hai dạng, mỗi dạng một địa bàn — **không dạng nào lấn địa bàn dạng kia**:
 
 - **Đốm sáng tối giản** — sống trong wordmark (chấm chữ i) và app icon. Đây là dạng duy nhất được đứng trong logo: thay chấm chữ i bằng nguyên con đom đóm sẽ phá tính "một hình duy nhất" (tên = mascot = logo = icon) — chính là điểm ăn giải khi chọn tên Rangi.
-- **Đom đóm đầy đủ (geometric)** — sống trong minh họa: hero illustration, empty state, pattern nền, social post, pose sheet. Vẽ hình học tối giản, KHÔNG baby-face; mọi quy tắc cảm xúc mục 3.2 áp dụng nguyên vẹn.
+- **Đom đóm đầy đủ (geometric)** — sống trong minh họa: hero illustration, empty state, social post, pose sheet. Vẽ hình học tối giản, KHÔNG baby-face; mọi quy tắc cảm xúc mục 3.2 áp dụng nguyên vẹn.
 
-**Motif đường bay chấm gạch** (dashed flight path): đường bay của đom đóm vẽ bằng nét đứt, là họa tiết đồ họa chính thức thứ hai sau đốm sáng — dùng làm đường dẫn thị giác trong layout, pattern, trang trí. SVG: `<path>` + `stroke-dasharray`, tham số hóa trong pipeline sinh logo.
+**Motif đường bay chấm gạch đã bị loại bỏ hoàn toàn (07/08/2026)** — người dùng đánh giá nét đứt xấu và không cần thiết. Bỏ cả nhánh: 2 asset `flight-path-*.svg`, 2 file `pattern-*.svg` (nền vốn dựng từ chính đường bay), pose `flying` của mascot, module sinh `motifs.mjs` và test của nó. **Không vẽ lại nét đứt trang trí ở bất kỳ đâu trong bộ nhận diện.** Ngoại lệ duy nhất: icon `learning-path` — nét đứt ở đó là hình vẽ của "lộ trình học" ở cỡ 24px, không phải họa tiết thương hiệu.
 
-**Cầu nối hai dạng**: câu chuyện chuẩn là _đom đóm đầy đủ bay theo đường chấm gạch rồi đậu xuống thành chấm chữ i_. Tĩnh: wordmark giữ nguyên, đường bay dẫn vào chấm sáng. Động (splash/hero animation): kể trọn cảnh bay-và-đậu. Nhờ đó dạng đầy đủ và wordmark không cạnh tranh nhau mà là hai khung hình của cùng một cảnh.
+**Quan hệ hai dạng**: hai dạng là hai khung hình của cùng một nhân vật — đom đóm đầy đủ trong minh họa, đốm sáng trong logo. Trước đây câu chuyện được kể bằng cảnh "bay theo đường chấm gạch rồi đậu thành chấm chữ i"; cách kể đó **đã ngừng** cùng với motif và animation. Cách kể bằng chuyển động sẽ thiết kế lại sau, không dùng lại nét đứt.
+
+**Animation: tạm ngừng toàn bộ (07/08/2026)** — splash "bay-và-đậu" (`RangiSplash`) và hiệu ứng thở của chấm sáng (`breath` trong `RangiLogo`) đều bị gỡ; logo hiện là SVG tĩnh hoàn toàn. Người dùng đánh giá chưa đạt yêu cầu, sẽ thiết kế lại thành một hạng mục riêng.
 
 ---
 
@@ -152,11 +154,13 @@ Tất cả nằm trong `frontend/public/brand/`:
 | --------- | --------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Icon UI   | `icons/outline/*.svg` (21, v2)                | mặc định trong UI                       | màu qua `currentColor`; accent hổ phách tự có trong file                                                                                                                             |
 | Icon UI   | `icons/filled/*.svg` (21, v2)                 | trạng thái active/nhấn mạnh             | thiết kế theo ngữ pháp filled riêng (không phải outline tô đặc)                                                                                                                      |
-| Mascot v2 | `mascot/firefly-{pose}[-light].svg` (4×2 nền) | minh họa, empty state, onboarding       | soft illustrated, tỷ lệ chuẩn từ trace (đầu ≈ 1.05× bề ngang thân); bản `-light` cho nền sáng (cánh đậm hơn); độ sáng chỉnh bằng CSS var `--rangi-glow` (0→1); KHÔNG dùng trong logo |
-| Đường bay | `flight-path-*.svg`                           | trang trí section, kể chuyện bay-và-đậu | sinh từ code, sửa tham số trong `generate-logo.mjs`; KHÔNG đặt dưới logo (quyết 06/08)                                                                                               |
-| Pattern   | `pattern-{light,dark}.svg`                    | nền section, tương phản thấp            | tile 240px, `background-repeat` cả hai chiều                                                                                                                                         |
+| Mascot v2 | `mascot/firefly-{pose}[-light].svg` (3×2 nền) | minh họa, empty state, onboarding       | soft illustrated, tỷ lệ chuẩn từ trace (đầu ≈ 1.05× bề ngang thân); bản `-light` cho nền sáng (cánh đậm hơn); độ sáng chỉnh bằng CSS var `--rangi-glow` (0→1); KHÔNG dùng trong logo |
+
+Ba pose còn lại: `glowing`, `resting`, `greeting`.
 
 Đã loại 06/08/2026: bộ lockup dọc `rangi-lockup-vertical-*.svg` (người dùng bỏ — xóa cả code sinh lẫn file); mascot v1 geometric (thay bằng v2, nguồn + hàm sinh tại `frontend/scripts/brand/proto-v2/`, còn tinh chỉnh tiếp).
+
+Đã loại 07/08/2026: `flight-path-*.svg`, `pattern-{light,dark}.svg`, pose `flying`, module `motifs.mjs` + test, component `RangiSplash` + CSS + test, animation `breath` của `RangiLogo` (xóa cả code sinh lẫn file — xem §3.3).
 
 Gate chất lượng: `pnpm brand:check` (chạy trong `frontend/`, có trong CI) — icon sai chuẩn (viewBox 24, hex trần ngoài var, tên ngoài danh mục) hoặc mascot sai chuẩn v2 (viewBox 220×252, hex ngoài whitelist amber/mint) sẽ fail. Thêm icon mới = thêm tên vào `ICON_MANIFEST` trong `scripts/brand/check-icons.mjs` + vẽ đủ HAI bộ outline/filled.
 

@@ -28,8 +28,6 @@ export const ICON_MANIFEST = [
   "calendar",
 ].sort();
 export const MASCOT_MANIFEST = [
-  "firefly-flying",
-  "firefly-flying-light",
   "firefly-glowing",
   "firefly-glowing-light",
   "firefly-resting",

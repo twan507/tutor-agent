@@ -78,7 +78,6 @@ function wordmarkSVG({ ink, mint, sfx, width = 560 }) {
 function firefly(pose, sfx, size = 190, bg = "dark") {
   const s = sfx;
   const light = bg === "light";
-  const flying = pose === "flying";
   const resting = pose === "resting";
   const greeting = pose === "greeting";
 
@@ -92,11 +91,9 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
     );
   };
   // góc tính từ phương thẳng đứng: ~90° = ngang; cặp trên hơi chếch lên, cặp dưới hơi chúc xuống
-  const spec = flying
-    ? { upper: [108, 52, 27], lower: [82, 40, 22] }
-    : resting
-      ? { upper: [84, 40, 22], lower: [55, 30, 18] }
-      : { upper: [97, 48, 26], lower: [66, 36, 21] };
+  const spec = resting
+    ? { upper: [84, 40, 22], lower: [55, 30, 18] }
+    : { upper: [97, 48, 26], lower: [66, 36, 21] };
   const wing = (side, [ang, L, W], op) => {
     const rx = side === "L" ? 101 : 119;
     const a = side === "L" ? ang : -ang;
@@ -114,16 +111,7 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
       ? `<g fill="#F5C86B"><circle cx="50" cy="78" r="1.8" opacity=".8"/><circle cx="172" cy="62" r="1.5" opacity=".7"/><circle cx="180" cy="128" r="2" opacity=".8"/></g>`
       : "";
 
-  const underPath = flying
-    ? `<path d="M8 234 C42 214 62 228 88 228 C124 228 132 208 162 206 C184 204.5 198 208 214 200"
-         fill="none" stroke="#F5C86B" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="6 10" opacity=".5"/>`
-    : "";
-
-  const bodyRot = flying
-    ? `transform="rotate(-12 110 130)"`
-    : greeting
-      ? `transform="rotate(4 110 130)"`
-      : "";
+  const bodyRot = greeting ? `transform="rotate(4 110 130)"` : "";
 
   return `
 <svg xmlns="http://www.w3.org/2000/svg" class="fly" viewBox="0 0 220 252" width="${size}" role="img" aria-label="Rangi firefly ${pose}" style="--rangi-glow:1">
@@ -160,7 +148,6 @@ function firefly(pose, sfx, size = 190, bg = "dark") {
       <feGaussianBlur stdDeviation="2.4"/>
     </filter>
   </defs>
-  ${underPath}
   <g ${bodyRot} style="opacity:${resting ? 0.95 : 1}">
     <g style="opacity:calc(0.2 + 0.8*var(--rangi-glow,1))">
       <circle cx="110" cy="132" r="84" fill="url(#halo-${s})"/>
@@ -231,11 +218,9 @@ const slots = {
   "<!--__LOGO_LIGHT_EN__-->": official("rangi-lockup-slogan-en-light.svg", 320),
   "<!--__LOGO_LIGHT_VN__-->": official("rangi-lockup-slogan-light.svg", 320),
   "<!--__FLY_GLOWING_DARK__-->": firefly("glowing", "gd"),
-  "<!--__FLY_FLYING_DARK__-->": firefly("flying", "fd"),
   "<!--__FLY_RESTING_DARK__-->": firefly("resting", "rd"),
   "<!--__FLY_GREETING_DARK__-->": firefly("greeting", "grd"),
   "<!--__FLY_GLOWING_LIGHT__-->": firefly("glowing", "gl", 190, "light"),
-  "<!--__FLY_FLYING_LIGHT__-->": firefly("flying", "fl", 190, "light"),
   "<!--__FLY_RESTING_LIGHT__-->": firefly("resting", "rl", 190, "light"),
   "<!--__FLY_GREETING_LIGHT__-->": firefly("greeting", "grl", 190, "light"),
   "<!--__V1_FIREFLY__-->": v1svg,
@@ -254,7 +239,7 @@ fs.writeFileSync(path.join(DIR, "mockup-rangi-v2.html"), html);
 // standalone mascot v2 pose files (dark-bg gradients; bg "light" đổi gradient cánh)
 const MASCOT_DIR = path.join(DIR, "mascot-v2");
 fs.mkdirSync(MASCOT_DIR, { recursive: true });
-for (const pose of ["glowing", "flying", "resting", "greeting"]) {
+for (const pose of ["glowing", "resting", "greeting"]) {
   fs.writeFileSync(
     path.join(MASCOT_DIR, `firefly-${pose}-v2.svg`),
     firefly(pose, `f-${pose}`).trim() + "\n",
@@ -264,4 +249,4 @@ for (const pose of ["glowing", "flying", "resting", "greeting"]) {
     firefly(pose, `fl-${pose}`, 190, "light").trim() + "\n",
   );
 }
-console.log("assembled:", html.length, "bytes + 8 mascot-v2 svg");
+console.log("assembled:", html.length, "bytes + 6 mascot-v2 svg");

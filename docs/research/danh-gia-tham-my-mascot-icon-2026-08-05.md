@@ -61,3 +61,13 @@ Ghi nhận theo yêu cầu người dùng: "đánh giá và note lại thôi, t�
 - Khi tích hợp thật: nới rule mascot trong `check-icons.mjs` (viewBox 220×252, cho phép gradient stop trong họ màu brand) + cập nhật sổ tay thương hiệu §3.3-3.4 + spec mới theo đúng quy trình.
 - Icon v2 thay production đồng loạt hay chọn lọc — chưa quyết.
 - Bài học quy trình đã áp dụng từ vòng này: KHÔNG gửi bản vẽ khi chưa tự render soi (dùng sharp-cli render offline khi browser pane đóng); đo tỷ lệ từ trace/ảnh thay vì áng chừng.
+
+## Cập nhật 07/08/2026 — loại bỏ nhánh nét đứt và animation
+
+Người dùng soi lại bộ asset và quyết: **nét đứt trang trí xấu, bỏ cả nhánh** — không phải gọt line khỏi hình mà xóa hẳn file và code sinh. Đã xóa: `flight-path-horizontal.svg`, `flight-path-to-dot.svg`, `pattern-{light,dark}.svg`, pose `flying` (2 file production + 2 file proto), module `motifs.mjs` + `motifs.test.mjs`, `generated-files.test.mjs`, khối sinh flight-path/pattern trong `generate-logo.mjs`, nhánh `flying` trong `assemble.mjs`.
+
+Cùng lượt, người dùng đánh giá **animation cũng chưa đạt yêu cầu, bỏ hết, tính lại sau**: xóa `RangiSplash.tsx` + test + `rangi-splash.module.css`, xóa animation `breath` của `RangiLogo` (prop `animated`, `rangi-logo.module.css`, biến `--breath-scale`); trang chủ chuyển sang `RangiLogo` tĩnh.
+
+Giữ lại: icon `learning-path` (nét đứt là nội dung của icon ở 24px, không phải họa tiết thương hiệu). Câu "Giữ nguyên: motifs/flight-path/pattern/lockup" ở mục trên là đánh giá 05/08 — nay đã bị quyết định sau ghi đè, giữ để truy vết lịch sử.
+
+Điểm cần rút: cả hai lần loại bỏ (lockup dọc 06/08, nét đứt + animation 07/08) đều rơi vào thứ được sinh từ code theo spec mà **chưa ai chấm thẩm mỹ trước khi đưa vào bộ chuẩn** — đúng nguyên nhân gốc số 2 đã ghi ở trên (gate xanh ≠ đẹp). Hạng mục trang trí nên qua vòng render-và-duyệt của người dùng TRƯỚC khi được ghi vào sổ tay như motif chính thức.
