@@ -19,17 +19,17 @@ Yêu cầu: Docker (Desktop hoặc Engine) đang chạy, Node.js (đã cần cho
 
 **Chuẩn bị lần đầu** (sau khi clone): `cd frontend && pnpm install` — bắt buộc, vì `pnpm dev`/`pnpm build` sẽ lỗi nếu chưa có `node_modules`. Backend thì không cần bước tương ứng: `uv run ...` (được `dev-start` gọi bên trong) tự tạo/đồng bộ venv từ `backend/pyproject.toml` trước khi chạy.
 
-Toàn bộ logic nằm trong `scripts/stack.mjs` (Node thuần, không thêm dependency); các file `.bat`/`.sh` ở gốc repo chỉ là cửa vào. Gõ trực tiếp tên lệnh, không có tiền tố `make`:
+Toàn bộ logic nằm trong `scripts/stack.mjs` (Node thuần, không thêm dependency); `package.json` ở gốc chỉ khai báo 5 tên lệnh trỏ vào đó. Gõ `pnpm <lệnh>` từ gốc repo — giống hệt nhau trên cmd, PowerShell, Linux/macOS, không cần tiền tố `.\`:
 
-| Lệnh | Windows (cmd) | PowerShell | Linux/VPS | Việc |
-|---|---|---|---|---|
-| `dev-start` | `dev-start` | `.\dev-start` | `./dev-start.sh` | Postgres (Docker) + migrate + Django `:8000` + Next.js `:3000`, log gộp `[be]`/`[fe]`, Ctrl+C tắt sạch |
-| `dev-stop` | `dev-stop` | `.\dev-stop` | `./dev-stop.sh` | Tắt tiến trình dev + **stop** container Postgres (giữ container và volume) |
-| `docker-up` | `docker-up` | `.\docker-up` | `./docker-up.sh` | Build + chạy cả cụm 5 container, truy cập `http://localhost` |
-| `docker-down` | `docker-down` | `.\docker-down` | `./docker-down.sh` | **Xóa container** cả 2 tầng (app + infra), **GIỮ volume dữ liệu** |
-| `docker-clean` | `docker-clean` | `.\docker-clean` | `./docker-clean.sh` | Dọn build cache + image mồ côi + volume **vô danh**; in dung lượng trước/sau. KHÔNG đụng volume có tên |
+| Lệnh | Việc |
+|---|---|
+| `pnpm dev-start` | Postgres (Docker) + migrate + Django `:8000` + Next.js `:3000`, log gộp `[be]`/`[fe]`, Ctrl+C tắt sạch |
+| `pnpm dev-stop` | Tắt tiến trình dev + **stop** container Postgres (giữ container và volume) |
+| `pnpm docker-up` | Build + chạy cả cụm 5 container, truy cập `http://localhost` |
+| `pnpm docker-down` | **Xóa container** cả 2 tầng (app + infra), **GIỮ volume dữ liệu** |
+| `pnpm docker-clean` | Dọn build cache + image mồ côi + volume **vô danh**; in dung lượng trước/sau. KHÔNG đụng volume có tên |
 
-> **PowerShell** yêu cầu tiền tố `.\` cho file lệnh trong thư mục hiện tại (vd `.\dev-start`) — đây là quy tắc bảo mật của PowerShell, không phải lỗi. **cmd.exe** thì gõ trống, không cần tiền tố (`dev-start`).
+> Gõ `pnpm run` không kèm gì để xem danh sách lệnh. Các wrapper `.bat`/`.sh` cũ được lưu trữ trong `scripts/` (vd `scripts\dev-start` trên Windows, `./scripts/dev-start.sh` trên Linux) — vẫn chạy được, nhưng `pnpm <lệnh>` là cửa vào chính thức.
 
 ### Hai chế độ, hai bộ cổng
 
@@ -51,7 +51,7 @@ Toàn bộ logic nằm trong `scripts/stack.mjs` (Node thuần, không thêm dep
 
 ### Dừng `dev-start`
 
-Nhấn **Ctrl+C thật trong cửa sổ terminal** đang chạy lệnh — đây là cách duy nhất được kiểm chứng hoạt động trên Windows. **Không** dùng `kill -INT` từ Git Bash để gửi tín hiệu tới tiến trình `node.exe` — đã kiểm chứng tín hiệu đó không tới được tiến trình Node trên Windows, script sẽ không tắt sạch. Ctrl+C tắt cả Django lẫn Next.js, Postgres vẫn chạy (dùng `dev-stop` nếu muốn tắt luôn Postgres).
+Nhấn **Ctrl+C thật trong cửa sổ terminal** đang chạy lệnh — đây là cách duy nhất được kiểm chứng hoạt động trên Windows (đã kiểm chứng lại với `pnpm dev-start` ngày 07/08/2026: cả hai cổng tắt sạch, Postgres giữ nguyên). Có thể thấy dòng `Terminate batch job (Y/N)?` hiện ra — vô hại, tiến trình đã được tắt xong trước đó. **Không** dùng `kill -INT` từ Git Bash để gửi tín hiệu tới tiến trình `node.exe` — đã kiểm chứng tín hiệu đó không tới được tiến trình Node trên Windows, script sẽ không tắt sạch. Ctrl+C tắt cả Django lẫn Next.js, Postgres vẫn chạy (dùng `pnpm dev-stop` nếu muốn tắt luôn Postgres).
 
 ### Test / lint
 
