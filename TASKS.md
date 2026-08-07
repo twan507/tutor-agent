@@ -23,6 +23,7 @@ Backlog theo dõi công việc. Quy ước: `[ ]` chưa làm, `[x]` xong, `[~]` 
 
 - [ ] Bộ eval tiếng Việt nội bộ 30-50 câu (Toán THCS + tình huống sư phạm) để VALIDATE chất lượng M3 — không còn là gate chọn model nhưng là bằng chứng chất lượng trước beta; dùng nền DeepEval (AGENT, khi có tính năng LLM đầu tiên)
 
+- [ ] **Component `<Icon>` — làm KHI dựng màn hình UI đầu tiên, không làm trước.** Hiện file icon đã dùng được ngay bằng đường dẫn thẳng (`/brand/icons/outline/<tên>.svg`), nhưng chưa có lớp nào dịch tên: 4 alias trong `frontend/scripts/brand/icon-manifest.mjs` (`success`→`correct`, `privacy`→`locked`, `timer`→`clock`, `expand`→`chevron-down`) mới chỉ được `brand:check` canh cho trỏ đúng chỗ, chưa có code nào tiêu thụ. Component sẽ nhận tên (kể cả alias) + biến thể outline/filled rồi nhả SVG. Cố ý hoãn vì chưa dựng màn hình thật thì chưa biết nó cần props gì (cỡ, cách đổi màu, có cần inline để tô `currentColor` hay không) — spec `docs/specs/2026-08-07-bo-icon-tabler.md` §7 đã ghi là ngoài phạm vi (AGENT, khi có UI đầu tiên)
 - [ ] Thiết kế accountability layer trên giấy (CẢ HAI)
 - [ ] Skill graph Toán phạm vi một kỳ thi từ yêu cầu cần đạt GDPT 2018 (CẢ HAI)
 - [ ] Pipeline sinh item + SymPy verification, thử 50 item, đo tỷ lệ lỗi (AGENT, sau khi có spec được duyệt)
