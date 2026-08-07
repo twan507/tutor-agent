@@ -152,8 +152,8 @@ Tất cả nằm trong `frontend/public/brand/`:
 
 | Nhóm      | File                                          | Dùng cho                                | Quy tắc                                                                                                                                                                              |
 | --------- | --------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Icon UI   | `icons/outline/*.svg` (21, v2)                | mặc định trong UI                       | màu qua `currentColor`; accent hổ phách tự có trong file                                                                                                                             |
-| Icon UI   | `icons/filled/*.svg` (21, v2)                 | trạng thái active/nhấn mạnh             | thiết kế theo ngữ pháp filled riêng (không phải outline tô đặc)                                                                                                                      |
+| Icon UI   | `icons/outline/*.svg` (127, từ Tabler Icons 1.2.38, MIT) | mặc định trong UI                       | màu qua `currentColor`; accent do component quyết định lúc dùng, không nướng vào file                                                                                                                             |
+| Icon UI   | `icons/filled/*.svg` (93, từ Tabler Icons 1.2.38, MIT)   | trạng thái active/nhấn mạnh             | thiết kế theo ngữ pháp filled riêng (không phải outline tô đặc); chỉ bắt buộc cho khái niệm có ngữ cảnh chọn/bật                                                                    |
 | Mascot v2 | `mascot/firefly-{pose}[-light].svg` (3×2 nền) | minh họa, empty state, onboarding       | soft illustrated, tỷ lệ chuẩn từ trace (đầu ≈ 1.05× bề ngang thân); bản `-light` cho nền sáng (cánh đậm hơn); độ sáng chỉnh bằng CSS var `--rangi-glow` (0→1); KHÔNG dùng trong logo |
 
 Ba pose: `glowing` (sáng rõ, có đốm lấp lánh), `greeting` (thân nghiêng 4°, ba dấu cộng lấp lánh), `resting` (quầng dịu, thân mờ hơn, cánh cụp sát thân — trạng thái nghỉ, tuyệt đối không buồn bã).
@@ -164,7 +164,7 @@ Ba pose: `glowing` (sáng rõ, có đốm lấp lánh), `greeting` (thân nghiê
 
 Đã loại 07/08/2026: `flight-path-*.svg`, `pattern-{light,dark}.svg`, pose `flying`, module `motifs.mjs` + test, component `RangiSplash` + CSS + test, animation `breath` của `RangiLogo` (xóa cả code sinh lẫn file — xem §3.3).
 
-Gate chất lượng: `pnpm brand:check` (chạy trong `frontend/`, có trong CI) — icon sai chuẩn (viewBox 24, hex trần ngoài var, tên ngoài danh mục) hoặc mascot sai chuẩn v2 (viewBox 220×252, hex ngoài whitelist amber/mint) sẽ fail. Thêm icon mới = thêm tên vào `ICON_MANIFEST` trong `scripts/brand/check-icons.mjs` + vẽ đủ HAI bộ outline/filled.
+Gate chất lượng: `pnpm brand:check` (chạy trong `frontend/`, có trong CI) — icon sai chuẩn (viewBox 24, hex trần ngoài var, tên ngoài danh mục) hoặc mascot sai chuẩn v2 (viewBox 220×252, hex ngoài whitelist amber/mint) sẽ fail. Thêm icon mới = thêm một dòng vào `scripts/brand/icon-manifest.mjs` rồi chạy `pnpm brand:icons`; TUYỆT ĐỐI không tự vẽ.
 
 ---
 

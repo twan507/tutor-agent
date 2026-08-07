@@ -1,6 +1,6 @@
 # Spec — Thay bộ icon tự vẽ bằng Tabler Icons (07/08/2026)
 
-**TRẠNG THÁI**: chờ người dùng duyệt.
+**TRẠNG THÁI**: đã thực thi 07/08/2026.
 
 ## 1. Vấn đề
 

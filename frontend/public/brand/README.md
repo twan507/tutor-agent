@@ -44,6 +44,10 @@ Xuất từ `rangi-icon-dark.svg` (trừ khi ghi chú khác), dùng cho các b�
 | `png/og-image-en.png` | 1200×630   | Open Graph / Twitter card, trang tiếng Anh  |
 | `png/avatar-400.png`  | 400×400    | Social avatar (Facebook/Zalo/TikTok)        |
 
+## Icon (`icons/`)
+
+Nguồn: **Tabler Icons 1.2.38** (MIT, https://tabler.io/icons), **127 khái niệm / 220 file** (127 outline + 93 filled). Sinh bằng `pnpm brand:icons` từ `frontend/scripts/brand/icon-manifest.mjs` — **KHÔNG sửa tay**. Muốn thêm/đổi icon: sửa manifest rồi chạy lại `pnpm brand:icons`. Giấy phép đầy đủ: `icons/LICENSE.txt`.
+
 ## Quy tắc sử dụng
 
 - **Vùng an toàn**: chừa khoảng trống tối thiểu quanh logo bằng đường kính quầng sáng (halo) quanh chấm — không đặt text/UI khác chồng vào vùng này.

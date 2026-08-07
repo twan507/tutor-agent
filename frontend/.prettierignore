@@ -6,3 +6,7 @@ next-env.d.ts
 # Artifact sinh ra bởi scripts/brand/proto-v2/assemble.mjs — format tay sẽ bị
 # ghi đè ở lần chạy sau, làm format:check đỏ lại.
 scripts/brand/proto-v2/mockup-rangi-v2.html
+
+# Artifact sinh ra bởi scripts/brand/generate-icons.mjs (writePreview) từ
+# preview-icons.template.html — format tay sẽ bị ghi đè ở lần chạy sau.
+scripts/brand/preview-icons.html
